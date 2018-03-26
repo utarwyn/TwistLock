@@ -123,8 +123,28 @@ public class Metier {
 		/* Vérifications de fin de partie:
 		 *   - Aucun emplacement de Twistlock disponible
 		 *   - Plus aucun joueur n'a de twistlock         */
+		boolean finDePartie = true;
+		TwistLock[][] locks = this.getTwistLocks();
+
+		for (int lig = 0; lig < locks.length; lig++)
+			for (int col = 0; col < locks[lig].length; col++)
+				if (locks[lig][col] == null)
+					finDePartie = false;
+
+		for (Joueur joueur : this.joueurs)
+			if (joueur.getNbTwistLockwistLock() > 0)
+				finDePartie = false;
+
+		if (finDePartie) {
+			this.joueurCourant = null;
+			return false;
+		}
 
 		// Détermination du prochain joueur (il doit avoir des twistlocks)
+		do {
+			this.prochainJoueur();
+		} while (this.joueurCourant.getNbTwistLockwistLock() == 0);
+
 		return true;
 	}
 
