@@ -4,11 +4,17 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import twistlock.Controleur;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,6 +37,10 @@ public class IHM extends Application
     
     private ScrollPane scrollPanePlateau;
     
+    private StackPane stackPaneRouge, stackPaneVert, stackPaneBleu, stackPaneJaune;
+    
+    private ArrayList< Circle > circlesTwistLocks;
+    
     @Override
     public void start( Stage stage ) throws Exception
     {
@@ -38,7 +48,20 @@ public class IHM extends Application
         
         ConteneurGraphique circle = new ConteneurGraphique( );
         
+        for( int i = 0 ; i < 20 ; i++ ) {
+            Circle c = new Circle( 1 );
+            circlesTwistLocks.add( c );
+        }
+        
         borderPaneJeu = new BorderPane( );
+        
+        stackPaneRouge = new StackPane( );
+        
+        Image    image              = new Image( "img/boueeRouge.jpg" );
+        Text     textNom            = new Text( );
+        GridPane gridPaneTwistLocks = new GridPane( );
+        
+//        stackPaneRouge.getChildren().addAll( image, textNom, gridPaneTwistLocks )
         
         borderPaneJeu.setCenter( scrollPanePlateau );
         

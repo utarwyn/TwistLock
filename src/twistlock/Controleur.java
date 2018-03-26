@@ -1,5 +1,6 @@
 package twistlock;
 
+import twistlock.ihm.AjoutJoueur;
 import twistlock.ihm.IHM;
 import twistlock.metier.Conteneur;
 import twistlock.metier.Joueur;
@@ -18,11 +19,16 @@ public class Controleur {
 	private IHM ihm;
 
 	private Controleur() {
-		IHM application = new IHM();
-		application.launch(IHM.class);
-		application.setControleur(this);
-
-		this.metier = new Metier(Controleur.NB_LIG, Controleur.NB_COL);
+        AjoutJoueur ajoutJoueur = new AjoutJoueur();
+        ajoutJoueur.launch( AjoutJoueur.class );
+        ajoutJoueur.setControleur( this );
+	    
+	    
+//		IHM application = new IHM();
+        //		application.launch(IHM.class);
+        //		application.setControleur(this);
+        
+        this.metier = new Metier(Controleur.NB_LIG, Controleur.NB_COL);
 	}
 
 
