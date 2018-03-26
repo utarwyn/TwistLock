@@ -1,11 +1,16 @@
 package twistlock.metier;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Metier {
 
 	private int nbLig, nbCol;
+
+	private ArrayList<Joueur> joueurs;
+
+	private Joueur joueurCourant;
 
 	private Conteneur[][] conteneurs;
 
@@ -60,8 +65,48 @@ public class Metier {
 		return locks;
 	}
 
-	public Conteneur[][] getConteneurs() {
-		return conteneurs;
+	public boolean isTwistlock(int lig, int col) {
+		return this.getTwistLocks()[lig][col] != null;
+	}
+
+	public void recalculerScores() {
+		for (Joueur joueur : this.joueurs)
+			joueur.setScore(0);
+
+		Conteneur conteneur;
+		Joueur proprietaire;
+
+		for (int lig = 0; lig < this.nbLig; lig++) {
+			for (int col = 0; col < this.nbCol; col++) {
+				conteneur = this.getConteneur(lig, col);
+				proprietaire = conteneur.getProprietaire();
+
+				if (proprietaire != null) {
+					for (Joueur joueur : this.joueurs)
+						if (joueur == proprietaire) {
+							joueur.addScore(conteneur.getValeur());
+							break;
+						}
+				}
+			}
+		}
+	}
+
+	public void ajouterJoueur(String nom) {
+		this.joueurs.add(new Joueur(this.joueurs.size() + 1, "VERT", nom));
+	}
+
+	public void lancerPartie() {
+		this.joueurCourant = this.joueurs.get(0);
+	}
+
+	public void nouveauTour() {
+		this.recalculerScores();
+
+		// TODO: Vérification de fin de partie
+
+		// Prochain joueur
+		this.joueurCourant = this.joueurs.get(this.joueurCourant.getId() % this.joueurs.size());
 	}
 
 	public boolean jouerTwistlock(int lig, int col, Joueur joueur) {
