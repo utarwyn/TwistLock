@@ -9,4 +9,5 @@ public class TwistLock {
     }
 
     public Joueur getJoueur() { return joueur; }
+
 }

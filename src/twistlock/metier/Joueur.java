@@ -18,10 +18,10 @@ public class Joueur {
     public int getScore() { return score; }
     public int getNbTwistLockwistLock() { return nbTwistLock; }
 
-    public void setId(int id) { this.id = id; }
-    public void setCouleur(String couleur) { this.couleur = couleur; }
-    public void setNom(String nom) { this.nom = nom; }
+    public void addScore(int score) { this.score += score; }
+
     public void setScore(int score) { this.score = score; }
+
     public void setNbTwistLock(int nbTwistLock) { this.nbTwistLock = nbTwistLock; }
 
     // méthode enlevant un twist-lock si la personne fait une action invalide
