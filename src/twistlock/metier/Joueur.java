@@ -2,7 +2,7 @@ package twistlock.metier;
 
 public class Joueur {
     private int id, score;
-    private int nbTwistLock = 20;
+    private int nbTwistLock;
     private String couleur, nom;
 
     public Joueur(int id, String couleur, String nom, int score, int nbTwistLock){
