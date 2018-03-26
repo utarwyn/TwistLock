@@ -19,8 +19,8 @@ public class Console {
 		Conteneur conteneur;
 		Joueur joueur;
 
-		Joueur j1 = new Joueur(1, "V", "TATA");
-		Joueur j2 = new Joueur(2, "R", "TONTON");
+		Joueur j1 = new Joueur(1, "V");
+		Joueur j2 = new Joueur(2, "R");
 
 		this.metier.jouerTwistlock(1, 1, j1);
 		this.metier.jouerTwistlock(4, 6, j1);
@@ -41,7 +41,7 @@ public class Console {
 				conteneur = this.metier.getConteneur(i, j);
 				joueur = conteneur.getProprietaire();
 
-				System.out.print("  " + String.format("%02d", conteneur.getValeur()) + " (" + ((joueur != null) ? joueur.getCouleur() : 'X') + ")  |");
+				System.out.print("  " + String.format("%02d", conteneur.getValeur()) + " (" + ((joueur != null) ? joueur.getNom().charAt(0) : 'X') + ")  |");
 			}
 
 			System.out.print("\n " + this.symbolLock(locks[i+1][0]));
