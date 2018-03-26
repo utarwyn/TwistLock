@@ -1,15 +1,14 @@
 package twistlock.metier;
 
 public class Joueur {
-    private int id, score;
-    private int nbTwistLock;
+    private int id, score, nbTwistLock;
     private String couleur, nom;
 
-    public Joueur(int id, String couleur, String nom, int score){
+    public Joueur(int id, String couleur, String nom){
         this.id = id;
         this.couleur = couleur;
         this.nom = nom;
-        this.score = score;
+        this.score = 0;
         this.nbTwistLock = 20;
     }
 
