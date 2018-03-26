@@ -1,43 +1,89 @@
 package twistlock.metier;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Metier {
 
-	private ArrayList<Conteneur> conteneurs;
+	private int nbLig, nbCol;
+
+	private Conteneur[][] conteneurs;
 
 	public Metier(int nbLig, int nbCol) {
-		this.conteneurs = new ArrayList<>();
+		this.nbLig = nbLig;
+		this.nbCol = nbCol;
+		this.conteneurs = new Conteneur[this.nbLig][this.nbCol];
 
-		this.initialiser(nbLig, nbCol);
+		this.initialiser();
 	}
 
-	private void initialiser(int nbLig, int nbCol) {
-		ArrayList<Integer> valeurs = new ArrayList<>();
-		int valeur, indice;
-
-		// Valeurs des conteneurs
-		for (int nb = 1; nb <= nbLig * nbCol; nb++)
-			valeurs.add(nb);
-
+	private void initialiser() {
 		// Création des conteneurs
-		for (int lig = 1; lig <= nbLig; lig++)
-			for (char col = 'A'; col < (char) ('A' + nbCol); col++) {
-				indice = (int) (Math.random() * valeurs.size());
-				valeur = valeurs.get(indice);
-
-				this.conteneurs.add(new Conteneur(lig, col, valeur));
-				valeurs.remove(indice);
+		for (int lig = 0; lig < this.nbLig; lig++)
+			for (char col = 0; col < this.nbCol; col++) {
+				this.conteneurs[lig][col] = new Conteneur(
+						lig + 1, (char) ('A' + col),
+						(int) (Math.random() * (54 - 5) + 5)
+				);
 			}
 	}
 
-	public ArrayList<Conteneur> getConteneurs() {
+	public int getNbLig() {
+		return this.nbLig;
+	}
+
+	public int getNbCol() {
+		return this.nbCol;
+	}
+
+	public Conteneur getConteneur(int lig, int col) {
+		if (lig < 0 || col < 0 || lig >= this.nbLig || col >= this.nbCol)
+			return null;
+
+		return this.conteneurs[lig][col];
+	}
+
+	public TwistLock[][] getTwistLocks() {
+		TwistLock[][] locks = new TwistLock[this.getNbLig() + 1][this.getNbCol() + 1];
+		Conteneur conteneur;
+
+		for (int lig = 0; lig < this.conteneurs.length; lig++)
+			for (int col = 0; col < this.conteneurs[lig].length; col++) {
+				conteneur = this.conteneurs[lig][col];
+
+				locks[lig    ][col    ] = conteneur.getCoins()[0];
+				locks[lig    ][col + 1] = conteneur.getCoins()[1];
+				locks[lig + 1][col + 1] = conteneur.getCoins()[2];
+				locks[lig + 1][col    ] = conteneur.getCoins()[3];
+			}
+
+		return locks;
+	}
+
+	public Conteneur[][] getConteneurs() {
 		return conteneurs;
 	}
 
-	public twistlock.metier.TwistLock[][] getTwistLocks() {
-		// TODO: à coder
-		return new twistlock.metier.TwistLock[0][0];
+	public boolean jouerTwistlock(int lig, int col, Joueur joueur) {
+		Map<Conteneur, Integer> conteneurs = new HashMap<>();
+		Conteneur conteneur;
+
+		// Création du twistlock
+		TwistLock twistlock = new TwistLock(joueur);
+
+		if ((conteneur = this.getConteneur(lig - 1,col - 1)) != null)
+			conteneurs.put(conteneur, 3);
+		if ((conteneur = this.getConteneur(lig - 1,col)) != null)
+			conteneurs.put(conteneur, 4);
+		if ((conteneur = this.getConteneur(lig,col)) != null)
+			conteneurs.put(conteneur, 1);
+		if ((conteneur = this.getConteneur(lig, col - 1)) != null)
+			conteneurs.put(conteneur, 2);
+
+		for (Map.Entry<Conteneur, Integer> conteneurEntry : conteneurs.entrySet())
+			conteneurEntry.getKey().getCoins()[conteneurEntry.getValue() - 1] = twistlock;
+
+		return false;
 	}
 
 }
