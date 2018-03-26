@@ -2,8 +2,7 @@ package twistlock.metier;
 
 public class TwistLock {
 
-    Joueur joueur;
-    int coin;
+    private Joueur joueur;
 
     public TwistLock(Joueur joueur){
         this.joueur = joueur;

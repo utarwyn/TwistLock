@@ -1,9 +1,9 @@
 package twistlock.metier;
 
 public class Joueur {
-    int id, score;
-    int nbTwistLock = 20;
-    String couleur, nom;
+    private int id, score;
+    private int nbTwistLock = 20;
+    private String couleur, nom;
 
     public Joueur(int id, String couleur, String nom, int score, int nbTwistLock){
         this.id = id;
@@ -25,6 +25,7 @@ public class Joueur {
     public void setScore(int score) { this.score = score; }
     public void setNbTwistLock(int nbTwistLock) { this.nbTwistLock = nbTwistLock; }
 
+    // méthode enlevant un twist-lock si la personne fait une action invalide
     public void penalite(){
         setNbTwistLock(this.nbTwistLock-1);
     }
