@@ -50,6 +50,10 @@ public class Metier {
 		return this.conteneurs[lig][col];
 	}
 
+	public ArrayList<Joueur> getJoueurs() {
+		return this.joueurs;
+	}
+
 	public TwistLock[][] getTwistLocks() {
 		TwistLock[][] locks = new TwistLock[this.getNbLig() + 1][this.getNbCol() + 1];
 		Conteneur conteneur;
@@ -98,20 +102,33 @@ public class Metier {
 		this.joueurs.add(new Joueur(this.joueurs.size() + 1, nom));
 	}
 
+	/**
+	 * Lance la partie
+	 */
 	public void lancerPartie() {
 		this.joueurCourant = this.joueurs.get(0);
 	}
 
-	public void nouveauTour() {
+	/**
+	 * Passe le tour au joueur suivant
+	 * @return Vrai si le tour a pu être passé, faux si la partie est terminée.
+	 */
+	public boolean nouveauTour() {
 		this.recalculerScores();
 
 		// Suppression d'un twistlock pour le joueur courant
 		if (this.joueurCourant != null)
 			this.joueurCourant.penalite();
 
-		// TODO: Vérification de fin de partie
+		/* Vérifications de fin de partie:
+		 *   - Aucun emplacement de Twistlock disponible
+		 *   - Plus aucun joueur n'a de twistlock         */
 
-		// Prochain joueur
+		// Détermination du prochain joueur (il doit avoir des twistlocks)
+		return true;
+	}
+
+	private void prochainJoueur() {
 		this.joueurCourant = this.joueurs.get(this.joueurCourant.getId() % this.joueurs.size());
 	}
 
