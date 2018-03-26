@@ -1,3 +1,5 @@
+package metier;
+
 public class Joueur {
 
     int id, score;
