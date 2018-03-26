@@ -22,21 +22,13 @@ public class Conteneur {
 		this.coins = new twistlock.metier.TwistLock[4];
 	}
 
-	public int getLigne() {
-		return ligne;
-	}
+	public int getLigne() { return ligne; }
 
-	public char getColonne() {
-		return colonne;
-	}
+	public char getColonne() { return colonne; }
 
-	public int getValeur() {
-		return valeur;
-	}
+	public int getValeur() { return valeur; }
 
-	public TwistLock[] getCoins() {
-		return coins;
-	}
+	public TwistLock[] getCoins() { return coins; }
 
 	public Joueur getProprietaire() {
 		Map<Joueur, Integer> map = new HashMap<>();
