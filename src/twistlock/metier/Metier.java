@@ -17,7 +17,9 @@ public class Metier {
 	public Metier(int nbLig, int nbCol) {
 		this.nbLig = nbLig;
 		this.nbCol = nbCol;
+
 		this.conteneurs = new Conteneur[this.nbLig][this.nbCol];
+		this.joueurs = new ArrayList<>();
 
 		this.initialiser();
 	}
@@ -93,7 +95,7 @@ public class Metier {
 	}
 
 	public void ajouterJoueur(String nom) {
-		this.joueurs.add(new Joueur(this.joueurs.size() + 1, "VERT", nom));
+		this.joueurs.add(new Joueur(this.joueurs.size() + 1, nom));
 	}
 
 	public void lancerPartie() {
@@ -113,6 +115,12 @@ public class Metier {
 		Map<Conteneur, Integer> conteneurs = new HashMap<>();
 		Conteneur conteneur;
 
+		// Il y a déjà un twistlock où le joueur souhaite jouer
+		if (this.isTwistlock(lig, col)) {
+			joueur.penalite();
+			return false;
+		}
+
 		// Création du twistlock
 		TwistLock twistlock = new TwistLock(joueur);
 
@@ -128,7 +136,7 @@ public class Metier {
 		for (Map.Entry<Conteneur, Integer> conteneurEntry : conteneurs.entrySet())
 			conteneurEntry.getKey().getCoins()[conteneurEntry.getValue() - 1] = twistlock;
 
-		return false;
+		return true;
 	}
 
 }

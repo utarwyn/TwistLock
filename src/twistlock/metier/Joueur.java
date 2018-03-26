@@ -1,31 +1,56 @@
 package twistlock.metier;
 
 public class Joueur {
-    private int id, score, nbTwistLock;
-    private String couleur, nom;
 
-    public Joueur(int id, String couleur, String nom){
-        this.id = id;
-        this.couleur = couleur;
-        this.nom = nom;
-        this.score = 0;
-        this.nbTwistLock = 20;
-    }
+	private int id;
 
-    public int getId() { return id; }
-    public String getCouleur() { return couleur; }
-    public String getNom() { return nom; }
-    public int getScore() { return score; }
-    public int getNbTwistLockwistLock() { return nbTwistLock; }
+	private int score;
 
-    public void addScore(int score) { this.score += score; }
+	private int nbTwistLock;
 
-    public void setScore(int score) { this.score = score; }
+	private String nom;
 
-    public void setNbTwistLock(int nbTwistLock) { this.nbTwistLock = nbTwistLock; }
+	public Joueur(int id, String nom) {
+		this.id = id;
+		this.nom = nom;
+		this.score = 0;
+		this.nbTwistLock = 20;
+	}
 
-    // méthode enlevant un twist-lock si la personne fait une action invalide
-    public void penalite(){
-        setNbTwistLock(this.nbTwistLock-1);
-    }
+	public int getId() {
+		return id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public int getNbTwistLockwistLock() {
+		return nbTwistLock;
+	}
+
+	public boolean peutJouer() {
+		return this.nbTwistLock > 0;
+	}
+
+	public void addScore(int score) {
+		this.score += score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	// méthode enlevant un twist-lock si la personne fait une action invalide
+	public void penalite() {
+		this.nbTwistLock--;
+
+		if(this.nbTwistLock < 0)
+			this.nbTwistLock = 0;
+	}
+
 }
