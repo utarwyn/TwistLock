@@ -27,10 +27,12 @@ public class Controleur {
 //		IHM application = new IHM();
         //		application.launch(IHM.class);
         //		application.setControleur(this);
-        
-        this.metier = new Metier(Controleur.NB_LIG, Controleur.NB_COL);
 	}
 
+
+	public void chargerMetier(int nbLig, int nbCol) {
+		this.metier = new Metier(nbLig, nbCol);
+	}
 
 	/* ----------------------------- */
 	/*  GESTION DE LA GRILLE DE JEU  */
@@ -74,10 +76,6 @@ public class Controleur {
 
 	public ArrayList<Joueur> getJoueurs() {
 		return this.metier.getJoueurs();
-	}
-
-	public void lancerPartie() {
-		this.metier.lancerPartie();
 	}
 
 	public boolean nouveauTour() {
