@@ -19,8 +19,8 @@ public class Console {
 		Conteneur conteneur;
 		Joueur joueur;
 
-		Joueur j1 = new Joueur(1, "V", "TATA", 0, 20);
-		Joueur j2 = new Joueur(2, "R", "TONTON", 0, 20);
+		Joueur j1 = new Joueur(1, "V", "TATA", 0);
+		Joueur j2 = new Joueur(2, "R", "TONTON", 0);
 
 		this.metier.jouerTwistlock(1, 1, j1);
 		this.metier.jouerTwistlock(4, 6, j1);

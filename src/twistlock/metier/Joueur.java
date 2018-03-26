@@ -5,12 +5,12 @@ public class Joueur {
     private int nbTwistLock;
     private String couleur, nom;
 
-    public Joueur(int id, String couleur, String nom, int score, int nbTwistLock){
+    public Joueur(int id, String couleur, String nom, int score){
         this.id = id;
         this.couleur = couleur;
         this.nom = nom;
         this.score = score;
-        this.nbTwistLock = nbTwistLock;
+        this.nbTwistLock = 20;
     }
 
     public int getId() { return id; }
