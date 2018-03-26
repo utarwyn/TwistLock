@@ -28,15 +28,9 @@ public class IHM extends Application
     
     private BorderPane borderPaneJeu;
     
-    public IHM( )
+    public IHM( Controleur controleur )
     {
         this.controleur = controleur;
-    }
-    
-    public static void main( String[] args )
-    {
-        
-        Application.launch( IHM.class , args );
     }
     
     @Override
