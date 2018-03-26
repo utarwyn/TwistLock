@@ -61,7 +61,7 @@ public class IHM extends Application
         Text     textNom            = new Text( );
         GridPane gridPaneTwistLocks = new GridPane( );
         
-//        stackPaneRouge.getChildren().addAll( image, textNom, gridPaneTwistLocks )
+        //        stackPaneRouge.getChildren().addAll( image, textNom, gridPaneTwistLocks )
         
         borderPaneJeu.setCenter( scrollPanePlateau );
         
