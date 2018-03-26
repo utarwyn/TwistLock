@@ -1,4 +1,4 @@
-package metier;
+package twistlock.metier;
 
 public class Joueur {
     int id, score;

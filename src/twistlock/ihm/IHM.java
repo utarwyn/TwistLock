@@ -1,4 +1,4 @@
-package ihm;
+package twistlock.ihm;
 
 import javafx.application.Application;
 import javafx.scene.Group;

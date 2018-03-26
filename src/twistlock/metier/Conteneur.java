@@ -1,6 +1,4 @@
-package metier;
-
-import java.util.ArrayList;
+package twistlock.metier;
 
 public class Conteneur {
 
@@ -10,14 +8,14 @@ public class Conteneur {
 
 	private int valeur;
 
-	private ArrayList<TwistLock> coins;
+	private twistlock.metier.TwistLock[] coins;
 
 	public Conteneur(int ligne, char colonne, int valeur) {
 		this.ligne = ligne;
 		this.colonne = colonne;
 		this.valeur = valeur;
 
-		this.coins = new ArrayList<>();
+		this.coins = new twistlock.metier.TwistLock[4];
 	}
 
 	public int getLigne() {

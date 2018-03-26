@@ -1,5 +1,7 @@
-import ihm.IHM;
-import metier.Metier;
+package twistlock;
+
+import twistlock.ihm.IHM;
+import twistlock.metier.Metier;
 
 public class Controleur {
 
@@ -12,7 +14,7 @@ public class Controleur {
 	}
 
     public static void main( String[] args ) {
-        System.out.println( "test" );
+        System.out.println("twistlock/test");
     }
 
 }

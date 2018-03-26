@@ -1,6 +1,6 @@
-package test;
+package twistlock.test;
 
-import metier.Metier;
+import twistlock.metier.Metier;
 
 public class Console {
 
@@ -8,6 +8,10 @@ public class Console {
 
 	private Console() {
 		this.metier = new Metier(10, 7);
+	}
+
+	private void afficherGrille() {
+
 	}
 
 	public static void main(String[] args) {
