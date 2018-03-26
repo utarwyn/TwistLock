@@ -1,13 +1,22 @@
 package twistlock.metier;
 
+/**
+ * Représente un Twistlock
+ */
 public class TwistLock {
 
-    private Joueur joueur;
+	private Joueur joueur;
 
-    public TwistLock(Joueur joueur){
-        this.joueur = joueur;
-    }
+	TwistLock(Joueur joueur) {
+		this.joueur = joueur;
+	}
 
-    public Joueur getJoueur() { return joueur; }
+	/**
+	 * Récupère le joueur qui possède le twistlock
+	 * @return Joueur qui possède le twistlock
+	 */
+	public Joueur getJoueur() {
+		return joueur;
+	}
 
 }
