@@ -1,6 +1,5 @@
 package twistlock;
 
-import javafx.application.Application;
 import twistlock.ihm.IHM;
 import twistlock.metier.Metier;
 
@@ -11,9 +10,11 @@ public class Controleur
     
     private IHM ihm;
     
-    public Controleur( )
+    private Controleur( )
     {
-        Application.launch( IHM.class );
+        IHM application = new IHM( );
+        application.launch( IHM.class );
+        application.setControleur( this );
     }
     
     public static void main( String[] args )

@@ -28,11 +28,6 @@ public class IHM extends Application
     
     private BorderPane borderPaneJeu;
     
-    public IHM( Controleur controleur )
-    {
-        this.controleur = controleur;
-    }
-    
     @Override
     public void start( Stage stage ) throws Exception
     {
@@ -51,5 +46,10 @@ public class IHM extends Application
             
             }
         } , 100 , 100 ); // raffraichissement de la fenêtre chaque dixième de seconde
+    }
+    
+    public void setControleur( Controleur controleur )
+    {
+        this.controleur = controleur;
     }
 }
