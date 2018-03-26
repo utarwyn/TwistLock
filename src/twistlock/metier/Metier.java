@@ -143,14 +143,11 @@ public class Metier {
 	 * @param nom Nom du joueur
 	 */
 	public void ajouterJoueur(String nom) {
-		this.joueurs.add(new Joueur(this.joueurs.size() + 1, nom));
-	}
+		Joueur joueur = new Joueur(this.joueurs.size() + 1, nom);
 
-	/**
-	 * Lance la partie
-	 */
-	public void lancerPartie() {
-		this.joueurCourant = this.joueurs.get(0);
+		this.joueurs.add(joueur);
+		if  (this.joueurCourant == null)
+			this.joueurCourant = joueur;
 	}
 
 	/**
