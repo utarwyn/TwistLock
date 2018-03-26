@@ -6,12 +6,15 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import twistlock.Controleur;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class IHM extends Application
 {
+    
+    private Controleur controleur;
     
     /**
      * possède les éléments graphiques
@@ -25,13 +28,14 @@ public class IHM extends Application
     
     private BorderPane borderPaneJeu;
     
-    public IHM(  )
+    public IHM( )
     {
-    
+        this.controleur = controleur;
     }
     
     public static void main( String[] args )
     {
+        
         Application.launch( IHM.class , args );
     }
     
@@ -39,8 +43,6 @@ public class IHM extends Application
     public void start( Stage stage ) throws Exception
     {
         stage.setTitle( "Les philosophes" ); // nom de la fenêtre
-        
-        
         
         stage.setScene( scene ); // configuration des éléments graphiques
         stage.centerOnScreen( ); // centre sur l'écran
