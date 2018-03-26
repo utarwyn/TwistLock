@@ -1,5 +1,8 @@
 package twistlock.metier;
 
+/**
+ * Représente un joueur.
+ */
 public class Joueur {
 
 	private int id;
@@ -17,36 +20,65 @@ public class Joueur {
 		this.nbTwistLock = 20;
 	}
 
+	/**
+	 * Retourne l'identifiant du joueur (défini automatiquement au début de la partie)
+	 * @return Identifiant du joueur généré
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Retourne le nom du joueur
+	 * @return Nom du joueur
+	 */
 	public String getNom() {
 		return nom;
 	}
 
+	/**
+	 * Retourne le score actuel du joueur
+	 * @return Score du joueur (addition de la valeur des conteneurs qu'il possède)
+	 */
 	public int getScore() {
 		return score;
 	}
 
-	public int getNbTwistLockwistLock() {
+	/**
+	 * Retourne le nombre de twistlock qu'il reste au joueur
+	 * @return Nombre de twistlock du joueur
+	 */
+	public int getNbTwistlock() {
 		return nbTwistLock;
 	}
 
+	/**
+	 * Permet de savoir si un joueur peut jouer (a un nombre de twistlock suffisant)
+	 * @return Vrai si le joueur peut jouer, faux sinon.
+	 */
 	public boolean peutJouer() {
 		return this.nbTwistLock > 0;
 	}
 
+	/**
+	 * Ajoute un score précis au joueur
+	 * @param score Score à ajouter
+	 */
 	public void addScore(int score) {
 		this.score += score;
 	}
 
-	public void setScore(int score) {
-		this.score = score;
+	/**
+	 * Réinitialise le score du joueur
+	 */
+	public void resetScore() {
+		this.score = 0;
 	}
 
-	// méthode enlevant un twist-lock si la personne fait une action invalide
-	public void penalite() {
+	/**
+	 * Enlève un twist-lock au joueur
+	 */
+	public void retirerTwistlock() {
 		this.nbTwistLock--;
 
 		if(this.nbTwistLock < 0)

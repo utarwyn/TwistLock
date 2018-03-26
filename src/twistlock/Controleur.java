@@ -6,6 +6,8 @@ import twistlock.metier.Joueur;
 import twistlock.metier.Metier;
 import twistlock.metier.TwistLock;
 
+import java.util.ArrayList;
+
 public class Controleur {
 
 	private static final int NB_LIG = 10;
@@ -64,12 +66,16 @@ public class Controleur {
 		this.metier.ajouterJoueur(nom);
 	}
 
+	public ArrayList<Joueur> getJoueurs() {
+		return this.metier.getJoueurs();
+	}
+
 	public void lancerPartie() {
 		this.metier.lancerPartie();
 	}
 
-	public void nouveauTour() {
-		this.metier.nouveauTour();
+	public boolean nouveauTour() {
+		return this.metier.nouveauTour();
 	}
 
 	public static void main(String[] args) {

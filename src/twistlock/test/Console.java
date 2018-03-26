@@ -5,6 +5,10 @@ import twistlock.metier.Joueur;
 import twistlock.metier.Metier;
 import twistlock.metier.TwistLock;
 
+/**
+ * Classe présente pour tester le jeu en mode Console.
+ * (Elle est là uniquement pour une utilisation pour le développement)
+ */
 public class Console {
 
 	private Metier metier;
@@ -15,6 +19,9 @@ public class Console {
 		this.afficherGrille();
 	}
 
+	/**
+	 * Affiche la grille au format texte.
+	 */
 	private void afficherGrille() {
 		Conteneur conteneur;
 		Joueur joueur;
@@ -52,6 +59,11 @@ public class Console {
 		}
 	}
 
+	/**
+	 * Retourne le symbole lié au twistlock passé
+	 * @param lock Twistlock à utiliser
+	 * @return Symbole généré depuis le twistlock
+	 */
 	private char symbolLock(TwistLock lock) {
 		if (lock == null) return 'X';
 		else return 'O';
