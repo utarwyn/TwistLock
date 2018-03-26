@@ -105,6 +105,10 @@ public class Metier {
 	public void nouveauTour() {
 		this.recalculerScores();
 
+		// Suppression d'un twistlock pour le joueur courant
+		if (this.joueurCourant != null)
+			this.joueurCourant.penalite();
+
 		// TODO: Vérification de fin de partie
 
 		// Prochain joueur
