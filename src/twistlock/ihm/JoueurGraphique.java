@@ -1,5 +1,4 @@
 package twistlock.ihm;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -36,7 +35,9 @@ public class JoueurGraphique
         
         for( int i = 0 ; i < 20 ; i++ ) {
             Circle c = new Circle( 1 );
-            c.setRadius( 4.5 );
+            c.setRadius( 10 );
+            c.setStroke( Color.TRANSPARENT );
+            c.setStrokeWidth( 5 );
             circleArrayList.add( c );
         }
     }
@@ -59,8 +60,6 @@ public class JoueurGraphique
     private GridPane colorTwistLock( int i )
     {
         GridPane gridPane = new GridPane( );
-        gridPane.setHgap( 4 );
-        gridPane.setVgap( 4 );
         for( int j = 0 ; j < 4 ; j++ ) {
             for( int k = 0 ; k < 5 ; k++ ) {
                 if( 5 * j + k < i ) circleArrayList.get( 5 * j + k ).setFill( Color.RED );
@@ -74,7 +73,7 @@ public class JoueurGraphique
     public VBox stackPaneVertical( )
     {
         ImageView image = new ImageView( URL_IMAGES[ id ] );
-        image.setFitWidth( 100 );
+
         Text textNom = new Text( nom );
         textNom.setTextAlignment( TextAlignment.CENTER );
         GridPane gridPaneTwistLocks = colorTwistLock( 20 );
@@ -82,15 +81,16 @@ public class JoueurGraphique
         vBox = new VBox( );
         vBox.setSpacing( 10 );
         vBox.setAlignment( Pos.CENTER );
+        vBox.setPrefWidth( 200 );
         vBox.setFillWidth( true );
-        vBox.getChildren( ).addAll( image , textNom , gridPaneTwistLocks );
+        vBox.getChildren( ).addAll( image , textNom ,textScore, gridPaneTwistLocks );
         return vBox;
     }
     
     public HBox stackPaneHorizontal( )
     {
         ImageView image = new ImageView( URL_IMAGES[ id ] );
-        image.setFitHeight( 100 );
+
         Text textNom = new Text( nom );
         textNom.setTextAlignment( TextAlignment.CENTER );
         GridPane gridPaneTwistLocks = colorTwistLock( 20 );
@@ -98,8 +98,9 @@ public class JoueurGraphique
         hBox = new HBox( );
         hBox.setSpacing( 10 );
         hBox.setAlignment( Pos.CENTER );
+        hBox.setPrefHeight( 200 );
         hBox.setFillHeight( true );
-        hBox.getChildren( ).addAll( image , textNom ,textScore, gridPaneTwistLocks );
+        hBox.getChildren( ).addAll( image , textNom , textScore , gridPaneTwistLocks );
         return hBox;
     }
     
@@ -116,5 +117,13 @@ public class JoueurGraphique
     public void setScore( int score )
     {
         this.score = score;
+    }
+    
+    public double getWidth(){
+        return hBox.getWidth();
+    }
+    
+    public double getHeight(){
+        return vBox.getHeight();
     }
 }
