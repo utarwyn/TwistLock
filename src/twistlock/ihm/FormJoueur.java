@@ -236,7 +236,7 @@ public class FormJoueur extends JFrame
         }
         else
             
-            try {Integer.parseInt( textFieldNbLignes.getText( ) );} catch( Exception e ) {
+            try {nInteger.parseInt( textFieldNbLignes.getText( ) );} catch( Exception e ) {
                 bOk = false;
                 erreur( "Saississez un nombre de lignes entre 1 et 9" );
             }
