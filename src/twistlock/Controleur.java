@@ -16,17 +16,9 @@ public class Controleur {
 
 
     private Controleur() {
-		this.ihm = new IHM(this);
-
-		new FormJoueur(this);
-
-		// TODO: temporaire
-		this.chargerMetier(9, 9);
-		this.metier.ajouterJoueur("TONTON");
-		this.metier.ajouterJoueur("TATA");
-        this.metier.ajouterJoueur("TATA");
-        this.metier.ajouterJoueur("TATA");
-		this.chargerIHM();
+        this.ihm = new IHM(this);
+        new FormJoueur( this );
+		
     }
 
 
@@ -65,8 +57,8 @@ public class Controleur {
     /*  GESTION DES JOUEURS  */
     /* --------------------- */
 
-    public void ajouterJoueur(String nom) {
-        this.metier.ajouterJoueur(nom);
+    public void ajouterJoueur(String nom, int tL) {
+        this.metier.ajouterJoueur(nom, tL);
     }
 
     public ArrayList<Joueur> getJoueurs() {
