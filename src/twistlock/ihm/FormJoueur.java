@@ -16,8 +16,8 @@ public class FormJoueur extends JFrame
     
     private GridBagLayout gridBagLayout;
     private JLabel        jLabelTitre, jLabelNbLignes, jLabelNbColonnes, jLabelNbTL, jLabelJ1, jLabelJ2, jLabelJ3, jLabelJ4;
-    private TextField textFieldNbLignes, textFieldNbColonnes, textFieldNbTL, textFieldJ1, textFieldJ2, textFieldJ3, textFieldJ4;
-    private Button buttonQuitter, buttonValider;
+    private JTextField textFieldNbLignes, textFieldNbColonnes, textFieldNbTL, textFieldJ1, textFieldJ2, textFieldJ3, textFieldJ4;
+    private JButton buttonQuitter, buttonValider;
     
     private int nbJoueurs;
     private int lignes, colonnes;
@@ -30,13 +30,13 @@ public class FormJoueur extends JFrame
         
         this.setTitle( "Jeu des Twistlocks - Ajouter des Joueurs" );
         this.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
-        //        this.setLocationRelativeTo( null );
         this.setSize( 1200 , 800 );
         
         preparer( );
         
         remplir( );
         
+        this.setLocationRelativeTo( null );
         this.setVisible( true );
     }
     
@@ -53,18 +53,19 @@ public class FormJoueur extends JFrame
         jLabelJ3 = new JLabel( "Nom du joueur 3 : " );
         jLabelJ4 = new JLabel( "Nom du joueur 4 : " );
         
-        textFieldNbLignes = new TextField( );
+        textFieldNbLignes = new JTextField( );
         textFieldNbLignes.addKeyListener( new KeyAdapter( )
         {
             public void keyTyped( KeyEvent e )
             {
                 char caracter = e.getKeyChar( );
+                System.out.println( e );
                 if( ( ( caracter < '1' ) || ( caracter > '9' ) ) && ( caracter != '\b' ) || textFieldNbLignes.getText( ).length( ) > 0 ) {
                     e.consume( );
                 }
             }
         } );
-        textFieldNbColonnes = new TextField( );
+        textFieldNbColonnes = new JTextField( );
         textFieldNbColonnes.addKeyListener( new KeyAdapter( )
         {
             public void keyTyped( KeyEvent e )
@@ -75,7 +76,7 @@ public class FormJoueur extends JFrame
                 }
             }
         } );
-        textFieldNbTL = new TextField( );
+        textFieldNbTL = new JTextField( );
         textFieldNbTL.addKeyListener( new KeyAdapter( )
         {
             public void keyTyped( KeyEvent e )
@@ -86,10 +87,10 @@ public class FormJoueur extends JFrame
                 }
             }
         } );
-        textFieldJ1 = new TextField( );
-        textFieldJ2 = new TextField( );
-        textFieldJ3 = new TextField( );
-        textFieldJ4 = new TextField( );
+        textFieldJ1 = new JTextField( );
+        textFieldJ2 = new JTextField( );
+        textFieldJ3 = new JTextField( );
+        textFieldJ4 = new JTextField( );
         
         textFieldNbLignes.setColumns( 20 );
         textFieldNbColonnes.setColumns( 20 );
@@ -99,7 +100,7 @@ public class FormJoueur extends JFrame
         textFieldJ3.setColumns( 20 );
         textFieldJ4.setColumns( 20 );
         
-        buttonQuitter = new Button( "Quitter" );
+        buttonQuitter = new JButton( "Quitter" );
         buttonQuitter.addActionListener( new ActionListener( )
         {
             @Override
@@ -109,13 +110,15 @@ public class FormJoueur extends JFrame
             }
         } );
         
-        buttonValider = new Button( "Valider" );
+        buttonValider = new JButton( "Valider" );
         buttonValider.addActionListener( new ActionListener( )
                                          {
                                              @Override
                                              public void actionPerformed( ActionEvent e )
                                              {
                                                  if( verification( ) ) {
+                    
+                                                     nbJoueurs = 2;
                     
                                                      if( ! textFieldJ3.getText( ).equals( "" ) ) {
                                                          nbJoueurs = 3;
@@ -126,14 +129,14 @@ public class FormJoueur extends JFrame
                     
                                                      lignes = Integer.parseInt( textFieldNbLignes.getText( ) );
                                                      colonnes = Integer.parseInt( textFieldNbColonnes.getText( ) );
-                                                     nbTwistlocks = Integer.parseInt( textFieldNbTL.getText() );
+                                                     nbTwistlocks = Integer.parseInt( textFieldNbTL.getText( ) );
                                                      nomJoueurs = new ArrayList<>( );
                                                      nomJoueurs.add( textFieldJ1.getText( ) );
                                                      nomJoueurs.add( textFieldJ2.getText( ) );
                                                      if( nbJoueurs > 2 ) nomJoueurs.add( textFieldJ3.getText( ) );
                                                      if( nbJoueurs > 3 ) nomJoueurs.add( textFieldJ4.getText( ) );
-                                                     
-                                                     lancer();
+                    
+                                                     lancer( );
                                                  }
                                              }
                                          }
@@ -230,11 +233,11 @@ public class FormJoueur extends JFrame
     private void lancer( )
     {
         controleur.chargerMetier( lignes , colonnes );
-        for( int i = 0 ; i < nbJoueurs -1; i++ ) {
-            controleur.ajouterJoueur( nomJoueurs.get( i ), nbTwistlocks );
+        for( int i = 0 ; i < nbJoueurs ; i++ ) {
+            controleur.ajouterJoueur( nomJoueurs.get( i ) , nbTwistlocks );
         }
-        controleur.chargerIHM();
-        this.dispose();
+        controleur.chargerIHM( );
+        this.dispose( );
     }
     
     private boolean verification( )
@@ -243,44 +246,44 @@ public class FormJoueur extends JFrame
         
         if( textFieldNbLignes.getText( ).equals( "" ) ) {
             bOk = false;
-            erreur( "Saisisser un nombre de lignes entre 1 et 9" );
+            erreur( "Saississez un nombre de lignes entre 1 et 9" );
         }
         else
             
             try {Integer.parseInt( textFieldNbLignes.getText( ) );} catch( Exception e ) {
                 bOk = false;
-                erreur( "Saisisser un nombre de lignes entre 1 et 9" );
+                erreur( "Saississez un nombre de lignes entre 1 et 9" );
             }
         
         if( textFieldNbColonnes.getText( ).equals( "" ) ) {
             bOk = false;
-            erreur( "Saisisser un nombre de colonnes entre 1 et 9" );
+            erreur( "Saississez un nombre de colonnes entre 1 et 9" );
         }
         else
             
             try {Integer.parseInt( textFieldNbColonnes.getText( ) );} catch( Exception e ) {
                 bOk = false;
-                erreur( "Saisisser un nombre de colonnes entre 1 et 9" );
+                erreur( "Saississez un nombre de colonnes entre 1 et 9" );
             }
         
         if( textFieldNbTL.getText( ).equals( "" ) ) {
             bOk = false;
-            erreur( "Saisisser un nombre de Twistlocks" );
+            erreur( "Saississez un nombre de Twistlocks" );
         }
         else
             
             try {Integer.parseInt( textFieldNbTL.getText( ) );} catch( Exception e ) {
                 bOk = false;
-                erreur( "Saisisser un nombre de Twistlocks" );
+                erreur( "Saississez un nombre de Twistlocks" );
             }
         
         if( textFieldJ1.getText( ).equals( "" ) ) {
             bOk = false;
-            erreur( "Saisisser le nom du joueur 1" );
+            erreur( "Saississez le nom du joueur 1" );
         }
         if( textFieldJ2.getText( ).equals( "" ) ) {
             bOk = false;
-            erreur( "Saisisser le nom du joueur 2" );
+            erreur( "Saississez le nom du joueur 2" );
         }
         if( ! textFieldJ4.getText( ).equals( "" ) && textFieldJ3.getText( ).equals( "" ) ) {
             bOk = false;
