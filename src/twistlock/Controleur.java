@@ -60,7 +60,7 @@ public class Controleur extends Application
     
     private BorderPane borderPaneJeu;
     
-    private StackPane stackPanePlateau;
+    private GridPane gridPanePlateau;
     
     private StackPane stackPaneRouge, stackPaneVert, stackPaneBleu, stackPaneJaune;
     
@@ -93,7 +93,7 @@ public class Controleur extends Application
         Text textNbColonnes = new Text( "Nombre de colonnes" );
         textNbColonnes.setTextAlignment( TextAlignment.RIGHT );
         
-        textFieldNbLignes = new TextField( "1" );
+        textFieldNbLignes = new TextField( "9" );
         textFieldNbLignes.textProperty( ).addListener( new ChangeListener< String >( )
         {
             @Override
@@ -107,7 +107,7 @@ public class Controleur extends Application
                     textFieldNbLignes.setText( textFieldNbLignes.getText( ).substring( 0 , textFieldNbLignes.getText( ).length( ) - 1 ) );
             }
         } );
-        textFieldNbColonnes = new TextField( "2" );
+        textFieldNbColonnes = new TextField( "9" );
         textFieldNbColonnes.textProperty( ).addListener( new ChangeListener< String >( )
         {
             @Override
@@ -215,20 +215,19 @@ public class Controleur extends Application
         borderPaneJeu.setTop( joueurGraphiqueArrayList.get( 2 ).stackPaneHorizontal( ) );
         borderPaneJeu.setBottom( joueurGraphiqueArrayList.get( 3 ).stackPaneHorizontal( ) );
         
-        stackPanePlateau = new StackPane( );
-        stackPanePlateau.setPrefSize( scene.getWidth( ) - 200 , scene.getHeight( ) - 200 );
+        gridPanePlateau = new GridPane( );
+        gridPanePlateau.setPrefSize( scene.getWidth( ) - 200 , scene.getHeight( ) - 200 );
         
         conteneurGraphiqueArrayList = new ArrayList<>( );
         for( int i = 0 ; i < lignes ; i++ ) {
             for( int j = 0 ; j < colonnes ; j++ ) {
-                ConteneurGraphique conteneurGraphique = new ConteneurGraphique( "test" ,
-                                                                                lignes * 40 , colonnes * 50 );
+                ConteneurGraphique conteneurGraphique = new ConteneurGraphique( String.valueOf( getConteneur( i , j ).getValeur( ) ) );
                 conteneurGraphiqueArrayList.add( conteneurGraphique );
-                stackPanePlateau.getChildren( ).add( conteneurGraphique.getStackPane() );
+                gridPanePlateau.add( conteneurGraphique.getStackPane( ) , j , i );
             }
         }
         
-        borderPaneJeu.setCenter( stackPanePlateau );
+        borderPaneJeu.setCenter( gridPanePlateau );
         
         group.getChildren( ).add( borderPaneJeu );
         

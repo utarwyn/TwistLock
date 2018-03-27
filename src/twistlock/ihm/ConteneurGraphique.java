@@ -10,12 +10,12 @@ public class ConteneurGraphique
     
     private StackPane stackPane;
     
-    public ConteneurGraphique(String stringValeur, int x, int y)
+    public ConteneurGraphique(String stringValeur)
     {
         this.stringValeur = stringValeur;
         
-        int    largeur   = 50;
-        int    hauteur   = 40;
+        int    largeur   = 300;
+        int    hauteur   = 300;
         double rayonCoin = - 10;
         int    marge     = 1;
         Color  couleurAngle1, couleurAngle2, couleurAngle3, couleurAngle4;
@@ -24,11 +24,9 @@ public class ConteneurGraphique
         
         stackPane = new StackPane( );
         stackPane.setPrefSize( largeur , hauteur );
-        stackPane.setTranslateX( x );
-        stackPane.setTranslateY( y );
         
         Rectangle rectangle = new Rectangle( );
-        rectangle.setFill( couleurFond );
+        rectangle.setStroke( couleurFond );
         rectangle.setArcHeight( rayonCoin );
         rectangle.setArcWidth( rayonCoin );
         
