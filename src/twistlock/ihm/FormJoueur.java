@@ -61,7 +61,8 @@ public class FormJoueur extends JFrame
             public void keyTyped( KeyEvent e )
             {
                 char caracter = e.getKeyChar( );
-                if( e.getKeyCode() != KeyEvent.VK_DELETE && ( ( caracter < '1' ) || ( caracter > '9' ) ) && ( caracter != '\b' ) || textFieldNbLignes.getText( ).length( ) > 0 ) {
+                System.out.println( e );
+                if( e.getKeyCode() != KeyEvent.VK_BACK_SPACE && ( ( caracter < '1' ) || ( caracter > '9' ) ) && ( caracter != '\b' ) || textFieldNbLignes.getText( ).length( ) > 0 ) {
                     e.consume( );
                 }
             }
