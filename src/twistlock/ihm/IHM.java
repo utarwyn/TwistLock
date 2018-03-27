@@ -84,7 +84,15 @@ public class IHM extends JFrame {
 			);
 		}
 
-		if (!this.controleur.nouveauTour()) {
+		boolean nouveauTour = this.controleur.nouveauTour();
+
+		for (MainJoueur mainJoueur : this.mains)
+			if (mainJoueur != null)
+				mainJoueur.miseAJour(this.controleur.getJoueurCourant() == mainJoueur.getJoueur());
+
+		this.plateau.miseAJour();
+
+		if (!nouveauTour) {
 			StringBuilder scores = new StringBuilder();
 
 			for (Joueur joueur : this.controleur.getJoueurs())
@@ -99,14 +107,7 @@ public class IHM extends JFrame {
 
 			this.dispose();
 			System.exit(0);
-			return;
 		}
-
-		for (MainJoueur mainJoueur : this.mains)
-			if (mainJoueur != null)
-				mainJoueur.miseAJour(this.controleur.getJoueurCourant() == mainJoueur.getJoueur());
-
-		this.plateau.miseAJour();
 	}
 
 }
