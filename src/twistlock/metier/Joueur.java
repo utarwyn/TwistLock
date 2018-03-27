@@ -14,12 +14,12 @@ public class Joueur
     
     private String nom;
     
-    public Joueur( int id , String nom )
+    public Joueur( int id , String nom , int nbTwistLock)
     {
         this.id = id;
         this.nom = nom;
         this.score = 0;
-        this.nbTwistLock = 20;
+        this.nbTwistLock = nbTwistLock;
     }
     
     /**

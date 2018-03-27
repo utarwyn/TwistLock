@@ -164,7 +164,7 @@ public class Metier
      */
     public void ajouterJoueur( String nom )
     {
-        Joueur joueur = new Joueur( this.joueurs.size( ) + 1 , nom );
+        Joueur joueur = new Joueur( this.joueurs.size( ) + 1 , nom, 20 );
         
         this.joueurs.add( joueur );
         if( this.joueurCourant == null ) this.joueurCourant = joueur;
