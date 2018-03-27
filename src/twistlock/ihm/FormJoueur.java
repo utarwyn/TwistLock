@@ -268,10 +268,16 @@ public class FormJoueur extends JFrame
         this.dispose( );
     }
     
+    /**
+     * Vérifie les donées saisies et affiche des messages d'erreur en cas d'erreur
+     *
+     * @return si les données sont valides
+     */
     private boolean verification( )
     {
         boolean bOk = true;
         
+        //nombre de lignes
         if( textFieldNbLignes.getText( ).equals( "" ) ) {
             bOk = false;
             erreur( "Saississez un nombre de lignes entre 1 et 9" );
@@ -283,6 +289,7 @@ public class FormJoueur extends JFrame
                 erreur( "Saississez un nombre de lignes entre 1 et 9" );
             }
         
+        //nombre de colonnes
         if( textFieldNbColonnes.getText( ).equals( "" ) ) {
             bOk = false;
             erreur( "Saississez un nombre de colonnes entre 1 et 9" );
@@ -294,6 +301,7 @@ public class FormJoueur extends JFrame
                 erreur( "Saississez un nombre de colonnes entre 1 et 9" );
             }
         
+        //nombre de twistlocks
         if( textFieldNbTL.getText( ).equals( "" ) ) {
             bOk = false;
             erreur( "Saississez un nombre de Twistlocks" );
@@ -305,19 +313,25 @@ public class FormJoueur extends JFrame
                 erreur( "Saississez un nombre de Twistlocks" );
             }
         
+        //nom joueur 1 vide
         if( textFieldJ1.getText( ).equals( "" ) ) {
             bOk = false;
             erreur( "Saississez le nom du joueur 1" );
         }
+    
+        //nom joueur 2 vide
         if( textFieldJ2.getText( ).equals( "" ) ) {
             bOk = false;
             erreur( "Saississez le nom du joueur 2" );
         }
+    
+        //nom joueur 4 remplie mais pas le joueur 3
         if( ! textFieldJ4.getText( ).equals( "" ) && textFieldJ3.getText( ).equals( "" ) ) {
             bOk = false;
             erreur( "Saisissez le nom du joueur 3" );
         }
         
+        //noms de joueurs égaux
         if( textFieldJ1.getText( ).equals( textFieldJ2.getText( ) ) || textFieldJ1.getText( ).equals( textFieldJ3.getText( ) ) ||
             textFieldJ1.getText( ).equals( textFieldJ4.getText( ) ) || textFieldJ2.getText( ).equals( textFieldJ3.getText( ) ) ||
             textFieldJ2.getText( ).equals( textFieldJ4.getText( ) ) ||
@@ -330,6 +344,11 @@ public class FormJoueur extends JFrame
         return bOk;
     }
     
+    /**
+     * fenêtre d'erreur
+     *
+     * @param message a afficher dans la fenêtre d'erreur
+     */
     private void erreur( String message )
     {
         JOptionPane.showMessageDialog( null , message );
