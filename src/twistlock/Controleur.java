@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -192,8 +193,12 @@ public class Controleur extends Application
     private void plateauDeJeuGraphique( )
     {
         group = new Group( );
-        scene = new Scene( group , 1200 , 800 , Color.LIGHTBLUE );
+        scene = new Scene( group , Color.LIGHTBLUE );
         stage.setTitle( "Twist-Lock" ); // nom de la fenêtre
+        stage.setScene( scene ); // configuration des éléments graphiques
+        stage.centerOnScreen( ); // centre sur l'écran
+        stage.setMaximized( true );
+        stage.setResizable( false );
         
         circlesTwistLocks = new ArrayList<>( );
         
@@ -216,14 +221,33 @@ public class Controleur extends Application
         borderPaneJeu.setBottom( joueurGraphiqueArrayList.get( 3 ).stackPaneHorizontal( ) );
         
         gridPanePlateau = new GridPane( );
-        gridPanePlateau.setPrefSize( scene.getWidth( ) - 200 , scene.getHeight( ) - 200 );
+        gridPanePlateau.setPrefSize( scene.getWidth( ) - 400 , scene.getHeight( ) - ( nbJoueurs * 200 ) + 400 );
         
         conteneurGraphiqueArrayList = new ArrayList<>( );
         for( int i = 0 ; i < lignes ; i++ ) {
             for( int j = 0 ; j < colonnes ; j++ ) {
-                ConteneurGraphique conteneurGraphique = new ConteneurGraphique( String.valueOf( getConteneur( i , j ).getValeur( ) ) );
+                /*ConteneurGraphique conteneurGraphique = new ConteneurGraphique( String.valueOf( getConteneur( i , j ).getValeur( ) ) );
                 conteneurGraphiqueArrayList.add( conteneurGraphique );
-                gridPanePlateau.add( conteneurGraphique.getStackPane( ) , j , i );
+                
+                conteneurGraphique.setHauteur( (int)gridPanePlateau.getHeight() / lignes );
+                conteneurGraphique.setLargeur( (int)gridPanePlateau.getHeight() / colonnes );
+                
+                gridPanePlateau.add( conteneurGraphique.getStackPane( ) , j , i );*/
+                
+                StackPane stackPane = new StackPane(  );
+                
+                Rectangle rectangle = new Rectangle( );
+                System.out.println(scene.getWidth( ) - 400 );
+                rectangle.setWidth( (scene.getWidth( ) - ( nbJoueurs * 200 ) + 400) / colonnes );
+                rectangle.setHeight( (scene.getHeight( ) - ( nbJoueurs * 200 ) + 400)/lignes );
+                rectangle.setFill( Color.GREY );
+                rectangle.setStroke( Color.BLACK );
+                rectangle.setStrokeWidth( 5 );
+                rectangle.setArcHeight( 30 );
+                rectangle.setArcWidth( 30 );
+                rectangle.setAccessibleText( String.valueOf( getConteneur( i , j ).getValeur( ) ) );
+                
+                gridPanePlateau.add( rectangle,j,i );
             }
         }
         
@@ -231,8 +255,6 @@ public class Controleur extends Application
         
         group.getChildren( ).add( borderPaneJeu );
         
-        stage.setScene( scene ); // configuration des éléments graphiques
-        stage.centerOnScreen( ); // centre sur l'écran
         stage.setOnCloseRequest( event -> System.exit( 0 ) ); // permet l'arrêt du programme lors du clic sur la croix de la fenêtre
         stage.show( ); // rend la fenêtre visible
     }

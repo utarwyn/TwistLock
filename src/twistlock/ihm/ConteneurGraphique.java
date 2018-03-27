@@ -10,12 +10,16 @@ public class ConteneurGraphique
     
     private StackPane stackPane;
     
+    private int largeur, hauteur;
+    
+    private Rectangle rectangle;
+    
     public ConteneurGraphique(String stringValeur)
     {
         this.stringValeur = stringValeur;
         
-        int    largeur   = 300;
-        int    hauteur   = 300;
+            largeur   = Integer.MAX_VALUE;
+            hauteur   = Integer.MAX_VALUE;
         double rayonCoin = - 10;
         int    marge     = 1;
         Color  couleurAngle1, couleurAngle2, couleurAngle3, couleurAngle4;
@@ -24,17 +28,17 @@ public class ConteneurGraphique
         
         stackPane = new StackPane( );
         stackPane.setPrefSize( largeur , hauteur );
-        
-        Rectangle rectangle = new Rectangle( );
-        rectangle.setStroke( couleurFond );
-        rectangle.setArcHeight( rayonCoin );
-        rectangle.setArcWidth( rayonCoin );
-        
-        Text textNumero = new Text( this.stringValeur );
-        textNumero.setX( rectangle.getWidth( ) / 2 );
-        textNumero.setY( rectangle.getArcHeight( ) / 2 );
-        
-        stackPane.getChildren( ).addAll( rectangle , textNumero );
+    
+        rectangle = new Rectangle();
+        rectangle.setWidth( stackPane.getWidth() );
+        rectangle.setHeight( stackPane.getHeight() );
+        rectangle.setFill(Color.GREEN);
+        rectangle.setStroke(Color.DARKGREEN);
+        rectangle.setStrokeWidth(5);
+        rectangle.setArcHeight(30);
+        rectangle.setArcWidth(30);
+        rectangle.setAccessibleText( this.stringValeur );
+        stackPane.getChildren().add( rectangle );
     }
     
     public StackPane getStackPane( )
@@ -45,5 +49,17 @@ public class ConteneurGraphique
     public void setStringValeur( String stringValeur )
     {
         this.stringValeur = stringValeur;
+    }
+    
+    public void setLargeur( int largeur )
+    {
+        this.largeur = largeur;
+        rectangle.setWidth( largeur );
+    }
+    
+    public void setHauteur( int hauteur )
+    {
+        this.hauteur = hauteur;
+        rectangle.setHeight( hauteur );
     }
 }
