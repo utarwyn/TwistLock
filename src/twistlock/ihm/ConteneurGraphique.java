@@ -25,6 +25,12 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 		this.conteneur = conteneur;
 
 		this.setBorder(BorderFactory.createEmptyBorder());
+
+		this.setOpaque(false);
+		this.setFocusPainted(false);
+		this.setBorderPainted(false);
+		this.setContentAreaFilled(false);
+
 		this.addActionListener(this);
 	}
 
@@ -72,6 +78,8 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 
 		g2.setFont(font);
 		g2.drawString(text, (float) dim.getWidth()/2 - width/2, (float) (dim.getHeight() - 6)/2 + FONT_SIZE/2);
+
+		g2.dispose();
 	}
 
 	/**
