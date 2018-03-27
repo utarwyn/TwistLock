@@ -5,7 +5,6 @@ import twistlock.ihm.IHM;
 import twistlock.metier.Conteneur;
 import twistlock.metier.Joueur;
 import twistlock.metier.Metier;
-import twistlock.metier.TwistLock;
 
 import java.util.ArrayList;
 
@@ -14,17 +13,30 @@ public class Controleur {
     private Metier metier;
 
     private IHM ihm;
-    
+
 
     private Controleur() {
 		this.ihm = new IHM(this);
-        new FormJoueur(this);
+
+		new FormJoueur(this);
+
+		// TODO: temporaire
+		this.chargerMetier(9, 9);
+		this.metier.ajouterJoueur("TONTON");
+		this.metier.ajouterJoueur("TATA");
+        this.metier.ajouterJoueur("TATA");
+        this.metier.ajouterJoueur("TATA");
+		this.chargerIHM();
     }
 
 
     public void chargerMetier(int nbLig, int nbCol) {
         this.metier = new Metier(nbLig, nbCol);
     }
+
+    public void chargerIHM() {
+    	this.ihm.lancer();
+	}
 
     /* ----------------------------- */
     /*  GESTION DE LA GRILLE DE JEU  */
@@ -45,17 +57,8 @@ public class Controleur {
     /* ------------------------ */
     /*  GESTION DES TWISTLOCKS  */
     /* ------------------------ */
-
-    public TwistLock[][] getTwistLocks() {
-        return this.metier.getTwistLocks();
-    }
-
-    public boolean isTwistlock(int lig, int col) {
-        return this.metier.isTwistlock(lig, col);
-    }
-
-    public boolean jouerTwistlock(int lig, int col, Joueur joueur) {
-        return this.metier.jouerTwistlock(lig, col, joueur);
+    public boolean jouerTwistlock(Conteneur conteneur, int coin) {
+        return this.metier.jouerTwistlock(conteneur, coin);
     }
 
     /* --------------------- */
