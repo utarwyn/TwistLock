@@ -16,12 +16,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import twistlock.Controleur;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class AjoutJoueur extends Application
+public class Fenetre extends Application
 {
+    
+    Controleur controleur;
     /**
      * possède les éléments graphiques
      */
@@ -40,14 +43,13 @@ public class AjoutJoueur extends Application
     
     private ArrayList< String > nomJoueurs;
     
-    @Override
-    public void stop( ) throws Exception
+    public void init( )
     {
-        super.stop( );
+        this.controleur = controleur;
     }
     
     @Override
-    public void start( Stage stage )
+    public void start( Stage stage ) throws Exception
     {
         stage.setTitle( "Twist-Lock - Ajouter des joueurs" ); // nom de la fenêtre
         
@@ -124,7 +126,10 @@ public class AjoutJoueur extends Application
                     if( nbJoueurs > 2 ) nomJoueurs.add( textFieldJ3.getText( ) );
                     if( nbJoueurs > 3 ) nomJoueurs.add( textFieldJ4.getText( ) );
                     
-                    stage.close();
+                    controleur.chargerMetier( lignes , colonnes );
+                    for( int i = 0 ; i < nbJoueurs ; i++ ) {
+                        controleur.ajouterJoueur( getNomJoueurs( ).get( i ) );
+                    }
                 }
             }
         } );
@@ -216,4 +221,3 @@ public class AjoutJoueur extends Application
         return nomJoueurs;
     }
 }
-
