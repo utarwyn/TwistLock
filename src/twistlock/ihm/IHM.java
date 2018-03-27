@@ -8,9 +8,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Représente la fenêtre principale de jeu.
+ * Est le coeur de la partie IHM
+ */
 public class IHM extends JFrame {
 
-	public static final String[] MAIN_JOUEURS = new String[] { "West", "East", "North", "South" };
+	public static final String[] PLACES_MAIN = new String[] { "West", "East", "North", "South" };
 
 	public static final Color[] COULEURS = new Color[] {
 			Color.RED,
@@ -30,6 +34,9 @@ public class IHM extends JFrame {
 		this.preparer();
 	}
 
+	/**
+	 * Prépare l'IHM de la fenêtre
+	 */
 	private void preparer() {
 		this.setTitle("Jeu des Twistlocks");
 		this.setExtendedState(MAXIMIZED_BOTH);
@@ -42,13 +49,16 @@ public class IHM extends JFrame {
 		this.add(this.plateau, BorderLayout.CENTER);
 	}
 
+	/**
+	 * Lance la partie IHM et ouvre la fenêtre de jeu
+	 */
 	public void lancer() {
 		ArrayList<Joueur> joueurs = this.controleur.getJoueurs();
 
 		int i = 0;
 		for (Joueur joueur : joueurs) {
 			this.mains[i] = new MainJoueur(joueur);
-			this.add(this.mains[i], MAIN_JOUEURS[i++]);
+			this.add(this.mains[i], PLACES_MAIN[i++]);
 		}
 
 		this.plateau.preparer();
@@ -58,9 +68,14 @@ public class IHM extends JFrame {
 		this.setVisible(true);
 	}
 
+	/**
+	 * Appelée lorsqu'un joueur souhaite poser un twistlock
+	 * @param conteneur Conteneur concerné par la pose
+	 * @param coin Coin dans lequel poser le twistlock
+	 */
 	public void choixTwistlock(Conteneur conteneur, int coin) {
 		if (!this.controleur.jouerTwistlock(conteneur, coin)) {
-			// le joueur n'a pas pu poser de twistlock ce gros couillon
+			// le joueur n'a pas pu poser de twistlock
 			JOptionPane.showMessageDialog(
 					this,
 					"Cet emplacement est déjà utilisé. Tu perds un twistlock de pénalité.",

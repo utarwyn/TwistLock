@@ -8,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
+/**
+ * Représente la grille de jeu dans l'IHM.
+ */
 class Plateau extends JPanel {
 
 	private IHM ihm;
@@ -15,11 +18,14 @@ class Plateau extends JPanel {
 	private Controleur controleur;
 
 	Plateau(IHM ihm, Controleur controleur) {
+		super(true);
+
 		this.ihm = ihm;
 		this.controleur = controleur;
 	}
 
 	void preparer() {
+		this.setOpaque(true);
 		this.setLayout(new GridLayout(controleur.getNbLig(), controleur.getNbCol()));
 
 		for (int lig = 0; lig < this.controleur.getNbLig(); lig++)
@@ -35,12 +41,16 @@ class Plateau extends JPanel {
 
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
 		Graphics2D g2 = (Graphics2D) g;
 		Dimension dim = this.getSize();
 		Conteneur conteneur;
 		TwistLock twistLock;
 		double baseX, baseY;
 		double x, y;
+
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		int SIZE = 20;
 
