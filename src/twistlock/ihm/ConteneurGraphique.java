@@ -88,7 +88,7 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String[] coin = new String[] { "1", "2", "3", "4" };
+		String[] coin = new String[] { "HAUT GAUCHE", "HAUT DROIT", "BAS DROIT", "BAS GAUCHE" };
 
 		int rang = JOptionPane.showOptionDialog(
 				null,
