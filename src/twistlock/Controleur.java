@@ -10,67 +10,69 @@ import java.util.ArrayList;
 
 public class Controleur {
 
-    private Metier metier;
+	private Metier metier;
 
-    private IHM ihm;
+	private IHM ihm;
 
 
     private Controleur() {
-        this.ihm = new IHM(this);
-        new FormJoueur( this );
-		
+		this.ihm = new IHM(this);
+		new FormJoueur(this);
     }
 
-
-    public void chargerMetier(int nbLig, int nbCol) {
-        this.metier = new Metier(nbLig, nbCol);
-    }
-
-    public void chargerIHM() {
-    	this.ihm.lancer();
+	public void chargerMetier(int nbLig, int nbCol) {
+		this.metier = new Metier(nbLig, nbCol);
 	}
 
-    /* ----------------------------- */
-    /*  GESTION DE LA GRILLE DE JEU  */
-    /* ----------------------------- */
+	public void chargerIHM() {
+		this.ihm.lancer();
+	}
 
-    public int getNbLig() {
-        return this.metier.getNbLig();
-    }
+	/* ----------------------------- */
+	/*  GESTION DE LA GRILLE DE JEU  */
+	/* ----------------------------- */
 
-    public int getNbCol() {
-        return this.metier.getNbCol();
-    }
+	public int getNbLig() {
+		return this.metier.getNbLig();
+	}
 
-    public Conteneur getConteneur(int lig, int col) {
-        return this.metier.getConteneur(lig, col);
-    }
+	public int getNbCol() {
+		return this.metier.getNbCol();
+	}
 
-    /* ------------------------ */
-    /*  GESTION DES TWISTLOCKS  */
-    /* ------------------------ */
-    public boolean jouerTwistlock(Conteneur conteneur, int coin) {
-        return this.metier.jouerTwistlock(conteneur, coin);
-    }
+	public Conteneur getConteneur(int lig, int col) {
+		return this.metier.getConteneur(lig, col);
+	}
 
-    /* --------------------- */
-    /*  GESTION DES JOUEURS  */
-    /* --------------------- */
+	/* ------------------------ */
+	/*  GESTION DES TWISTLOCKS  */
+	/* ------------------------ */
+	public boolean jouerTwistlock(Conteneur conteneur, int coin) {
+		return this.metier.jouerTwistlock(conteneur, coin);
+	}
+
+	/* --------------------- */
+	/*  GESTION DES JOUEURS  */
+	/* --------------------- */
 
     public void ajouterJoueur(String nom, int tL) {
         this.metier.ajouterJoueur(nom, tL);
     }
 
-    public ArrayList<Joueur> getJoueurs() {
-        return this.metier.getJoueurs();
-    }
+	public ArrayList<Joueur> getJoueurs() {
+		return this.metier.getJoueurs();
+	}
 
-    public boolean nouveauTour() {
-        return this.metier.nouveauTour();
-    }
+	public Joueur getJoueurCourant() {
+		return this.metier.getJoueurCourant();
+	}
 
-    public static void main(String[] args) {
-        new Controleur();
-    }
+	public boolean nouveauTour() {
+		return this.metier.nouveauTour();
+	}
+
+	public static void main(String[] args) {
+		new Controleur();
+	}
 
 }

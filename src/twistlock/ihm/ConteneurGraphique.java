@@ -1,6 +1,7 @@
 package twistlock.ihm;
 
 import twistlock.metier.Conteneur;
+import twistlock.metier.Joueur;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +44,13 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 		rect.subtract(c4);
 
 		// Dessin
-		g2.setColor(Color.WHITE);
+		Color color = Color.WHITE;
+		Joueur proprietaire = this.conteneur.getProprietaire();
+
+		if (proprietaire != null)
+			color = IHM.COULEURS[proprietaire.getId() - 1];
+
+		g2.setColor(color);
 		g2.fill(rect);
 		g2.setColor(Color.BLACK);
 		g2.draw(rect);
@@ -72,7 +79,9 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 				null, coin, null
 		);
 
-		this.ihm.choixTwistlock(this.conteneur, rang+1);
+		if (rang > -1)
+			this.ihm.choixTwistlock(this.conteneur, rang+1);
+
 	}
 
 }

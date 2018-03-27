@@ -79,6 +79,14 @@ public class Metier {
 	}
 
 	/**
+	 * Retourne le joueur courant
+	 * @return Joueur jourant, null si aucun joueur n'est en train de jouer.
+	 */
+	public Joueur getJoueurCourant() {
+		return this.joueurCourant;
+	}
+
+	/**
 	 * Recalcule le score de tous les joueurs en fonction de leur possession de conteneurs dans la grille de jeu.
 	 */
 	private void recalculerScores() {
@@ -131,19 +139,19 @@ public class Metier {
 		/* Vérifications de fin de partie:
 		 *   - Aucun emplacement de Twistlock disponible
 		 *   - Plus aucun joueur n'a de twistlock         */
-		boolean finDePartie = true;
+		boolean fin1 = true, fin2 = true;
 		Conteneur[][] conteneurs = this.conteneurs;
 
 		for (int lig = 0; lig < conteneurs.length; lig++)
 			for (int col = 0; col < conteneurs[lig].length; col++)
 				if (!conteneurs[lig][col].estEntoure())
-					finDePartie = false;
+					fin1 = false;
 
 		for (Joueur joueur : this.joueurs)
 			if (joueur.peutJouer())
-				finDePartie = false;
+				fin2 = false;
 
-		if (finDePartie) {
+		if (fin1 || fin2) {
 			this.joueurCourant = null;
 			return false;
 		}
@@ -194,6 +202,12 @@ public class Metier {
 		return true;
 	}
 
+	/**
+	 * Retourne les voisins d'un conteneur lié par un coin commun
+	 * @param origine Conteneur d'origine pour récupérer les voisins
+	 * @param coin Coin de liaison
+	 * @return Tableau associatif des voisins (avec les coins de liaison)
+	 */
 	private HashMap<Conteneur, Integer> getVoisins(Conteneur origine, int coin) {
 		HashMap<Conteneur, Integer> voisins = new HashMap<>();
 		Conteneur voisin;
