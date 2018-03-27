@@ -1,5 +1,6 @@
 package twistlock;
 
+import twistlock.ihm.FormJoueur;
 import twistlock.ihm.IHM;
 import twistlock.metier.Conteneur;
 import twistlock.metier.Joueur;
@@ -13,9 +14,11 @@ public class Controleur {
     private Metier metier;
 
     private IHM ihm;
+    
 
     private Controleur() {
 		this.ihm = new IHM(this);
+        new FormJoueur(this);
     }
 
 
