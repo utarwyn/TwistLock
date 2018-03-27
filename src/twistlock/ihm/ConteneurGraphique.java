@@ -10,6 +10,10 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
+/**
+ * Représente un conteneur dans le plateau de jeu (Graphique)
+ * Est en réalité un bouton cliquable redessiné.
+ */
 public class ConteneurGraphique extends JButton implements ActionListener {
 
 	private IHM ihm;
@@ -24,6 +28,10 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 		this.addActionListener(this);
 	}
 
+	/**
+	 * Appelée lorsque l'on souhaite dessiner un conteneur graphique
+	 * @param g Contexte graphique pour le dessin
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -66,6 +74,10 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 		g2.drawString(text, (float) dim.getWidth()/2 - width/2, (float) (dim.getHeight() - 6)/2 + FONT_SIZE/2);
 	}
 
+	/**
+	 * Méthode lancée dès lors du clic sur le bouton (conteneur)
+	 * @param e Evenement de clic
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String[] coin = new String[] { "1", "2", "3", "4" };
