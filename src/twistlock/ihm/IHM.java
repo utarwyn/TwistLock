@@ -46,8 +46,6 @@ public class IHM extends Application
     {
         stage.setTitle( "Twist-Lock" ); // nom de la fenêtre
         
-        ConteneurGraphique circle = new ConteneurGraphique( );
-        
         for( int i = 0 ; i < 20 ; i++ ) {
             Circle c = new Circle( 1 );
             circlesTwistLocks.add( c );
