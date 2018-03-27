@@ -32,6 +32,7 @@ public class IHM extends JFrame {
 
 	private void preparer() {
 		this.setTitle("Jeu des Twistlocks");
+		this.setExtendedState(MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		this.mains = new MainJoueur[4];
@@ -58,8 +59,37 @@ public class IHM extends JFrame {
 	}
 
 	public void choixTwistlock(Conteneur conteneur, int coin) {
-		this.controleur.jouerTwistlock(conteneur, coin);
-		this.controleur.nouveauTour();
+		if (!this.controleur.jouerTwistlock(conteneur, coin)) {
+			// le joueur n'a pas pu poser de twistlock ce gros couillon
+			JOptionPane.showMessageDialog(
+					this,
+					"Cet emplacement est déjà utilisé. Tu perds un twistlock de pénalité.",
+					"Impossible de jouer ici",
+					JOptionPane.ERROR_MESSAGE
+			);
+		}
+
+		if (!this.controleur.nouveauTour()) {
+			StringBuilder scores = new StringBuilder();
+
+			for (Joueur joueur : this.controleur.getJoueurs())
+				scores.append(joueur.getNom()).append(": ").append(joueur.getScore()).append("\n");
+
+			JOptionPane.showMessageDialog(
+					this,
+					scores.toString(),
+					"FIN DE PARTIE - Tableau des scores",
+					JOptionPane.INFORMATION_MESSAGE
+			);
+
+			this.dispose();
+			System.exit(0);
+			return;
+		}
+
+		for (MainJoueur mainJoueur : this.mains)
+			if (mainJoueur != null)
+				mainJoueur.miseAJour(this.controleur.getJoueurCourant() == mainJoueur.getJoueur());
 
 		this.plateau.miseAJour();
 	}
