@@ -91,7 +91,7 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 		String[] coin = new String[] { "HAUT GAUCHE", "HAUT DROIT", "BAS DROIT", "BAS GAUCHE" };
 
 		int rang = JOptionPane.showOptionDialog(
-				null,
+				this.ihm,
 				"Choisissez le coin où placer le twistlock",
 				"Choix du coin",
 				JOptionPane.YES_NO_CANCEL_OPTION,
