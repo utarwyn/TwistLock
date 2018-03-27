@@ -1,6 +1,5 @@
 package twistlock.ihm;
 
-import javafx.scene.input.KeyCode;
 import twistlock.Controleur;
 
 import javax.swing.*;
@@ -9,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.security.Key;
 import java.util.ArrayList;
 
 public class FormJoueur extends JFrame
@@ -32,13 +30,13 @@ public class FormJoueur extends JFrame
         
         this.setTitle( "Jeu des Twistlocks - Ajouter des Joueurs" );
         this.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
-        //        this.setLocationRelativeTo( null );
         this.setSize( 1200 , 800 );
         
         preparer( );
         
         remplir( );
         
+        this.setLocationRelativeTo( null );
         this.setVisible( true );
     }
     
@@ -62,7 +60,7 @@ public class FormJoueur extends JFrame
             {
                 char caracter = e.getKeyChar( );
                 System.out.println( e );
-                if(( ( caracter < '1' ) || ( caracter > '9' ) ) && ( caracter != '\b' ) || textFieldNbLignes.getText( ).length( ) > 0 ) {
+                if( ( ( caracter < '1' ) || ( caracter > '9' ) ) && ( caracter != '\b' ) || textFieldNbLignes.getText( ).length( ) > 0 ) {
                     e.consume( );
                 }
             }
@@ -120,6 +118,8 @@ public class FormJoueur extends JFrame
                                              {
                                                  if( verification( ) ) {
                     
+                                                     nbJoueurs = 2;
+                    
                                                      if( ! textFieldJ3.getText( ).equals( "" ) ) {
                                                          nbJoueurs = 3;
                                                      }
@@ -129,14 +129,14 @@ public class FormJoueur extends JFrame
                     
                                                      lignes = Integer.parseInt( textFieldNbLignes.getText( ) );
                                                      colonnes = Integer.parseInt( textFieldNbColonnes.getText( ) );
-                                                     nbTwistlocks = Integer.parseInt( textFieldNbTL.getText() );
+                                                     nbTwistlocks = Integer.parseInt( textFieldNbTL.getText( ) );
                                                      nomJoueurs = new ArrayList<>( );
                                                      nomJoueurs.add( textFieldJ1.getText( ) );
                                                      nomJoueurs.add( textFieldJ2.getText( ) );
                                                      if( nbJoueurs > 2 ) nomJoueurs.add( textFieldJ3.getText( ) );
                                                      if( nbJoueurs > 3 ) nomJoueurs.add( textFieldJ4.getText( ) );
-                                                     
-                                                     lancer();
+                    
+                                                     lancer( );
                                                  }
                                              }
                                          }
@@ -234,10 +234,10 @@ public class FormJoueur extends JFrame
     {
         controleur.chargerMetier( lignes , colonnes );
         for( int i = 0 ; i < nbJoueurs ; i++ ) {
-            controleur.ajouterJoueur( nomJoueurs.get( i ), nbTwistlocks );
+            controleur.ajouterJoueur( nomJoueurs.get( i ) , nbTwistlocks );
         }
-        controleur.chargerIHM();
-        this.dispose();
+        controleur.chargerIHM( );
+        this.dispose( );
     }
     
     private boolean verification( )
