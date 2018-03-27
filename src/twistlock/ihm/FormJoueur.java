@@ -1,5 +1,6 @@
 package twistlock.ihm;
 
+import javafx.scene.input.KeyCode;
 import twistlock.Controleur;
 
 import javax.swing.*;
@@ -8,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.security.Key;
 import java.util.ArrayList;
 
 public class FormJoueur extends JFrame
@@ -59,7 +61,7 @@ public class FormJoueur extends JFrame
             public void keyTyped( KeyEvent e )
             {
                 char caracter = e.getKeyChar( );
-                if( ( ( caracter < '1' ) || ( caracter > '9' ) ) && ( caracter != '\b' ) || textFieldNbLignes.getText( ).length( ) > 0 ) {
+                if( e.getKeyCode() != KeyEvent.VK_DELETE && ( ( caracter < '1' ) || ( caracter > '9' ) ) && ( caracter != '\b' ) || textFieldNbLignes.getText( ).length( ) > 0 ) {
                     e.consume( );
                 }
             }
@@ -230,7 +232,7 @@ public class FormJoueur extends JFrame
     private void lancer( )
     {
         controleur.chargerMetier( lignes , colonnes );
-        for( int i = 0 ; i < nbJoueurs -1; i++ ) {
+        for( int i = 0 ; i < nbJoueurs ; i++ ) {
             controleur.ajouterJoueur( nomJoueurs.get( i ), nbTwistlocks );
         }
         controleur.chargerIHM();
@@ -243,44 +245,44 @@ public class FormJoueur extends JFrame
         
         if( textFieldNbLignes.getText( ).equals( "" ) ) {
             bOk = false;
-            erreur( "Saisisser un nombre de lignes entre 1 et 9" );
+            erreur( "Saississez un nombre de lignes entre 1 et 9" );
         }
         else
             
             try {Integer.parseInt( textFieldNbLignes.getText( ) );} catch( Exception e ) {
                 bOk = false;
-                erreur( "Saisisser un nombre de lignes entre 1 et 9" );
+                erreur( "Saississez un nombre de lignes entre 1 et 9" );
             }
         
         if( textFieldNbColonnes.getText( ).equals( "" ) ) {
             bOk = false;
-            erreur( "Saisisser un nombre de colonnes entre 1 et 9" );
+            erreur( "Saississez un nombre de colonnes entre 1 et 9" );
         }
         else
             
             try {Integer.parseInt( textFieldNbColonnes.getText( ) );} catch( Exception e ) {
                 bOk = false;
-                erreur( "Saisisser un nombre de colonnes entre 1 et 9" );
+                erreur( "Saississez un nombre de colonnes entre 1 et 9" );
             }
         
         if( textFieldNbTL.getText( ).equals( "" ) ) {
             bOk = false;
-            erreur( "Saisisser un nombre de Twistlocks" );
+            erreur( "Saississez un nombre de Twistlocks" );
         }
         else
             
             try {Integer.parseInt( textFieldNbTL.getText( ) );} catch( Exception e ) {
                 bOk = false;
-                erreur( "Saisisser un nombre de Twistlocks" );
+                erreur( "Saississez un nombre de Twistlocks" );
             }
         
         if( textFieldJ1.getText( ).equals( "" ) ) {
             bOk = false;
-            erreur( "Saisisser le nom du joueur 1" );
+            erreur( "Saississez le nom du joueur 1" );
         }
         if( textFieldJ2.getText( ).equals( "" ) ) {
             bOk = false;
-            erreur( "Saisisser le nom du joueur 2" );
+            erreur( "Saississez le nom du joueur 2" );
         }
         if( ! textFieldJ4.getText( ).equals( "" ) && textFieldJ3.getText( ).equals( "" ) ) {
             bOk = false;
