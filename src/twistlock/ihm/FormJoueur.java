@@ -18,8 +18,8 @@ public class FormJoueur extends JFrame
     
     private GridBagLayout gridBagLayout;
     private JLabel        jLabelTitre, jLabelNbLignes, jLabelNbColonnes, jLabelNbTL, jLabelJ1, jLabelJ2, jLabelJ3, jLabelJ4;
-    private TextField textFieldNbLignes, textFieldNbColonnes, textFieldNbTL, textFieldJ1, textFieldJ2, textFieldJ3, textFieldJ4;
-    private Button buttonQuitter, buttonValider;
+    private JTextField textFieldNbLignes, textFieldNbColonnes, textFieldNbTL, textFieldJ1, textFieldJ2, textFieldJ3, textFieldJ4;
+    private JButton buttonQuitter, buttonValider;
     
     private int nbJoueurs;
     private int lignes, colonnes;
@@ -55,19 +55,19 @@ public class FormJoueur extends JFrame
         jLabelJ3 = new JLabel( "Nom du joueur 3 : " );
         jLabelJ4 = new JLabel( "Nom du joueur 4 : " );
         
-        textFieldNbLignes = new TextField( );
+        textFieldNbLignes = new JTextField( );
         textFieldNbLignes.addKeyListener( new KeyAdapter( )
         {
             public void keyTyped( KeyEvent e )
             {
                 char caracter = e.getKeyChar( );
                 System.out.println( e );
-                if( e.getKeyCode() != KeyEvent.VK_BACK_SPACE && ( ( caracter < '1' ) || ( caracter > '9' ) ) && ( caracter != '\b' ) || textFieldNbLignes.getText( ).length( ) > 0 ) {
+                if(( ( caracter < '1' ) || ( caracter > '9' ) ) && ( caracter != '\b' ) || textFieldNbLignes.getText( ).length( ) > 0 ) {
                     e.consume( );
                 }
             }
         } );
-        textFieldNbColonnes = new TextField( );
+        textFieldNbColonnes = new JTextField( );
         textFieldNbColonnes.addKeyListener( new KeyAdapter( )
         {
             public void keyTyped( KeyEvent e )
@@ -78,7 +78,7 @@ public class FormJoueur extends JFrame
                 }
             }
         } );
-        textFieldNbTL = new TextField( );
+        textFieldNbTL = new JTextField( );
         textFieldNbTL.addKeyListener( new KeyAdapter( )
         {
             public void keyTyped( KeyEvent e )
@@ -89,10 +89,10 @@ public class FormJoueur extends JFrame
                 }
             }
         } );
-        textFieldJ1 = new TextField( );
-        textFieldJ2 = new TextField( );
-        textFieldJ3 = new TextField( );
-        textFieldJ4 = new TextField( );
+        textFieldJ1 = new JTextField( );
+        textFieldJ2 = new JTextField( );
+        textFieldJ3 = new JTextField( );
+        textFieldJ4 = new JTextField( );
         
         textFieldNbLignes.setColumns( 20 );
         textFieldNbColonnes.setColumns( 20 );
@@ -102,7 +102,7 @@ public class FormJoueur extends JFrame
         textFieldJ3.setColumns( 20 );
         textFieldJ4.setColumns( 20 );
         
-        buttonQuitter = new Button( "Quitter" );
+        buttonQuitter = new JButton( "Quitter" );
         buttonQuitter.addActionListener( new ActionListener( )
         {
             @Override
@@ -112,7 +112,7 @@ public class FormJoueur extends JFrame
             }
         } );
         
-        buttonValider = new Button( "Valider" );
+        buttonValider = new JButton( "Valider" );
         buttonValider.addActionListener( new ActionListener( )
                                          {
                                              @Override
