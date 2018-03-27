@@ -14,7 +14,6 @@ public class FormJoueur extends JFrame
 {
     private Controleur controleur;
     
-    private GridBagLayout gridBagLayout;
     private JLabel        jLabelTitre, jLabelNbLignes, jLabelNbColonnes, jLabelNbTL, jLabelJ1, jLabelJ2, jLabelJ3, jLabelJ4;
     private JTextField textFieldNbLignes, textFieldNbColonnes, textFieldNbTL, textFieldJ1, textFieldJ2, textFieldJ3, textFieldJ4;
     private JButton buttonQuitter, buttonValider;
@@ -59,7 +58,6 @@ public class FormJoueur extends JFrame
             public void keyTyped( KeyEvent e )
             {
                 char caracter = e.getKeyChar( );
-                System.out.println( e );
                 if( ( ( caracter < '1' ) || ( caracter > '9' ) ) && ( caracter != '\b' ) || textFieldNbLignes.getText( ).length( ) > 0 ) {
                     e.consume( );
                 }
@@ -101,46 +99,34 @@ public class FormJoueur extends JFrame
         textFieldJ4.setColumns( 20 );
         
         buttonQuitter = new JButton( "Quitter" );
-        buttonQuitter.addActionListener( new ActionListener( )
-        {
-            @Override
-            public void actionPerformed( ActionEvent e )
-            {
-                System.exit( 0 );
-            }
-        } );
+        buttonQuitter.addActionListener( e -> System.exit( 0 ) );
         
         buttonValider = new JButton( "Valider" );
-        buttonValider.addActionListener( new ActionListener( )
-                                         {
-                                             @Override
-                                             public void actionPerformed( ActionEvent e )
-                                             {
-                                                 if( verification( ) ) {
-                    
-                                                     nbJoueurs = 2;
-                    
-                                                     if( ! textFieldJ3.getText( ).equals( "" ) ) {
-                                                         nbJoueurs = 3;
-                                                     }
-                                                     if( ! textFieldJ4.getText( ).equals( "" ) ) {
-                                                         nbJoueurs = 4;
-                                                     }
-                    
-                                                     lignes = Integer.parseInt( textFieldNbLignes.getText( ) );
-                                                     colonnes = Integer.parseInt( textFieldNbColonnes.getText( ) );
-                                                     nbTwistlocks = Integer.parseInt( textFieldNbTL.getText( ) );
-                                                     nomJoueurs = new ArrayList<>( );
-                                                     nomJoueurs.add( textFieldJ1.getText( ) );
-                                                     nomJoueurs.add( textFieldJ2.getText( ) );
-                                                     if( nbJoueurs > 2 ) nomJoueurs.add( textFieldJ3.getText( ) );
-                                                     if( nbJoueurs > 3 ) nomJoueurs.add( textFieldJ4.getText( ) );
-                    
-                                                     lancer( );
-                                                 }
-                                             }
-                                         }
-        
+        buttonValider.addActionListener( e -> {
+            if( verification( ) ) {
+
+                nbJoueurs = 2;
+
+                if( ! textFieldJ3.getText( ).equals( "" ) ) {
+                    nbJoueurs = 3;
+                }
+                if( ! textFieldJ4.getText( ).equals( "" ) ) {
+                    nbJoueurs = 4;
+                }
+
+                lignes = Integer.parseInt( textFieldNbLignes.getText( ) );
+                colonnes = Integer.parseInt( textFieldNbColonnes.getText( ) );
+                nbTwistlocks = Integer.parseInt( textFieldNbTL.getText( ) );
+                nomJoueurs = new ArrayList<>( );
+                nomJoueurs.add( textFieldJ1.getText( ) );
+                nomJoueurs.add( textFieldJ2.getText( ) );
+                if( nbJoueurs > 2 ) nomJoueurs.add( textFieldJ3.getText( ) );
+                if( nbJoueurs > 3 ) nomJoueurs.add( textFieldJ4.getText( ) );
+
+                lancer( );
+            }
+        }
+
         );
     }
     
