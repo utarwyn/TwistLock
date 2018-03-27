@@ -1,5 +1,4 @@
-package twistlock;
-
+package twistlock.ihm;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,32 +11,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import twistlock.ihm.ConteneurGraphique;
-import twistlock.ihm.Fenetre;
-import twistlock.ihm.JoueurGraphique;
-import twistlock.metier.Conteneur;
-import twistlock.metier.Joueur;
-import twistlock.metier.Metier;
-import twistlock.metier.TwistLock;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class Controleur extends Application
+public class AjoutJoueur extends Application
 {
-    
-    private Metier metier;
-    
-    private Fenetre fenetre;
-    
     /**
      * possède les éléments graphiques
      */
@@ -48,8 +32,6 @@ public class Controleur extends Application
      */
     private Scene scene = new Scene( group , Color.LIGHTBLUE );
     
-    private Stage stage;
-    
     private TextField textFieldNbLignes, textFieldNbColonnes, textFieldJ1, textFieldJ2, textFieldJ3, textFieldJ4;
     
     private int lignes, colonnes;
@@ -58,29 +40,14 @@ public class Controleur extends Application
     
     private ArrayList< String > nomJoueurs;
     
-    private BorderPane borderPaneJeu;
-    
-    private GridPane gridPanePlateau;
-    
-    private StackPane stackPaneRouge, stackPaneVert, stackPaneBleu, stackPaneJaune;
-    
-    private ArrayList< Circle > circlesTwistLocks;
-    
-    private ArrayList< ConteneurGraphique > conteneurGraphiqueArrayList;
-    
-    public static void main( String[] args )
+    @Override
+    public void stop( ) throws Exception
     {
-        Application.launch( Controleur.class );
+        super.stop( );
     }
     
     @Override
     public void start( Stage stage )
-    {
-        this.stage = stage;
-        ajoutJoueursGraphique( );
-    }
-    
-    private void ajoutJoueursGraphique( )
     {
         stage.setTitle( "Twist-Lock - Ajouter des joueurs" ); // nom de la fenêtre
         
@@ -93,7 +60,7 @@ public class Controleur extends Application
         Text textNbColonnes = new Text( "Nombre de colonnes" );
         textNbColonnes.setTextAlignment( TextAlignment.RIGHT );
         
-        textFieldNbLignes = new TextField( "9" );
+        textFieldNbLignes = new TextField( );
         textFieldNbLignes.textProperty( ).addListener( new ChangeListener< String >( )
         {
             @Override
@@ -107,7 +74,7 @@ public class Controleur extends Application
                     textFieldNbLignes.setText( textFieldNbLignes.getText( ).substring( 0 , textFieldNbLignes.getText( ).length( ) - 1 ) );
             }
         } );
-        textFieldNbColonnes = new TextField( "9" );
+        textFieldNbColonnes = new TextField( );
         textFieldNbColonnes.textProperty( ).addListener( new ChangeListener< String >( )
         {
             @Override
@@ -127,10 +94,10 @@ public class Controleur extends Application
         Text textJ3 = new Text( "Nom joueur 3 (facultatif)" );
         Text textJ4 = new Text( "Nom joueur 4 (facultatif)" );
         
-        textFieldJ1 = new TextField( "3" );
-        textFieldJ2 = new TextField( "4" );
-        textFieldJ3 = new TextField( "5" );
-        textFieldJ4 = new TextField( "6" );
+        textFieldJ1 = new TextField( );
+        textFieldJ2 = new TextField( );
+        textFieldJ3 = new TextField( );
+        textFieldJ4 = new TextField( );
         
         Button buttonValider = new Button( "Valider" );
         buttonValider.setOnAction( new EventHandler< ActionEvent >( )
@@ -151,18 +118,13 @@ public class Controleur extends Application
                     lignes = Integer.parseInt( textFieldNbLignes.getText( ) );
                     colonnes = Integer.parseInt( textFieldNbColonnes.getText( ) );
                     
-                    nomJoueurs = new ArrayList<>( );
+                    nomJoueurs = new ArrayList< String >( );
                     nomJoueurs.add( textFieldJ1.getText( ) );
                     nomJoueurs.add( textFieldJ2.getText( ) );
                     if( nbJoueurs > 2 ) nomJoueurs.add( textFieldJ3.getText( ) );
                     if( nbJoueurs > 3 ) nomJoueurs.add( textFieldJ4.getText( ) );
                     
-                    chargerMetier( lignes , colonnes );
-                    for( int i = 0 ; i < nbJoueurs ; i++ ) {
-                        ajouterJoueur( nomJoueurs.get( i ) );
-                    }
-                    group.getChildren( ).remove( 0 );
-                    plateauDeJeuGraphique( );
+                    stage.close();
                 }
             }
         } );
@@ -182,54 +144,6 @@ public class Controleur extends Application
         gridPane.add( buttonValider , 1 , 6 );
         
         group.getChildren( ).add( gridPane );
-        
-        stage.setScene( scene ); // configuration des éléments graphiques
-        stage.centerOnScreen( ); // centre sur l'écran
-        stage.setOnCloseRequest( event -> System.exit( 0 ) ); // permet l'arrêt du programme lors du clic sur la croix de la fenêtre
-        stage.show( ); // rend la fenêtre visible
-    }
-    
-    private void plateauDeJeuGraphique( )
-    {
-        group = new Group( );
-        scene = new Scene( group , 1200 , 800 , Color.LIGHTBLUE );
-        stage.setTitle( "Twist-Lock" ); // nom de la fenêtre
-        
-        circlesTwistLocks = new ArrayList<>( );
-        
-        for( int i = 0 ; i < 20 ; i++ ) {
-            Circle c = new Circle( 1 );
-            circlesTwistLocks.add( c );
-        }
-        
-        borderPaneJeu = new BorderPane( );
-        
-        ArrayList< JoueurGraphique > joueurGraphiqueArrayList = new ArrayList<>( );
-        
-        for( int i = 0 ; i < nbJoueurs ; i++ ) {
-            joueurGraphiqueArrayList.add( new JoueurGraphique( i , nomJoueurs.get( i ) ) );
-        }
-        
-        borderPaneJeu.setLeft( joueurGraphiqueArrayList.get( 0 ).stackPaneVertical( ) );
-        borderPaneJeu.setRight( joueurGraphiqueArrayList.get( 1 ).stackPaneVertical( ) );
-        borderPaneJeu.setTop( joueurGraphiqueArrayList.get( 2 ).stackPaneHorizontal( ) );
-        borderPaneJeu.setBottom( joueurGraphiqueArrayList.get( 3 ).stackPaneHorizontal( ) );
-        
-        gridPanePlateau = new GridPane( );
-        gridPanePlateau.setPrefSize( scene.getWidth( ) - 200 , scene.getHeight( ) - 200 );
-        
-        conteneurGraphiqueArrayList = new ArrayList<>( );
-        for( int i = 0 ; i < lignes ; i++ ) {
-            for( int j = 0 ; j < colonnes ; j++ ) {
-                ConteneurGraphique conteneurGraphique = new ConteneurGraphique( String.valueOf( getConteneur( i , j ).getValeur( ) ) );
-                conteneurGraphiqueArrayList.add( conteneurGraphique );
-                gridPanePlateau.add( conteneurGraphique.getStackPane( ) , j , i );
-            }
-        }
-        
-        borderPaneJeu.setCenter( gridPanePlateau );
-        
-        group.getChildren( ).add( borderPaneJeu );
         
         stage.setScene( scene ); // configuration des éléments graphiques
         stage.centerOnScreen( ); // centre sur l'écran
@@ -282,65 +196,24 @@ public class Controleur extends Application
         final Optional< ButtonType > result = alert.showAndWait( );
     }
     
-    /* ----------------------------- */
-    /*  GESTION DE LA GRILLE DE JEU  */
-    /* ----------------------------- */
-    
-    public void chargerMetier( int nbLignes , int nbColonnes )
+    public int getLignes( )
     {
-        this.metier = new Metier( nbLignes , nbColonnes );
+        return lignes;
     }
     
-    public int getNbLig( )
+    public int getColonnes( )
     {
-        return this.metier.getNbLig( );
+        return colonnes;
     }
     
-    public int getNbCol( )
+    public int getNbJoueurs( )
     {
-        return this.metier.getNbCol( );
+        return nbJoueurs;
     }
     
-    /* ------------------------ */
-    /*  GESTION DES TWISTLOCKS  */
-    /* ------------------------ */
-    
-    public Conteneur getConteneur( int lig , int col )
+    public ArrayList< String > getNomJoueurs( )
     {
-        return this.metier.getConteneur( lig , col );
-    }
-    
-    public TwistLock[][] getTwistLocks( )
-    {
-        return this.metier.getTwistLocks( );
-    }
-    
-    public boolean isTwistlock( int lig , int col )
-    {
-        return this.metier.isTwistlock( lig , col );
-    }
-    
-    /* --------------------- */
-    /*  GESTION DES JOUEURS  */
-    /* --------------------- */
-    
-    public boolean jouerTwistlock( int lig , int col , Joueur joueur )
-    {
-        return this.metier.jouerTwistlock( lig , col , joueur );
-    }
-    
-    public void ajouterJoueur( String nom )
-    {
-        this.metier.ajouterJoueur( nom );
-    }
-    
-    public ArrayList< Joueur > getJoueurs( )
-    {
-        return this.metier.getJoueurs( );
-    }
-    
-    public boolean nouveauTour( )
-    {
-        return this.metier.nouveauTour( );
+        return nomJoueurs;
     }
 }
+

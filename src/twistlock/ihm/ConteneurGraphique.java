@@ -1,39 +1,49 @@
 package twistlock.ihm;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class ConteneurGraphique
 {
     private String stringValeur;
     
-    public ConteneurGraphique( )
+    private StackPane stackPane;
+    
+    public ConteneurGraphique(String stringValeur)
     {
-        int   largeur     = 10;
-        int   hauteur     = 8;
-        int   rayonCoin   = 2;
-        int   marge       = 1;
-        Color couleurAngle1, couleurAngle2, couleurAngle3, couleurAngle4;
-        Color couleurFond;
-        Color couleurBord;
+        this.stringValeur = stringValeur;
         
+        int    largeur   = 300;
+        int    hauteur   = 300;
+        double rayonCoin = - 10;
+        int    marge     = 1;
+        Color  couleurAngle1, couleurAngle2, couleurAngle3, couleurAngle4;
+        Color  couleurFond = Color.GRAY;
+        Color  couleurBord;
         
-        
-        StackPane stackPane = new StackPane( );
+        stackPane = new StackPane( );
         stackPane.setPrefSize( largeur , hauteur );
         
+        Rectangle rectangle = new Rectangle( );
+        rectangle.setStroke( couleurFond );
+        rectangle.setArcHeight( rayonCoin );
+        rectangle.setArcWidth( rayonCoin );
         
-        Line haut, droite, bas, gauche;
+        Text textNumero = new Text( this.stringValeur );
+        textNumero.setX( rectangle.getWidth( ) / 2 );
+        textNumero.setY( rectangle.getArcHeight( ) / 2 );
         
-        haut = new Line( 4 , 2 , largeur - 4 , 2 );
-        droite = new Line( 2 , 2 , largeur - 4 , 2 );
-        bas = new Line( 4 , 2 , largeur - 4 , 2 );
-        gauche = new Line( 4 , 2 , largeur - 4 , 2 );
+        stackPane.getChildren( ).addAll( rectangle , textNumero );
+    }
     
-        Text textNumero = new Text( );
-        
-        stackPane.getChildren().addAll( haut, droite, bas, gauche );
+    public StackPane getStackPane( )
+    {
+        return stackPane;
+    }
+    
+    public void setStringValeur( String stringValeur )
+    {
+        this.stringValeur = stringValeur;
     }
 }
