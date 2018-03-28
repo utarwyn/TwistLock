@@ -90,16 +90,18 @@ public class IHM extends JFrame {
 		this.miseAJour();
 
 		if (!nouveauTour) {
-			JOptionPane.showMessageDialog(
-					this,
-					this.controleur.getClassement(),
-					"FIN DE PARTIE - Tableau des scores",
-					JOptionPane.INFORMATION_MESSAGE
-			);
-
-			this.dispose();
-			System.exit(0);
+			messageFin();
 		}
+	}
+	
+	public void messageFin(){
+		JOptionPane.showMessageDialog(
+				this,
+				this.controleur.getClassement(),
+				"FIN DE PARTIE - Tableau des scores",
+				JOptionPane.CLOSED_OPTION
+		);
+		System.exit( 0 );
 	}
 
 	/**

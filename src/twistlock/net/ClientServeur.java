@@ -93,8 +93,8 @@ public class ClientServeur {
 					client.envoyer("KILL");
 				}
 				
-				//TODO fin de partie IHM
-				System.exit(0);
+				this.serveur.getControleur().getIhm().messageFin();
+				
 			} else {
 				this.serveur.envoiInfoTour();
 			}
