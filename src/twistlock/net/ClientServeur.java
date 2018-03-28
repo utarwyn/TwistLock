@@ -89,6 +89,8 @@ public class ClientServeur {
 				}
 
 				System.exit(0);
+			} else {
+				this.serveur.envoiInfoTour();
 			}
 
 			return;
@@ -112,7 +114,7 @@ public class ClientServeur {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(this.joueur.getId()).append("-Bonjour Equipe ").append(this.joueur.getNom()).append("\n");
-		sb.append("Vous êtes le joueur ").append(this.joueur.getId()).append(" ("+COULEURS[this.joueur.getId()-1]+") ");
+		sb.append("Vous êtes le joueur ").append(this.joueur.getId()).append(" (").append(COULEURS[this.joueur.getId() - 1]).append(") ");
 
 		this.envoyer(sb.toString());
 	}
