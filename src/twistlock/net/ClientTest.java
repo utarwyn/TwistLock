@@ -16,10 +16,10 @@ public class ClientTest {
 
 			DatagramPacket envoi = new DatagramPacket(message.getBytes(), message.length(), InetAddress.getByName("localhost"), 2684);
 			ds.send(envoi);
-			System.out.println("envoi de " + message);
-			/*DatagramPacket msg = new DatagramPacket(new byte[100], 100);
+			DatagramPacket msg = new DatagramPacket(new byte[1024], 1024);
 			ds.receive(msg);
-			System.out.println(new String(msg.getData()));*/
+
+			System.out.println(new String(msg.getData()).trim());
 		}
 	}
 }
