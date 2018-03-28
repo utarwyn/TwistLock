@@ -54,6 +54,7 @@ public class Conteneur {
 
 	/**
 	 * Permet de savoir si un coin du conteneur est occupé par un twistlock ou non
+	 *
 	 * @param nb Numéro du coin
 	 * @return Vrai si un twistlock est présent dans le coin
 	 */
@@ -63,6 +64,7 @@ public class Conteneur {
 
 	/**
 	 * Permet de savoir si un conteneur est occupé à 100% (tous les twistlocks)
+	 *
 	 * @return Vrai si le conteneur est occupé, faux sinon.
 	 */
 	public boolean estEntoure() {

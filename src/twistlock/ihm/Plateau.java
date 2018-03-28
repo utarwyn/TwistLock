@@ -54,7 +54,7 @@ class Plateau extends JPanel {
 
 		int SIZE = 20;
 
-		Dimension conteneurSize  = new Dimension();
+		Dimension conteneurSize = new Dimension();
 		conteneurSize.setSize(
 				dim.getWidth() / this.controleur.getNbCol(),
 				dim.getHeight() / this.controleur.getNbLig()
@@ -74,15 +74,27 @@ class Plateau extends JPanel {
 
 					switch (i) {
 						default:
-						case 0: x = 0;                        y = 0;                         break;
-						case 1: x = conteneurSize.getWidth(); y = 0;                         break;
-						case 2: x = conteneurSize.getWidth(); y = conteneurSize.getHeight(); break;
-						case 3: x = 0;                        y = conteneurSize.getHeight(); break;
+						case 0:
+							x = 0;
+							y = 0;
+							break;
+						case 1:
+							x = conteneurSize.getWidth();
+							y = 0;
+							break;
+						case 2:
+							x = conteneurSize.getWidth();
+							y = conteneurSize.getHeight();
+							break;
+						case 3:
+							x = 0;
+							y = conteneurSize.getHeight();
+							break;
 					}
 
 					g2.setColor(IHM.COULEURS[twistLock.getJoueur().getId() - 1]);
 
-					Ellipse2D.Double c = new Ellipse2D.Double(baseX + x - SIZE/2D,baseY + y - SIZE/2D, SIZE, SIZE);
+					Ellipse2D.Double c = new Ellipse2D.Double(baseX + x - SIZE / 2D, baseY + y - SIZE / 2D, SIZE, SIZE);
 					g2.fill(c);
 				}
 			}

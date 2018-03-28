@@ -13,27 +13,27 @@ import java.util.ArrayList;
  * Est le coeur de la partie IHM
  */
 public class IHM extends JFrame {
-	
-	public static final String[] PLACES_MAIN = new String[] { "West", "East", "North", "South" };
-	
-	public static final Color[] COULEURS = new Color[] {
+
+	public static final String[] PLACES_MAIN = new String[]{"West", "East", "North", "South"};
+
+	public static final Color[] COULEURS = new Color[]{
 			Color.RED,
 			new Color(39, 174, 96),
 			new Color(241, 196, 15),
 			Color.BLUE
 	};
-	
+
 	private Controleur controleur;
-	
+
 	private Plateau plateau;
-	
+
 	private MainJoueur[] mains;
-	
+
 	public IHM(Controleur controleur) {
 		this.controleur = controleur;
 		this.preparer();
 	}
-	
+
 	/**
 	 * Prépare l'IHM de la fenêtre
 	 */
@@ -41,37 +41,38 @@ public class IHM extends JFrame {
 		this.setTitle("Jeu des Twistlocks");
 		this.setExtendedState(MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		
+
 		this.mains = new MainJoueur[4];
-		
+
 		// Mise en place du plateau
 		this.plateau = new Plateau(this, this.controleur);
 		this.add(this.plateau, BorderLayout.CENTER);
 	}
-	
+
 	/**
 	 * Lance la partie IHM et ouvre la fenêtre de jeu
 	 */
 	public void lancer() {
 		ArrayList<Joueur> joueurs = this.controleur.getJoueurs();
-		
+
 		int i = 0;
 		for (Joueur joueur : joueurs) {
 			this.mains[i] = new MainJoueur(joueur);
 			this.add(this.mains[i], PLACES_MAIN[i++]);
 		}
-		
+
 		this.plateau.preparer();
-		
+
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
-	
+
 	/**
 	 * Appelée lorsqu'un joueur souhaite poser un twistlock
+	 *
 	 * @param conteneur Conteneur concerné par la pose
-	 * @param coin Coin dans lequel poser le twistlock
+	 * @param coin      Coin dans lequel poser le twistlock
 	 */
 	public void choixTwistlock(Conteneur conteneur, int coin) {
 		if (!this.controleur.jouerTwistlock(conteneur, coin)) {
@@ -83,43 +84,43 @@ public class IHM extends JFrame {
 					JOptionPane.ERROR_MESSAGE
 			);
 		}
-		
+
 		boolean nouveauTour = this.controleur.nouveauTour();
-		
+
 		for (MainJoueur mainJoueur : this.mains)
 			if (mainJoueur != null)
 				mainJoueur.miseAJour(this.controleur.getJoueurCourant() == mainJoueur.getJoueur());
-		
+
 		this.plateau.miseAJour();
-		
+
 		if (!nouveauTour) {
-			ArrayList<Joueur> arrayList  =new ArrayList<>(  );
-			
-			for( Joueur joueur : this.controleur.getJoueurs( ) ) {
-				arrayList.add( joueur );
+			ArrayList<Joueur> arrayList = new ArrayList<>();
+
+			for (Joueur joueur : this.controleur.getJoueurs()) {
+				arrayList.add(joueur);
 			}
-			
-			arrayList.sort( ( o1 , o2 ) -> o2.getScore() - o1.getScore() );
-			
-			StringBuilder scores = new StringBuilder( " Classement :\n\n " );
-			
-            for( int i = 0 ; i < arrayList.size( ) ; i++ ) {
-                
-                Joueur joueur = arrayList.get( i );
-                scores.append( i+1 ).append( " - "  ).append( joueur.getNom( ) ).append( " : " ).append( joueur.getScore( ) ).append( "\n" );
-                
-            }
-			
+
+			arrayList.sort((o1, o2) -> o2.getScore() - o1.getScore());
+
+			StringBuilder scores = new StringBuilder(" Classement :\n\n ");
+
+			for (int i = 0; i < arrayList.size(); i++) {
+
+				Joueur joueur = arrayList.get(i);
+				scores.append(i + 1).append(" - ").append(joueur.getNom()).append(" : ").append(joueur.getScore()).append("\n");
+
+			}
+
 			JOptionPane.showMessageDialog(
 					this,
 					scores.toString(),
 					"FIN DE PARTIE - Tableau des scores",
 					JOptionPane.INFORMATION_MESSAGE
 			);
-			
+
 			this.dispose();
 			System.exit(0);
 		}
 	}
-	
+
 }
