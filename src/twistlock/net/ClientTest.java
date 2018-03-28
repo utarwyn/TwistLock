@@ -7,11 +7,16 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+/**
+ * classe qui se connecte au serveur et interargie avec l'utilisateur
+ */
 public class ClientTest
 {
-    public static void main( String args[] ) throws Exception
+    private DatagramSocket ds;
+    
+    public ClientTest( ) throws IOException
     {
-        DatagramSocket ds            = new DatagramSocket( );
+        ds = new DatagramSocket( );
         BufferedReader entreeClavier = new BufferedReader( new InputStreamReader( System.in ) );
         
         System.out.println( "Nouvelle partie de TwistLock\n" + "\n" + "Vous pouvez envoyer les messages :\n" + "    MAP : donne la map du plateau\n" +
@@ -20,6 +25,7 @@ public class ClientTest
                             "                      1 - pour en haut à gauche\n" + "                      2 - pour en haut à droite\n" +
                             "                      3 - pour en bas  à droite\n" + "                      4 - pour en bas  à gauche\n" +
                             "    q   : pour quitter\n" );
+        
         new Thread( ( ) -> {
             do {
                 DatagramPacket msg = new DatagramPacket( new byte[ 1024 ] , 1024 );
@@ -28,18 +34,31 @@ public class ClientTest
                 } catch( IOException e ) {
                     e.printStackTrace( );
                 }
-                System.out.println( new String( msg.getData( ) ).trim( ) );
-            }while( true );
-            
+                System.out.println( "\n" + new String( msg.getData( ) ).trim( ) );
+            } while( ds != null );
         } ).start( );
+    
+        System.out.print( "\nVotre nom d'équipe  : " );
+        
         do {
             String message = entreeClavier.readLine( );
-            
-            if( message.equalsIgnoreCase( "q" ) ) ds.close( );
+            if( ! message.equalsIgnoreCase( "q" ) ) System.out.print( "\nVotre commande  : " );
+            if( message.equalsIgnoreCase( "q" ) ) ds = null;
             else {
                 DatagramPacket envoi = new DatagramPacket( message.getBytes( ) , message.length( ) , InetAddress.getByName( "127.0.0.1" ) , 2684 );
                 ds.send( envoi );
             }
-        } while( true);
+        } while( ds != null );
+        System.exit( 0 );
+    }
+    
+    /**
+     *
+     * @param args
+     * @throws Exception
+     */
+    public static void main( String args[] ) throws Exception
+    {
+        new ClientTest( );
     }
 }
