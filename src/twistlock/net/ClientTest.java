@@ -14,15 +14,12 @@ public class ClientTest
 {
 	private DatagramSocket ds;
 	
-	private int port;
-	
-	private String adresse;
-	
-	public ClientTest( ) throws IOException
+	private ClientTest( ) throws IOException
 	{
 		ds = new DatagramSocket( );
 		BufferedReader entreeClavier = new BufferedReader( new InputStreamReader( System.in ) );
 		
+		String adresse;
 		do {
 			
 			System.out.print( "Adresse du serveur : " );
@@ -31,6 +28,7 @@ public class ClientTest
 		
 		String stringPort;
 		
+		int port;
 		do {
 			
 			port = 0;

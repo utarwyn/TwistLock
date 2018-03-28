@@ -9,14 +9,11 @@ import java.awt.event.KeyEvent;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Objects;
 
-public class FormServeur extends JFrame
+class FormServeur extends JFrame
 {
-    ArrayList< NetworkInterface > listeAdressesIP;
-    
     private Controleur controleur;
     
     private JLabel jLabelTitre;
@@ -43,7 +40,7 @@ public class FormServeur extends JFrame
     private int                 nbTwistlocks;
     private int                 portConnexion;
     
-    public FormServeur( Controleur controleur )
+    FormServeur( Controleur controleur )
     {
         this.controleur = controleur;
         
@@ -64,7 +61,7 @@ public class FormServeur extends JFrame
     
     private JComboBox< String > adresseIP( )
     {
-        JComboBox jComboBox = new JComboBox< String >( );
+        JComboBox< String > jComboBox = new JComboBox< >( );
         
         Enumeration< NetworkInterface > interfaces = null;
         try {
@@ -84,8 +81,6 @@ public class FormServeur extends JFrame
                 jComboBox.addItem( currentAddress.getHostAddress( ) );
             }
         }
-        
-        jComboBox.addItem( listeAdressesIP );
         
         return jComboBox;
     }

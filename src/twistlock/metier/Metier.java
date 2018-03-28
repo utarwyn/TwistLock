@@ -145,11 +145,9 @@ public class Metier {
 		 *   - Plus aucun joueur n'a de twistlock         */
 		boolean fin1 = true, fin2 = true;
 		Conteneur[][] conteneurs = this.conteneurs;
-
-		for (int lig = 0; lig < conteneurs.length; lig++)
-			for (int col = 0; col < conteneurs[lig].length; col++)
-				if (!conteneurs[lig][col].estEntoure())
-					fin1 = false;
+		
+		for( Conteneur[] conteneur : conteneurs )
+			for( Conteneur aConteneur : conteneur ) if( ! aConteneur.estEntoure( ) ) fin1 = false;
 
 		for (Joueur joueur : this.joueurs)
 			if (joueur.peutJouer())
@@ -251,14 +249,13 @@ public class Metier {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("MAP=");
-
-		for (int lig = 0; lig < this.conteneurs.length; lig++) {
-			for (int col = 0; col < this.conteneurs[lig].length; col++)
-				sb.append(String.format("%02d", this.conteneurs[lig][col].getValeur())).append(":");
-
-			sb.deleteCharAt(sb.length() - 1);
-
-			sb.append("|");
+		
+		for( Conteneur[] conteneur : this.conteneurs ) {
+			for( Conteneur aConteneur : conteneur ) sb.append( String.format( "%02d" , aConteneur.getValeur( ) ) ).append( ":" );
+			
+			sb.deleteCharAt( sb.length( ) - 1 );
+			
+			sb.append( "|" );
 		}
 
 		return sb.toString();
@@ -271,7 +268,7 @@ public class Metier {
 	 * @param coin    Coin de liaison
 	 * @return Tableau associatif des voisins (avec les coins de liaison)
 	 */
-	public HashMap<Conteneur, Integer> getVoisins(Conteneur origine, int coin) {
+	HashMap<Conteneur, Integer> getVoisins( Conteneur origine , int coin ) {
 		HashMap<Conteneur, Integer> voisins = new HashMap<>();
 		Conteneur voisin;
 
@@ -325,7 +322,7 @@ public class Metier {
 	 *
 	 * @return La liste des conteneurs
 	 */
-	public Conteneur[][] getConteneurs() {
+	Conteneur[][] getConteneurs( ) {
 		return conteneurs;
 	}
 

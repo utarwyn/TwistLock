@@ -58,7 +58,7 @@ public class Conteneur {
 	 * @param nb Numéro du coin
 	 * @return Vrai si un twistlock est présent dans le coin
 	 */
-	public boolean estOccupe(int nb) {
+	boolean estOccupe( int nb ) {
 		return this.coins[nb - 1] != null;
 	}
 
@@ -67,7 +67,7 @@ public class Conteneur {
 	 *
 	 * @return Vrai si le conteneur est occupé, faux sinon.
 	 */
-	public boolean estEntoure() {
+	boolean estEntoure( ) {
 		for (TwistLock twistLock : this.coins)
 			if (twistLock == null)
 				return false;

@@ -72,9 +72,7 @@ public class ConnexionClient extends JFrame
 		
 		//pour passer au jeu
 		buttonValider = new JButton( "Fermer la fenêtre" );
-		buttonValider.addActionListener( e -> {
-			this.dispose( );
-		} );
+		buttonValider.addActionListener( e -> this.dispose( ) );
 	}
 	
 	/**
@@ -161,25 +159,6 @@ public class ConnexionClient extends JFrame
 		this.add( buttonValider , gridBagConstraints );
 	}
 	
-	/**
-	 * Lance le jeu et ouvre la fenêtre avec le plateau du jeu Ajoute les joueurs
-	 */
-	private void lancer( )
-	{
-		this.dispose( );
-	}
-	
-	/**
-	 * fenêtre d'erreur
-	 *
-	 * @param message
-	 * 		a afficher dans la fenêtre d'erreur
-	 */
-	private void erreur( String message )
-	{
-		JOptionPane.showMessageDialog( null , message );
-	}
-	
 	public void setJLabel( int i , String nom )
 	{
 		switch( i ) {
@@ -199,22 +178,22 @@ public class ConnexionClient extends JFrame
 		}
 	}
 	
-	public void setjLabelJ1Value( String jLabelJ1Value )
+	private void setjLabelJ1Value( String jLabelJ1Value )
 	{
 		this.jLabelJ1Value.setText( jLabelJ1Value );
 	}
 	
-	public void setjLabelJ2Value( String jLabelJ2Value )
+	private void setjLabelJ2Value( String jLabelJ2Value )
 	{
 		this.jLabelJ2Value.setText( jLabelJ2Value );
 	}
 	
-	public void setjLabelJ3Value( String jLabelJ3Value )
+	private void setjLabelJ3Value( String jLabelJ3Value )
 	{
 		this.jLabelJ3Value.setText( jLabelJ3Value );
 	}
 	
-	public void setjLabelJ4Value( String jLabelJ4Value )
+	private void setjLabelJ4Value( String jLabelJ4Value )
 	{
 		this.jLabelJ4Value.setText( jLabelJ4Value );
 	}

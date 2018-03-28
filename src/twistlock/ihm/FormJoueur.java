@@ -43,7 +43,7 @@ public class FormJoueur extends JFrame {
 	 *
 	 * @param controleur de l'application
 	 */
-	public FormJoueur(Controleur controleur) {
+	FormJoueur( Controleur controleur ) {
 		this.controleur = controleur;
 
 		this.setTitle("Jeu des Twistlocks - Ajouter des Joueurs");

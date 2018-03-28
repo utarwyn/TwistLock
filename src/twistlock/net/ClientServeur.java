@@ -18,7 +18,7 @@ public class ClientServeur {
 
 	private SocketAddress address;
 
-    public static final String[] COULEURS = new String[]{
+    static final String[] COULEURS = new String[]{
             "ROUGE","VERT","JAUNE","BLEU"
     };
 
@@ -30,7 +30,7 @@ public class ClientServeur {
 		this.envoyerBienvenue();
 	}
 
-	public SocketAddress getAddress() {
+	SocketAddress getAddress( ) {
 		return address;
 	}
 
@@ -38,11 +38,11 @@ public class ClientServeur {
 		return this.joueur;
 	}
 
-	public boolean monTour() {
+	boolean monTour( ) {
 		return this.joueur == this.serveur.getControleur().getJoueurCourant();
 	}
 
-	public void lancerAction(String message) {
+	void lancerAction( String message ) {
 		
 		message = message.toUpperCase();
 		
@@ -105,7 +105,7 @@ public class ClientServeur {
 		this.envoyer("91-demande non valide");
 	}
 
-	public void envoyer(String message) {
+	void envoyer( String message ) {
 		DatagramPacket reponse = new DatagramPacket(message.getBytes(), message.length(), this.address);
 
 		try {
@@ -116,13 +116,8 @@ public class ClientServeur {
 	}
 
 	private void envoyerBienvenue() {
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(this.joueur.getId()).append("-Bonjour Equipe ").append(this.joueur.getNom()).append("\n");
-		sb.append("Vous êtes le joueur ").append(this.joueur.getId()).append(" (").append(COULEURS[this.joueur.getId() - 1]).append(") ");
-
-		this.envoyer(sb.toString());
+		this.envoyer( String.valueOf( this.joueur.getId( ) ) + "-Bonjour Equipe " + this.joueur.getNom( ) + "\n" + "Vous êtes le joueur " +
+		              this.joueur.getId( ) + " (" + COULEURS[ this.joueur.getId( ) - 1 ] + ") ");
 	}
 
 }
