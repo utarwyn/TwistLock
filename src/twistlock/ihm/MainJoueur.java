@@ -7,6 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * Représente la main du joueur en IHM.
+ * Il peut y en avoir jusqu'à 4 sur le terrain de jeu.
+ */
 class MainJoueur extends JPanel {
 
 	private Joueur joueur;
@@ -20,10 +24,17 @@ class MainJoueur extends JPanel {
 		this.preparer();
 	}
 
+	/**
+	 * Retourne le joueur à qui appartient la main
+	 * @return Joueur concerné
+	 */
 	public Joueur getJoueur() {
 		return this.joueur;
 	}
 
+	/**
+	 * Prépare le panel IHM
+	 */
 	private void preparer() {
 		JLabel image = new JLabel();
 		this.nom = new JLabel();
@@ -65,6 +76,10 @@ class MainJoueur extends JPanel {
 		this.miseAJour(this.joueur.getId() == 1);
 	}
 
+	/**
+	 * Mets à jour la main du joueur
+	 * @param monTour Vrai si c'est au tour du joueur
+	 */
 	void miseAJour(boolean monTour) {
 		if (monTour) {
 			this.setBackground(new Color(99, 205, 218));
