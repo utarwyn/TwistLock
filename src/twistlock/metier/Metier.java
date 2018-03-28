@@ -119,11 +119,14 @@ public class Metier {
 	 *
 	 * @param nom Nom du joueur
 	 */
-	public void ajouterJoueur(String nom, int tL) {
+	public Joueur ajouterJoueur(String nom, int tL) {
 		Joueur joueur = new Joueur(this.joueurs.size() + 1, nom, tL);
 
 		this.joueurs.add(joueur);
-		if (this.joueurCourant == null) this.joueurCourant = joueur;
+		if (this.joueurCourant == null)
+			this.joueurCourant = joueur;
+
+		return joueur;
 	}
 
 	/**

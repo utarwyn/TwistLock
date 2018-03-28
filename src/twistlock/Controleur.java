@@ -62,8 +62,8 @@ public class Controleur {
 	/* --------------------- */
 	/*  GESTION DES JOUEURS  */
 	/* --------------------- */
-	public void ajouterJoueur(String nom, int tL) {
-		this.metier.ajouterJoueur(nom, tL);
+	public Joueur ajouterJoueur(String nom, int tL) {
+		return this.metier.ajouterJoueur(nom, tL);
 	}
 
 	public ArrayList<Joueur> getJoueurs() {
