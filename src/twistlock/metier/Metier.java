@@ -80,6 +80,7 @@ public class Metier {
 
 	/**
 	 * Retourne le joueur courant
+	 *
 	 * @return Joueur jourant, null si aucun joueur n'est en train de jouer.
 	 */
 	public Joueur getJoueurCourant() {
@@ -178,7 +179,7 @@ public class Metier {
 	 *
 	 * @param conteneur Conteneur lié au twistlock à poser
 	 * @param coin      Coin dans lequel poser le twistlock
- 	 * @return Vrai si le twistlock à pu être posé.
+	 * @return Vrai si le twistlock à pu être posé.
 	 */
 	public boolean jouerTwistlock(Conteneur conteneur, int coin) {
 		Map<Conteneur, Integer> conteneurs = new HashMap<>();
@@ -204,8 +205,9 @@ public class Metier {
 
 	/**
 	 * Retourne les voisins d'un conteneur lié par un coin commun
+	 *
 	 * @param origine Conteneur d'origine pour récupérer les voisins
-	 * @param coin Coin de liaison
+	 * @param coin    Coin de liaison
 	 * @return Tableau associatif des voisins (avec les coins de liaison)
 	 */
 	private HashMap<Conteneur, Integer> getVoisins(Conteneur origine, int coin) {

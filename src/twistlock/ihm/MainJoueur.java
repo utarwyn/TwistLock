@@ -26,6 +26,7 @@ class MainJoueur extends JPanel {
 
 	/**
 	 * Retourne le joueur à qui appartient la main
+	 *
 	 * @return Joueur concerné
 	 */
 	public Joueur getJoueur() {
@@ -78,6 +79,7 @@ class MainJoueur extends JPanel {
 
 	/**
 	 * Mets à jour la main du joueur
+	 *
 	 * @param monTour Vrai si c'est au tour du joueur
 	 */
 	void miseAJour(boolean monTour) {

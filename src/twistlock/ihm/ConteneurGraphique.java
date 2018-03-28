@@ -36,6 +36,7 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 
 	/**
 	 * Appelée lorsque l'on souhaite dessiner un conteneur graphique
+	 *
 	 * @param g Contexte graphique pour le dessin
 	 */
 	@Override
@@ -47,10 +48,10 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 
 		Area rect = new Area(new Rectangle(3, 3, (int) dim.getWidth() - 6, (int) dim.getHeight() - 6));
 
-		Area c1 = new Area(new Ellipse2D.Double(                -SIZE/2,                  -SIZE/2, SIZE, SIZE));
-		Area c2 = new Area(new Ellipse2D.Double(dim.getWidth() - SIZE/2,                  -SIZE/2, SIZE, SIZE));
-		Area c3 = new Area(new Ellipse2D.Double(                -SIZE/2, dim.getHeight() - SIZE/2, SIZE, SIZE));
-		Area c4 = new Area(new Ellipse2D.Double(dim.getWidth() - SIZE/2, dim.getHeight() - SIZE/2, SIZE, SIZE));
+		Area c1 = new Area(new Ellipse2D.Double(-SIZE / 2, -SIZE / 2, SIZE, SIZE));
+		Area c2 = new Area(new Ellipse2D.Double(dim.getWidth() - SIZE / 2, -SIZE / 2, SIZE, SIZE));
+		Area c3 = new Area(new Ellipse2D.Double(-SIZE / 2, dim.getHeight() - SIZE / 2, SIZE, SIZE));
+		Area c4 = new Area(new Ellipse2D.Double(dim.getWidth() - SIZE / 2, dim.getHeight() - SIZE / 2, SIZE, SIZE));
 
 		rect.subtract(c1);
 		rect.subtract(c2);
@@ -77,18 +78,19 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 		int width = g2.getFontMetrics(font).stringWidth(text);
 
 		g2.setFont(font);
-		g2.drawString(text, (float) dim.getWidth()/2 - width/2, (float) (dim.getHeight() - 6)/2 + FONT_SIZE/2);
+		g2.drawString(text, (float) dim.getWidth() / 2 - width / 2, (float) (dim.getHeight() - 6) / 2 + FONT_SIZE / 2);
 
 		g2.dispose();
 	}
 
 	/**
 	 * Méthode lancée dès lors du clic sur le bouton (conteneur)
+	 *
 	 * @param e Evenement de clic
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String[] coin = new String[] { "HAUT GAUCHE", "HAUT DROIT", "BAS DROIT", "BAS GAUCHE" };
+		String[] coin = new String[]{"HAUT GAUCHE", "HAUT DROIT", "BAS DROIT", "BAS GAUCHE"};
 
 		int rang = JOptionPane.showOptionDialog(
 				this.ihm,
@@ -100,7 +102,7 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 		);
 
 		if (rang > -1)
-			this.ihm.choixTwistlock(this.conteneur, rang+1);
+			this.ihm.choixTwistlock(this.conteneur, rang + 1);
 
 	}
 
