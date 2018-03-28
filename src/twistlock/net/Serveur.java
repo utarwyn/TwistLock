@@ -99,15 +99,26 @@ public class Serveur extends Thread {
 					this.envoiInfoTour();
 				}
 			} else {
-				client.lancerAction(message);
+				if( client != null )
+					client.lancerAction(message);
+				else{
+					envoiMessageAll( "55-un joueur non autorise essaye de se connecter" );
+					envoiMessageAll( "56-nom : " + message );
+					envoiMessageAll( "57-adresse : " + msg.getAddress().toString() );
+				}
 			}
 		}
 	}
-
+	
 	public void envoiMessageAdversaire(String message) {
 		for (ClientServeur client : this.clients)
 			if (!client.monTour())
 				client.envoyer(message);
+	}
+	
+	public void envoiMessageAll(String message) {
+		for (ClientServeur client : this.clients)
+			client.envoyer(message);
 	}
 
 	private void envoiDemarragePartie() {
