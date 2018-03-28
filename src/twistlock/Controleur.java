@@ -47,6 +47,10 @@ public class Controleur {
 		return this.metier.getConteneur(lig, col);
 	}
 
+	public String getRepresentationPlateau() {
+		return this.metier.getRepresentationPlateau();
+	}
+
 	/* ------------------------ */
 	/*  GESTION DES TWISTLOCKS  */
 	/* ------------------------ */
