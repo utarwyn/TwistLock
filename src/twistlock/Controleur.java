@@ -7,6 +7,7 @@ import twistlock.ihm.IHM;
 import twistlock.metier.Conteneur;
 import twistlock.metier.Joueur;
 import twistlock.metier.Metier;
+import twistlock.net.Serveur;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ public class Controleur
 {
     
     private Metier metier;
+    private Serveur serveur;
     
     private FormServeur formServeur;
     private FormJoueur  formJoueur;
@@ -106,6 +108,7 @@ public class Controleur
         this.colonnes = colonnes;
         this.nbJoueurs = nbJoueurs;
         
+        this.serveur = new Serveur( this );
         //TODO lancer serveur
     }
     
