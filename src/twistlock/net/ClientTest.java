@@ -46,7 +46,6 @@ public class ClientTest
         
         do {
             String message = entreeClavier.readLine( );
-            if( ! message.equalsIgnoreCase( "q" ) ) System.out.print( "\nVotre commande  : " );
             if( message.equalsIgnoreCase( "q" ) ) ds = null;
             else {
                 DatagramPacket envoi = new DatagramPacket( message.getBytes( ) , message.length( ) , InetAddress.getByName( "127.0.0.1" ) , 2684 );
