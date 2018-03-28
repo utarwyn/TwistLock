@@ -18,6 +18,10 @@ public class ClientServeur {
 
 	private SocketAddress address;
 
+    public static final String[] COULEURS = new String[]{
+            "ROUGE","VERT","JAUNE","BLEU"
+    };
+
 	ClientServeur(Serveur serveur, String nom, SocketAddress address) {
 		this.serveur = serveur;
 		this.address = address;
@@ -80,10 +84,11 @@ public class ClientServeur {
 	}
 
 	private void envoyerBienvenue() {
+
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(this.joueur.getId()).append("-Bonjour Equipe ").append(this.joueur.getNom()).append("\n");
-		sb.append("Vous êtes le joueur ").append(this.joueur.getId()).append(" (ROUGE) ");
+		sb.append("Vous êtes le joueur ").append(this.joueur.getId()).append(" ("+COULEURS[this.joueur.getId()-1]+") ");
 
 		this.envoyer(sb.toString());
 	}
