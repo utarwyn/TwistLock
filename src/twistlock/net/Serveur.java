@@ -1,18 +1,21 @@
 package twistlock.net;
 
 import twistlock.Controleur;
-import twistlock.metier.Joueur;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.SocketAddress;
 import java.net.SocketException;
+import java.util.ArrayList;
 
 public class Serveur extends Thread {
 
 	private Controleur controleur;
 
 	private int portConnexion, nbJoueurs , tL;
+
+	private ArrayList<ClientServeur> clients;
 
 	private DatagramSocket datagramSocket;
 	private DatagramPacket datagramPacketRecu, datagramPacketEnvoie;
@@ -25,6 +28,8 @@ public class Serveur extends Thread {
 		this.nbJoueurs = nbJoueurs;
 		this.tL = tL;
 
+		this.clients = new ArrayList<>();
+
 		this.lancer();
 	}
 
@@ -36,32 +41,53 @@ public class Serveur extends Thread {
 		return nbJoueurs;
 	}
 
+	public int getNbTwistLocks() {
+		return this.tL;
+	}
+
+	public Controleur getControleur() {
+		return controleur;
+	}
+
+	public DatagramSocket getDatagramSocket() {
+		return datagramSocket;
+	}
+
+	public ClientServeur getClientParAdresse(SocketAddress address) {
+		for (ClientServeur client : this.clients)
+			if (client.getAddress().equals(address))
+				return client;
+
+		return null;
+	}
+
 	@Override
 	public void run() {
-		String messageRecu = "";
-
-		for(int i = 1; i <= nbJoueurs; i++)
-		{
-			DatagramPacket msg = new DatagramPacket(new byte[100], 100);
+		while (true) {
+			DatagramPacket msg = new DatagramPacket(new byte[1024], 1024);
 
 			try{
-				System.out.println("salut");
-				datagramSocket.receive( msg );
+				this.datagramSocket.receive( msg );
 			} catch( IOException e ) {
 				e.printStackTrace( );
 			}
 
+			ClientServeur client = this.getClientParAdresse(msg.getSocketAddress());
+			String message = new String(msg.getData()).trim();
 
-			messageEnvoie = "";
-			String nom = new String( msg.getData( ) ).trim( );
-			messageEnvoie += ( i + "-Bonjour Equipe " + new String( msg.getData( ) ).trim( ) );
-			messageEnvoie += ( "\nVous etes le Joueur " + 1 + " (ROUGE)" ); //TODO: Doit changer la couleur
-			new Joueur( i , nom , 20 ); //TODO? : ajout Joueur autre
+			// Nouveau joueur!
+			if (client == null && this.clients.size() < this.nbJoueurs) {
+				client = new ClientServeur(
+						this,
+						new String(msg.getData()).trim(),
+						msg.getSocketAddress()
+				);
 
+				this.clients.add(client);
+			} else {
+				client.lancerAction(message);
+			}
 		}
-
-		//TODO : Partie JEU
-		datagramSocket.close();
 	}
 
 	private void lancer() {
