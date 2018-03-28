@@ -37,8 +37,13 @@ public class Serveur extends Thread {
 	public Controleur getControleur() {
 		return controleur;
 	}
-
-	public DatagramSocket getDatagramSocket() {
+    
+    public int getPortConnexion( )
+    {
+        return portConnexion;
+    }
+    
+    public DatagramSocket getDatagramSocket() {
 		return datagramSocket;
 	}
 

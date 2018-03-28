@@ -14,10 +14,22 @@ public class ClientTest
 {
     private DatagramSocket ds;
     
+    private int port;
+    
+    private String adresse;
+    
     public ClientTest( ) throws IOException
     {
         ds = new DatagramSocket( );
         BufferedReader entreeClavier = new BufferedReader( new InputStreamReader( System.in ) );
+    
+        System.out.println( "Adresse du serveur : " );
+        
+        adresse = entreeClavier.readLine();
+        
+        System.out.println( "Port du serveur    : " );
+        
+        port = Integer.parseInt( entreeClavier.readLine() );
         
         System.out.println( "Nouvelle partie de TwistLock\n" + "\n" + "Vous pouvez envoyer les messages :\n" + "    MAP : donne la map du plateau\n" +
                             "    ??? : permet de jouer un coup avec \n" + "              1 - ligne avec un numéro de 1 à 9\n" +
@@ -48,7 +60,7 @@ public class ClientTest
             String message = entreeClavier.readLine( );
             if( message.equalsIgnoreCase( "q" ) ) ds = null;
             else {
-                DatagramPacket envoi = new DatagramPacket( message.getBytes( ) , message.length( ) , InetAddress.getByName( "127.0.0.1" ) , 2684 );
+                DatagramPacket envoi = new DatagramPacket( message.getBytes( ) , message.length( ) , InetAddress.getByName( adresse ) , port );
                 ds.send( envoi );
             }
         } while( ds != null );

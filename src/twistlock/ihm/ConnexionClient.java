@@ -56,11 +56,11 @@ public class ConnexionClient extends JFrame
             e.printStackTrace( );
         }
         
-        jLabelPort = new JLabel( "Port de connexion : " + portConnexion );
+        jLabelPort = new JLabel( "Port de connexion : " + controleur.getServeur().getPortConnexion() );
         
         jLabelJ1 = new JLabel( "Joueur 1 : " );
         jLabelJ2 = new JLabel( "Joueur 2 : " );
-        jLabelJ3 = new JLabel( "Joueur 3 : " );
+        //if( controleur.get )jLabelJ3 = new JLabel( "Joueur 3 : " );
         jLabelJ4 = new JLabel( "Joueur 4 : " );
         
         //pour quitter
@@ -68,9 +68,9 @@ public class ConnexionClient extends JFrame
         buttonQuitter.addActionListener( e -> System.exit( 0 ) );
         
         //pour passer au jeu
-        buttonValider = new JButton( "Valider" );
+        buttonValider = new JButton( "Fermer la fenêtre" );
         buttonValider.addActionListener( e -> {
-//            if( verification( ) ) lancer( );
+            this.dispose();
         } );
     }
     
@@ -83,58 +83,20 @@ public class ConnexionClient extends JFrame
         
         GridBagConstraints gridBagConstraints = new GridBagConstraints( );
         
-        gridBagConstraints.insets = new Insets( 10 , 0 , 10 , 0 );
-        gridBagConstraints.anchor = GridBagConstraints.CENTER;
+        gridBagConstraints.insets = new Insets( 10 , 10 , 10 , 10);
+        gridBagConstraints.anchor = GridBagConstraints.LINE_START;
         
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 1;
         this.add( jLabelTitre , gridBagConstraints );
         
         gridBagConstraints.gridwidth = 1;
         
-//        gridBagConstraints.anchor = GridBagConstraints.LINE_END;
-//        gridBagConstraints.gridy = 1;
-//        gridBagConstraints.gridx = 0;
-//        this.add( jLabelPortConnexion , gridBagConstraints );
-//
-//        gridBagConstraints.anchor = GridBagConstraints.LINE_START;
-//        gridBagConstraints.gridx = 1;
-//        this.add( textFieldPortConnexion , gridBagConstraints );
-//
-//        gridBagConstraints.anchor = GridBagConstraints.LINE_END;
-//        gridBagConstraints.gridy = 2;
-//        gridBagConstraints.gridx = 0;
-//        this.add( jLabelNbLignes , gridBagConstraints );
-//
-//        gridBagConstraints.anchor = GridBagConstraints.LINE_START;
-//        gridBagConstraints.gridx = 1;
-//        this.add( textFieldNbLignes , gridBagConstraints );
-//
-//        gridBagConstraints.anchor = GridBagConstraints.LINE_END;
-//        gridBagConstraints.gridy = 3;
-//        gridBagConstraints.gridx = 0;
-//        this.add( jLabelNbColonnes , gridBagConstraints );
-//
-//        gridBagConstraints.anchor = GridBagConstraints.LINE_START;
-//        gridBagConstraints.gridx = 1;
-//        this.add( textFieldNbColonnes , gridBagConstraints );
-//
-//        gridBagConstraints.anchor = GridBagConstraints.LINE_END;
-//        gridBagConstraints.gridy = 4;
-//        gridBagConstraints.gridx = 0;
-//        this.add( jLabelNbTL , gridBagConstraints );
-//
-//        gridBagConstraints.anchor = GridBagConstraints.LINE_START;
-//        gridBagConstraints.gridx = 1;
-//        this.add( textFieldNbTL , gridBagConstraints );
-//
-//        gridBagConstraints.anchor = GridBagConstraints.LINE_END;
-//        gridBagConstraints.gridy = 5;
-//        gridBagConstraints.gridx = 0;
-//        this.add( jLabelNombreJoueurs , gridBagConstraints );
-//
-//        gridBagConstraints.anchor = GridBagConstraints.LINE_START;
-//        gridBagConstraints.gridx = 1;
-//        this.add( textFieldNombreJoueurs , gridBagConstraints );
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 0;
+        this.add( jLabelPort , gridBagConstraints );
+
+        gridBagConstraints.gridy = 2;
+        this.add( jLabelAdresseIP , gridBagConstraints );
         
         gridBagConstraints.anchor = GridBagConstraints.CENTER;
         gridBagConstraints.gridy = 6;
@@ -150,94 +112,8 @@ public class ConnexionClient extends JFrame
      */
     private void lancer( )
     {
-        
         this.dispose( );
     }
-    
-    /**
-     * Vérifie les donées saisies et affiche des messages d'erreur en cas d'erreur
-     *
-     * @return si les données sont valides
-     */
-//    private boolean verification( ){}
-//    {
-//        boolean bOk = true;
-//
-//        //port de connexion
-//        if( textFieldPortConnexion.getText( ).equals( "" ) ) {
-//            bOk = false;
-//            erreur( "Saississez un port de connexion entre 1 et 65635" );
-//        }
-//        else
-//
-//            try {
-//                if( Integer.parseInt( textFieldPortConnexion.getText( ) ) < 0 || Integer.parseInt( textFieldPortConnexion.getText( ) ) > 65635 ) {
-//                    bOk = false;
-//                    erreur( "Saississez un port de connexion entre 1 et 65635" );
-//                }
-//            } catch( Exception e ) {
-//                bOk = false;
-//                erreur( "Saississez un port de connexion entre 1 et 65635" );
-//            }
-//
-//        //nombre de lignes
-//        if( textFieldNbLignes.getText( ).equals( "" ) ) {
-//            bOk = false;
-//            erreur( "Saississez un nombre de lignes entre 1 et 9" );
-//        }
-//        else
-//
-//            try {
-//                Integer.parseInt( textFieldNbLignes.getText( ) );
-//            } catch( Exception e ) {
-//                bOk = false;
-//                erreur( "Saississez un nombre de lignes entre 1 et 9" );
-//            }
-//
-//        //nombre de colonnes
-//        if( textFieldNbColonnes.getText( ).equals( "" ) ) {
-//            bOk = false;
-//            erreur( "Saississez un nombre de colonnes entre 1 et 9" );
-//        }
-//        else
-//
-//            try {
-//                Integer.parseInt( textFieldNbColonnes.getText( ) );
-//            } catch( Exception e ) {
-//                bOk = false;
-//                erreur( "Saississez un nombre de colonnes entre 1 et 9" );
-//            }
-//
-//        //nombre de twistlocks
-//        if( textFieldNbTL.getText( ).equals( "" ) ) {
-//            bOk = false;
-//            erreur( "Saississez un nombre de Twistlocks" );
-//        }
-//        else
-//
-//            try {
-//                Integer.parseInt( textFieldNbTL.getText( ) );
-//            } catch( Exception e ) {
-//                bOk = false;
-//                erreur( "Saississez un nombre de Twistlocks" );
-//            }
-//
-//        //nombre de joueurs
-//        if( textFieldPortConnexion.getText( ).equals( "" ) ) {
-//            bOk = false;
-//            erreur( "Saississez un nombre de joueurs entre 2 et 4" );
-//        }
-//        else
-//
-//            try {
-//                Integer.parseInt( textFieldNbLignes.getText( ) );
-//            } catch( Exception e ) {
-//                bOk = false;
-//                erreur( "Saississez un nombre de joueurs entre 2 et 4" );
-//            }
-//
-//        return bOk;
-//    }
     
     /**
      * fenêtre d'erreur
@@ -248,5 +124,25 @@ public class ConnexionClient extends JFrame
     private void erreur( String message )
     {
         JOptionPane.showMessageDialog( null , message );
+    }
+    
+    public JLabel getjLabelJ1( )
+    {
+        return jLabelJ1;
+    }
+    
+    public JLabel getjLabelJ2( )
+    {
+        return jLabelJ2;
+    }
+    
+    public JLabel getjLabelJ3( )
+    {
+        return jLabelJ3;
+    }
+    
+    public JLabel getjLabelJ4( )
+    {
+        return jLabelJ4;
     }
 }

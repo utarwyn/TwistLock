@@ -59,7 +59,7 @@ public class FormServeur extends JFrame {
 		jLabelNbTL = new JLabel("Nombre de twistlocks : ");
 		jLabelNombreJoueurs = new JLabel("Nombre de joueurs (2 à 4) : ");
 
-		textFieldPortConnexion = new JTextField("2684");
+		textFieldPortConnexion = new JTextField("");
 		textFieldPortConnexion.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char caracter = e.getKeyChar();
@@ -69,7 +69,7 @@ public class FormServeur extends JFrame {
 			}
 		});
 
-		textFieldNbLignes = new JTextField("9");
+		textFieldNbLignes = new JTextField("");
 		textFieldNbLignes.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char caracter = e.getKeyChar();
@@ -79,7 +79,7 @@ public class FormServeur extends JFrame {
 			}
 		});
 
-		textFieldNbColonnes = new JTextField("9");
+		textFieldNbColonnes = new JTextField("");
 		textFieldNbColonnes.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char caracter = e.getKeyChar();
@@ -89,7 +89,7 @@ public class FormServeur extends JFrame {
 			}
 		});
 
-		textFieldNbTL = new JTextField("5");
+		textFieldNbTL = new JTextField("");
 		textFieldNbTL.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char caracter = e.getKeyChar();
@@ -99,7 +99,7 @@ public class FormServeur extends JFrame {
 			}
 		});
 
-		textFieldNombreJoueurs = new JTextField("4");
+		textFieldNombreJoueurs = new JTextField("");
 		textFieldNombreJoueurs.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char caracter = e.getKeyChar();
