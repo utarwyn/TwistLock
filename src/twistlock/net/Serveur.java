@@ -18,9 +18,6 @@ public class Serveur extends Thread {
 	private ArrayList<ClientServeur> clients;
 
 	private DatagramSocket datagramSocket;
-	private DatagramPacket datagramPacketRecu, datagramPacketEnvoie;
-	private String messageRecu;
-	private String messageEnvoie;
 
 	public Serveur(Controleur controleur, int portConnexion, int nbJoueurs, int tL) {
 		this.controleur = controleur;
@@ -31,14 +28,6 @@ public class Serveur extends Thread {
 		this.clients = new ArrayList<>();
 
 		this.lancer();
-	}
-
-	public int getPortConnexion() {
-		return portConnexion;
-	}
-
-	public int getNbJoueurs() {
-		return nbJoueurs;
 	}
 
 	public int getNbTwistLocks() {
@@ -84,10 +73,28 @@ public class Serveur extends Thread {
 				);
 
 				this.clients.add(client);
+
+				// Tous les joueurs sont connectés
+				if (this.clients.size() == this.nbJoueurs) {
+					this.controleur.chargerIHM();
+					this.envoiInfoTour();
+				}
 			} else {
 				client.lancerAction(message);
 			}
 		}
+	}
+
+	public void envoiMessageAdversaire(String message) {
+		for (ClientServeur client : this.clients)
+			if (!client.monTour())
+				client.envoyer(message);
+	}
+
+	private void envoiInfoTour() {
+		for (ClientServeur client : this.clients)
+			if (client.monTour())
+				client.envoyer("10-A vous de jouer (ROUGE) :");
 	}
 
 	private void lancer() {
