@@ -74,6 +74,10 @@ public class Controleur {
 		return this.metier.getJoueurs();
 	}
 
+	public Joueur getGagnant() {
+		return this.metier.getGagnant();
+	}
+
 	public Joueur getJoueurCourant() {
 		return this.metier.getJoueurCourant();
 	}
@@ -89,7 +93,11 @@ public class Controleur {
 	/* -------------------- */
 	/*  GESTION DU SERVEUR  */
 	/* -------------------- */
-	public void lancerServeur(int portConnexion, int lignes, int colonnes,int tL, int nbJoueurs) {
+	public Serveur getServeur() {
+		return this.serveur;
+	}
+
+	public void lancerServeur(int portConnexion, int lignes, int colonnes, int tL, int nbJoueurs) {
 	    
 	    this.chargerMetier(lignes, colonnes);
 		this.serveur = new Serveur(this, portConnexion, nbJoueurs, tL);
