@@ -23,14 +23,21 @@ public class ClientTest
         do {
             String message = entreeClavier.readLine( );
             
-            if( message.equals( "q" ) ) ds.close( );
+            if( message.equalsIgnoreCase( "q" ) ) ds.close( );
             else {
                 DatagramPacket envoi = new DatagramPacket( message.getBytes( ) , message.length( ) , InetAddress.getByName( "localhost" ) , 2684 );
                 ds.send( envoi );
             }
-			/*DatagramPacket msg = new DatagramPacket(new byte[100], 100);
+            new Thread( new Runnable( ) {
+                @Override
+                public void run( )
+                {
+                
+                }
+            } ).start();
+			DatagramPacket msg = new DatagramPacket(new byte[100], 100);
 			ds.receive(msg);
-			System.out.println(new String(msg.getData()));*/
+			System.out.println(new String(msg.getData()));
         } while( ds.isConnected( ) );
     }
 }
