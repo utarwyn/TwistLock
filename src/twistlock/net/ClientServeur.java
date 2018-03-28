@@ -43,6 +43,9 @@ public class ClientServeur {
 	}
 
 	public void lancerAction(String message) {
+		
+		message = message.toUpperCase();
+		
 		// Commande "MAP"
 		if (message.equalsIgnoreCase("MAP")) {
 			this.envoyer(this.serveur.getControleur().getRepresentationPlateau());
@@ -58,7 +61,9 @@ public class ClientServeur {
 			Conteneur conteneur = this.serveur.getControleur().getConteneur(lig-1, col);
 
 			if (conteneur != null && this.serveur.getControleur().jouerTwistlock(conteneur, coin)) {
-				this.serveur.envoiMessageAdversaire("20-coup adversaire:" + message);
+				this.envoyer( "23-vous avez joué " + message );
+				this.envoyer( "24-attendez votre tour" );
+				this.serveur.envoiMessageAdversaire("20-coup adversaire : " + message);
 			} else {
 				this.envoyer("21-coup joue illegal");
 				this.serveur.envoiMessageAdversaire("22-coup adversaire illegal");
@@ -82,7 +87,7 @@ public class ClientServeur {
 					if (client.getJoueur() == gagnant)
 						client.envoyer("Vous avez gagné avec " + client.getJoueur().getScore() + " points !");
 					else
-						client.envoyer("Vous avez perdu !");
+						client.envoyer("Vous avez perdu avec " + client.getJoueur().getScore() + " points !");
 
 					client.envoyer(classement);
 					client.envoyer("KILL");
