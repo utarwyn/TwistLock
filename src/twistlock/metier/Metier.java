@@ -203,6 +203,23 @@ public class Metier {
 		return true;
 	}
 
+	public String getRepresentationPlateau() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("MAP=");
+
+		for (int lig = 0; lig < this.conteneurs.length; lig++) {
+			for (int col = 0; col < this.conteneurs[lig].length; col++)
+				sb.append(String.format("%02d", this.conteneurs[lig][col].getValeur())).append(":");
+
+			sb.deleteCharAt(sb.length() - 1);
+
+			sb.append("|");
+		}
+
+		return sb.toString();
+	}
+
 	/**
 	 * Retourne les voisins d'un conteneur lié par un coin commun
 	 *
