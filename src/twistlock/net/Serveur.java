@@ -104,7 +104,7 @@ public class Serveur extends Thread {
 	public void envoiInfoTour() {
 		for (ClientServeur client : this.clients)
 			if (client.monTour())
-				client.envoyer("10-A vous de jouer (ROUGE) :");
+				client.envoyer("10-A vous de jouer (" + ClientServeur.COULEURS[client.getJoueur().getId() - 1] + ") :");
 	}
 
 	private void lancer() {
