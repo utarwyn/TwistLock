@@ -67,12 +67,23 @@ public class ClientServeur {
 			boolean nouveauTour = this.serveur.getControleur().nouveauTour();
 			this.serveur.getControleur().miseAJourIHM();
 
+			// Le joueur n'a plus de twistlock
+			if (!this.joueur.peutJouer())
+				this.envoyer("50-Vous ne pouvez plus jouer");
+
 			// Fin de partie
 			if (!nouveauTour) {
 				String classement = this.serveur.getControleur().getClassement();
+				Joueur gagnant = this.serveur.getControleur().getGagnant();
 
 				for (ClientServeur client : this.serveur.getClients()) {
 					client.envoyer("-- FIN DE PARTIE --");
+
+					if (client.getJoueur() == gagnant)
+						client.envoyer("Vous avez gagné avec " + client.getJoueur().getScore() + " points !");
+					else
+						client.envoyer("Vous avez perdu !");
+
 					client.envoyer(classement);
 					client.envoyer("KILL");
 				}
@@ -83,7 +94,7 @@ public class ClientServeur {
 			return;
 		}
 
-		this.envoyer("25 - Action impossible");
+		this.envoyer("91-demande non valide");
 	}
 
 	public void envoyer(String message) {

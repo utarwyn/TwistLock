@@ -81,6 +81,7 @@ public class Serveur extends Thread {
 				// Tous les joueurs sont connectés
 				if (this.clients.size() == this.nbJoueurs) {
 					this.controleur.chargerIHM();
+					this.envoiDemarragePartie();
 					this.envoiInfoTour();
 				}
 			} else {
@@ -95,7 +96,12 @@ public class Serveur extends Thread {
 				client.envoyer(message);
 	}
 
-	private void envoiInfoTour() {
+	private void envoiDemarragePartie() {
+		for (ClientServeur client : this.clients)
+			client.envoyer("01-la partie va commencer\n" + this.controleur.getRepresentationPlateau());
+	}
+
+	public void envoiInfoTour() {
 		for (ClientServeur client : this.clients)
 			if (client.monTour())
 				client.envoyer("10-A vous de jouer (ROUGE) :");

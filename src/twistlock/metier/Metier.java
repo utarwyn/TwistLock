@@ -207,6 +207,23 @@ public class Metier {
 	}
 
 	/**
+	 * Récupère le joueur qui possède le plus de score
+	 * @return Joueur gagnant
+	 */
+	public Joueur getGagnant() {
+		int max = 0;
+		Joueur joueur = null;
+
+		for (Joueur j : this.joueurs)
+			if (j.getScore() > max) {
+				max = j.getScore();
+				joueur = j;
+			}
+
+		return joueur;
+	}
+
+	/**
 	 * Calculer les scores des joueurs dans l'ordre
 	 * @return Classement des scores des joueurs
 	 */
