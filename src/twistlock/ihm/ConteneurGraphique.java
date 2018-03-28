@@ -70,16 +70,26 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 		g2.setColor(Color.BLACK);
 		g2.draw(rect);
 
-		// Texte
-		int FONT_SIZE = 24;
+		// Texte Valeur
+		int FONT_SIZE_VALEUR = 24;
 		String text = String.valueOf(this.conteneur.getValeur());
-		Font font = g2.getFont().deriveFont(Font.BOLD, FONT_SIZE);
+		Font font = g2.getFont().deriveFont(Font.BOLD, FONT_SIZE_VALEUR);
 
 		int width = g2.getFontMetrics(font).stringWidth(text);
 
 		g2.setFont(font);
-		g2.drawString(text, (float) dim.getWidth() / 2 - width / 2, (float) (dim.getHeight() - 6) / 2 + FONT_SIZE / 2);
-
+		g2.drawString(text, (float) dim.getWidth() / 2 - width / 2, (float) (dim.getHeight()) / 3 + FONT_SIZE_VALEUR / 2);
+		
+		// Texte Identifiant
+		int FONT_SIZE_ID = 15;
+		String textID = String.valueOf(this.conteneur.getLigne() + " " + this.conteneur.getColonne() );
+		Font fontID = g2.getFont().deriveFont(Font.BOLD, FONT_SIZE_ID);
+		
+		int widthID = g2.getFontMetrics(fontID).stringWidth(textID);
+		
+		g2.setFont(fontID);
+		g2.drawString(textID, (float) dim.getWidth() / 2 - widthID / 2, (float) (dim.getHeight()) * 4 / 5 + FONT_SIZE_ID / 2);
+		
 		g2.dispose();
 	}
 
