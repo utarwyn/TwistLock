@@ -54,7 +54,7 @@ public class ClientServeur {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(this.joueur.getId()).append("-Bonjour Equipe ").append(this.joueur.getNom()).append("\n");
-		sb.append("Vous êtes le joueur ").append(this.joueur.getId()).append(" (ROUGE)");
+		sb.append("Vous êtes le joueur ").append(this.joueur.getId()).append(" (ROUGE) ");
 
 		this.envoyer(sb.toString());
 	}
