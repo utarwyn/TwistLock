@@ -82,9 +82,10 @@ public class Controleur {
 	/* -------------------- */
 	/*  GESTION DU SERVEUR  */
 	/* -------------------- */
-	public void lancerServeur(int portConnexion, int lignes, int colonnes, int nbJoueurs) {
-		this.chargerMetier(lignes, colonnes);
-		this.serveur = new Serveur(this, portConnexion, nbJoueurs);
+	public void lancerServeur(int portConnexion, int lignes, int colonnes,int tL, int nbJoueurs) {
+	    
+	    this.chargerMetier(lignes, colonnes);
+		this.serveur = new Serveur(this, portConnexion, nbJoueurs, tL);
 	}
 
 }
