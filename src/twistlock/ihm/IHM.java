@@ -90,26 +90,9 @@ public class IHM extends JFrame {
 		this.miseAJour();
 
 		if (!nouveauTour) {
-			ArrayList<Joueur> arrayList = new ArrayList<>();
-
-			for (Joueur joueur : this.controleur.getJoueurs()) {
-				arrayList.add(joueur);
-			}
-
-			arrayList.sort((o1, o2) -> o2.getScore() - o1.getScore());
-
-			StringBuilder scores = new StringBuilder(" Classement :\n\n ");
-
-			for (int i = 0; i < arrayList.size(); i++) {
-
-				Joueur joueur = arrayList.get(i);
-				scores.append(i + 1).append(" - ").append(joueur.getNom()).append(" : ").append(joueur.getScore()).append("\n");
-
-			}
-
 			JOptionPane.showMessageDialog(
 					this,
-					scores.toString(),
+					this.controleur.getClassement(),
 					"FIN DE PARTIE - Tableau des scores",
 					JOptionPane.INFORMATION_MESSAGE
 			);
