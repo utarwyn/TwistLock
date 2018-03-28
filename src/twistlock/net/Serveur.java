@@ -12,17 +12,18 @@ public class Serveur {
 
 	private Controleur controleur;
 
-	private int portConnexion, nbJoueurs;
+	private int portConnexion, nbJoueurs , tL;
 
 	private DatagramSocket datagramSocket;
 	private DatagramPacket datagramPacketRecu, datagramPacketEnvoie;
 	private String messageRecu;
 	private String messageEnvoie;
 
-	public Serveur(Controleur controleur, int portConnexion, int nbJoueurs) {
+	public Serveur(Controleur controleur, int portConnexion, int nbJoueurs, int tL) {
 		this.controleur = controleur;
 		this.portConnexion = portConnexion;
 		this.nbJoueurs = nbJoueurs;
+		this.tL = tL;
 
 		this.lancer();
 	}

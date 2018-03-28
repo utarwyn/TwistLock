@@ -210,7 +210,7 @@ public class FormServeur extends JFrame {
 	 * Lance le jeu et ouvre la fenêtre avec le plateau du jeu Ajoute les joueurs
 	 */
 	private void lancer() {
-		controleur.lancerServeur(portConnexion, lignes, colonnes, nbJoueurs);
+		controleur.lancerServeur(portConnexion, lignes, colonnes, nbTwistlocks, nbJoueurs);
 		this.dispose();
 	}
 
