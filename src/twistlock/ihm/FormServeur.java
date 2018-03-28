@@ -1,5 +1,6 @@
 package twistlock.ihm;
-import twistlock.ControleurServeur;
+
+import twistlock.Controleur;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.awt.event.KeyEvent;
 
 public class FormServeur extends JFrame
 {
-    private ControleurServeur controleurServeur;
+    private Controleur controleur;
     
     private JLabel jLabelTitre;
     private JLabel jLabelPortConnexion;
@@ -31,9 +32,9 @@ public class FormServeur extends JFrame
     private int     nbTwistlocks;
     private int     portConnexion;
     
-    public FormServeur( ControleurServeur controleurServeur )
+    public FormServeur( Controleur controleur )
     {
-        this.controleurServeur = controleurServeur;
+        this.controleur = controleur;
         
         this.setTitle( "Jeu des Twistlocks - Ajouter des Joueurs" );
         this.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
@@ -136,11 +137,11 @@ public class FormServeur extends JFrame
         buttonValider.addActionListener( e -> {
             if( verification( ) ) {
                 
-                portConnexion = Integer.parseInt( textFieldPortConnexion.getText() );
+                portConnexion = Integer.parseInt( textFieldPortConnexion.getText( ) );
                 lignes = Integer.parseInt( textFieldNbLignes.getText( ) );
                 colonnes = Integer.parseInt( textFieldNbColonnes.getText( ) );
                 nbTwistlocks = Integer.parseInt( textFieldNbTL.getText( ) );
-                nbJoueurs = Integer.parseInt( textFieldNombreJoueurs.getText() );
+                nbJoueurs = Integer.parseInt( textFieldNombreJoueurs.getText( ) );
                 
                 //lancer la nouvelle fanêtre avec le plateau de jeu
                 lancer( );
@@ -224,7 +225,7 @@ public class FormServeur extends JFrame
      */
     private void lancer( )
     {
-        controleurServeur.lancerServeur( portConnexion, lignes , colonnes, nbJoueurs );
+        controleur.lancerServeur( portConnexion , lignes , colonnes , nbJoueurs );
         this.dispose( );
     }
     
@@ -245,7 +246,7 @@ public class FormServeur extends JFrame
         else
             
             try {
-                if( Integer.parseInt( textFieldNbLignes.getText( ) ) < 0 || Integer.parseInt( textFieldNbLignes.getText( ) ) > 65635 ) {
+                if( Integer.parseInt( textFieldPortConnexion.getText( ) ) < 0 || Integer.parseInt( textFieldPortConnexion.getText( ) ) > 65635  ) {
                     bOk = false;
                     erreur( "Saississez un port de connexion entre 1 et 65635" );
                 }
@@ -315,6 +316,4 @@ public class FormServeur extends JFrame
     {
         JOptionPane.showMessageDialog( null , message );
     }
-    
-    
 }
