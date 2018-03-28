@@ -7,7 +7,6 @@ import twistlock.metier.Joueur;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 /**
  * Représente la fenêtre principale de jeu.
