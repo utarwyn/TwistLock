@@ -104,7 +104,7 @@ public class FormServeur extends JFrame
         textFieldPortConnexion = new JTextField( "" );
         jComboBoxAdresse = adresseIP( );
         
-        textFieldPortConnexion = new JTextField( "80" );
+        textFieldPortConnexion = new JTextField( "" );
         textFieldPortConnexion.addKeyListener( new KeyAdapter( )
         {
             public void keyTyped( KeyEvent e )
@@ -116,7 +116,7 @@ public class FormServeur extends JFrame
             }
         } );
         
-        textFieldNbLignes = new JTextField( "9" );
+        textFieldNbLignes = new JTextField( "" );
         textFieldNbLignes.addKeyListener( new KeyAdapter( )
         {
             public void keyTyped( KeyEvent e )
@@ -128,7 +128,7 @@ public class FormServeur extends JFrame
             }
         } );
         
-        textFieldNbColonnes = new JTextField( "9" );
+        textFieldNbColonnes = new JTextField( "" );
         textFieldNbColonnes.addKeyListener( new KeyAdapter( )
         {
             public void keyTyped( KeyEvent e )
@@ -140,7 +140,7 @@ public class FormServeur extends JFrame
             }
         } );
         
-        textFieldNbTL = new JTextField( "2" );
+        textFieldNbTL = new JTextField( "" );
         textFieldNbTL.addKeyListener( new KeyAdapter( )
         {
             public void keyTyped( KeyEvent e )
@@ -152,7 +152,7 @@ public class FormServeur extends JFrame
             }
         } );
         
-        textFieldNombreJoueurs = new JTextField( "2" );
+        textFieldNombreJoueurs = new JTextField( "" );
         textFieldNombreJoueurs.addKeyListener( new KeyAdapter( )
         {
             public void keyTyped( KeyEvent e )
