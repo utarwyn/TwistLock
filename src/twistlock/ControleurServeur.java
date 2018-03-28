@@ -19,7 +19,7 @@ public class ControleurServeur
         new FormServeur(this);
     }
     
-    public void chargerMetier(int nbLig, int nbCol) {
+    public void lancerServeur(int portConnexion, int nbLig, int nbCol, int nbjoueurs) {
         this.metier = new Metier(nbLig, nbCol);
     }
     

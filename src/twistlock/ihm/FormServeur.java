@@ -136,9 +136,11 @@ public class FormServeur extends JFrame
         buttonValider.addActionListener( e -> {
             if( verification( ) ) {
                 
+                portConnexion = Integer.parseInt( textFieldPortConnexion.getText() );
                 lignes = Integer.parseInt( textFieldNbLignes.getText( ) );
                 colonnes = Integer.parseInt( textFieldNbColonnes.getText( ) );
                 nbTwistlocks = Integer.parseInt( textFieldNbTL.getText( ) );
+                nbJoueurs = Integer.parseInt( textFieldNombreJoueurs.getText() );
                 
                 //lancer la nouvelle fanêtre avec le plateau de jeu
                 lancer( );
@@ -222,7 +224,7 @@ public class FormServeur extends JFrame
      */
     private void lancer( )
     {
-        controleurServeur.chargerMetier( lignes , colonnes );
+        controleurServeur.lancerServeur( portConnexion, lignes , colonnes, nbJoueurs );
         this.dispose( );
     }
     
