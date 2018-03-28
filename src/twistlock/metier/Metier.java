@@ -271,7 +271,7 @@ public class Metier {
 	 * @param coin    Coin de liaison
 	 * @return Tableau associatif des voisins (avec les coins de liaison)
 	 */
-	private HashMap<Conteneur, Integer> getVoisins(Conteneur origine, int coin) {
+	public HashMap<Conteneur, Integer> getVoisins(Conteneur origine, int coin) {
 		HashMap<Conteneur, Integer> voisins = new HashMap<>();
 		Conteneur voisin;
 
@@ -318,6 +318,15 @@ public class Metier {
 		}
 
 		return voisins;
+	}
+
+	/**
+	 * Retourne la liste des conteneurs
+	 *
+	 * @return La liste des conteneurs
+	 */
+	public Conteneur[][] getConteneurs() {
+		return conteneurs;
 	}
 
 }
