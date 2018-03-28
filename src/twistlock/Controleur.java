@@ -1,5 +1,6 @@
 package twistlock;
 
+import twistlock.ihm.ConnexionClient;
 import twistlock.ihm.FormChoixServeurPlateau;
 import twistlock.ihm.IHM;
 import twistlock.metier.Conteneur;
@@ -16,6 +17,8 @@ public class Controleur {
 	private Serveur serveur;
 
 	private IHM ihm;
+	
+	private ConnexionClient connexionClient;
 
 	private Controleur() {
 		new FormChoixServeurPlateau(this);
@@ -101,6 +104,7 @@ public class Controleur {
 	    
 	    this.chargerMetier(lignes, colonnes);
 		this.serveur = new Serveur(this, portConnexion, nbJoueurs, tL);
+		connexionClient = new ConnexionClient( this );
 	}
 
 	public void miseAJourIHM() {
