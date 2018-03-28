@@ -33,11 +33,11 @@ public class Serveur extends Thread {
 		this.lancer();
 	}
 
-	public int getNbTwistLocks() {
+	int getNbTwistLocks( ) {
 		return this.tL;
 	}
 
-	public Controleur getControleur() {
+	Controleur getControleur( ) {
 		return controleur;
 	}
     
@@ -50,15 +50,15 @@ public class Serveur extends Thread {
 		return adresseIP;
 	}
     
-    public DatagramSocket getDatagramSocket() {
+    DatagramSocket getDatagramSocket( ) {
 		return datagramSocket;
 	}
 
-	public ArrayList<ClientServeur> getClients() {
+	ArrayList<ClientServeur> getClients( ) {
 		return clients;
 	}
 
-	public ClientServeur getClientParAdresse(SocketAddress address) {
+	private ClientServeur getClientParAdresse( SocketAddress address ) {
 		for (ClientServeur client : this.clients)
 			if (client.getAddress().equals(address))
 				return client;
@@ -110,13 +110,13 @@ public class Serveur extends Thread {
 		}
 	}
 	
-	public void envoiMessageAdversaire(String message) {
+	void envoiMessageAdversaire(String message) {
 		for (ClientServeur client : this.clients)
 			if (!client.monTour())
 				client.envoyer(message);
 	}
 	
-	public void envoiMessageAll(String message) {
+	private void envoiMessageAll( String message ) {
 		for (ClientServeur client : this.clients)
 			client.envoyer(message);
 	}
@@ -126,7 +126,7 @@ public class Serveur extends Thread {
 			client.envoyer("01-la partie va commencer\n" + this.controleur.getRepresentationPlateau());
 	}
 
-	public void envoiInfoTour() {
+	void envoiInfoTour( ) {
 		for (ClientServeur client : this.clients)
 			if (client.monTour())
 				client.envoyer("10-A vous de jouer (" + ClientServeur.COULEURS[client.getJoueur().getId() - 1] + ") :");

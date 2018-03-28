@@ -70,21 +70,21 @@ public class Joueur {
 	 *
 	 * @param score Score à ajouter
 	 */
-	public void addScore(int score) {
+	void addScore( int score ) {
 		this.score += score;
 	}
 
 	/**
 	 * Réinitialise le score du joueur
 	 */
-	public void resetScore() {
+	void resetScore() {
 		this.score = 0;
 	}
 
 	/**
 	 * Enlève un twist-lock au joueur
 	 */
-	public void retirerTwistlock() {
+	void retirerTwistlock() {
 		this.nbTwistLock--;
 
 		if (this.nbTwistLock < 0) this.nbTwistLock = 0;
