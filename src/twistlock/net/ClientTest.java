@@ -52,11 +52,6 @@ public class ClientTest
         System.exit( 0 );
     }
     
-    /**
-     *
-     * @param args
-     * @throws Exception
-     */
     public static void main( String args[] ) throws Exception
     {
         new ClientTest( );
