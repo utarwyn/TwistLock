@@ -87,7 +87,8 @@ public class ClientServeur {
 					client.envoyer(classement);
 					client.envoyer("KILL");
 				}
-
+				
+				//TODO fin de partie IHM
 				System.exit(0);
 			} else {
 				this.serveur.envoiInfoTour();

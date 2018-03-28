@@ -100,13 +100,18 @@ public class Controleur {
 		return this.serveur;
 	}
 
-	public void lancerServeur(int portConnexion, int lignes, int colonnes, int tL, int nbJoueurs) {
+	public void lancerServeur(String adresseIP, int portConnexion, int lignes, int colonnes, int tL, int nbJoueurs) {
 	    
 	    this.chargerMetier(lignes, colonnes);
-		this.serveur = new Serveur(this, portConnexion, nbJoueurs, tL);
-		connexionClient = new ConnexionClient( this );
+		this.serveur = new Serveur(this, adresseIP, portConnexion, nbJoueurs, tL);
+		connexionClient = new ConnexionClient( this, nbJoueurs );
 	}
-
+	
+	public ConnexionClient getConnexionClient( )
+	{
+		return connexionClient;
+	}
+	
 	public void miseAJourIHM() {
 		if (this.ihm != null)
 			this.ihm.miseAJour();

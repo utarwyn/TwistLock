@@ -14,13 +14,16 @@ public class Serveur extends Thread {
 	private Controleur controleur;
 
 	private int portConnexion, nbJoueurs , tL;
+	
+	private String adresseIP;
 
 	private ArrayList<ClientServeur> clients;
 
 	private DatagramSocket datagramSocket;
 
-	public Serveur(Controleur controleur, int portConnexion, int nbJoueurs, int tL) {
+	public Serveur(Controleur controleur, String adresseIP, int portConnexion, int nbJoueurs, int tL) {
 		this.controleur = controleur;
+		this.adresseIP = adresseIP;
 		this.portConnexion = portConnexion;
 		this.nbJoueurs = nbJoueurs;
 		this.tL = tL;
@@ -42,6 +45,10 @@ public class Serveur extends Thread {
     {
         return portConnexion;
     }
+	
+	public String getAdresseIP(){
+		return adresseIP;
+	}
     
     public DatagramSocket getDatagramSocket() {
 		return datagramSocket;
@@ -82,6 +89,8 @@ public class Serveur extends Thread {
 				);
 
 				this.clients.add(client);
+				
+				this.controleur.getConnexionClient().setJLabel( clients.size(), client.getJoueur().getNom() );
 
 				// Tous les joueurs sont connectés
 				if (this.clients.size() == this.nbJoueurs) {
