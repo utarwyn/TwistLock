@@ -116,5 +116,9 @@ public class Controleur {
 		if (this.ihm != null)
 			this.ihm.miseAJour();
 	}
-
+	
+	public IHM getIhm( )
+	{
+		return ihm;
+	}
 }

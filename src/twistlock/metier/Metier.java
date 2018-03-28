@@ -231,7 +231,7 @@ public class Metier {
 		ArrayList<Joueur> arrayList = new ArrayList<>(this.joueurs);
 		arrayList.sort((o1, o2) -> o2.getScore() - o1.getScore());
 
-		StringBuilder scores = new StringBuilder(" Classement :\n\n ");
+		StringBuilder scores = new StringBuilder("Classement :\n\n ");
 
 		for (int i = 0; i < arrayList.size(); i++) {
 			Joueur joueur = arrayList.get(i);
