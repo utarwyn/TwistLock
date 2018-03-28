@@ -42,6 +42,10 @@ public class Serveur extends Thread {
 		return datagramSocket;
 	}
 
+	public ArrayList<ClientServeur> getClients() {
+		return clients;
+	}
+
 	public ClientServeur getClientParAdresse(SocketAddress address) {
 		for (ClientServeur client : this.clients)
 			if (client.getAddress().equals(address))

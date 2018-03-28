@@ -82,6 +82,9 @@ public class Controleur {
 		return this.metier.nouveauTour();
 	}
 
+	public String getClassement() {
+		return this.metier.getClassement();
+	}
 
 	/* -------------------- */
 	/*  GESTION DU SERVEUR  */

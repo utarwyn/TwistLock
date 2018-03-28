@@ -64,9 +64,22 @@ public class ClientServeur {
 				this.serveur.envoiMessageAdversaire("22-coup adversaire illegal");
 			}
 
-			this.serveur.getControleur().nouveauTour();
+			boolean nouveauTour = this.serveur.getControleur().nouveauTour();
 			this.serveur.getControleur().miseAJourIHM();
-			// TODO Fin de partie
+
+			// Fin de partie
+			if (!nouveauTour) {
+				String classement = this.serveur.getControleur().getClassement();
+
+				for (ClientServeur client : this.serveur.getClients()) {
+					client.envoyer("-- FIN DE PARTIE --");
+					client.envoyer(classement);
+					client.envoyer("KILL");
+				}
+
+				System.exit(0);
+			}
+
 			return;
 		}
 

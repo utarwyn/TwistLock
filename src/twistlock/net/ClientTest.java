@@ -34,7 +34,11 @@ public class ClientTest
                 } catch( IOException e ) {
                     e.printStackTrace( );
                 }
-                System.out.println( "\n" + new String( msg.getData( ) ).trim( ) );
+
+                String message = new String( msg.getData( ) ).trim( );
+
+                if ( message.equals("KILL") ) System.exit( 0 );
+				else System.out.println( "\n" + message );
             } while( ds != null );
         } ).start( );
     
