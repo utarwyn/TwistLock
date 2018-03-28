@@ -87,11 +87,7 @@ public class IHM extends JFrame {
 
 		boolean nouveauTour = this.controleur.nouveauTour();
 
-		for (MainJoueur mainJoueur : this.mains)
-			if (mainJoueur != null)
-				mainJoueur.miseAJour(this.controleur.getJoueurCourant() == mainJoueur.getJoueur());
-
-		this.plateau.miseAJour();
+		this.miseAJour();
 
 		if (!nouveauTour) {
 			ArrayList<Joueur> arrayList = new ArrayList<>();
@@ -121,6 +117,17 @@ public class IHM extends JFrame {
 			this.dispose();
 			System.exit(0);
 		}
+	}
+
+	/**
+	 * Mise à jour de toute l'IHM
+	 */
+	public void miseAJour() {
+		for (MainJoueur mainJoueur : this.mains)
+			if (mainJoueur != null)
+				mainJoueur.miseAJour(this.controleur.getJoueurCourant() == mainJoueur.getJoueur());
+
+		this.plateau.miseAJour();
 	}
 
 }

@@ -15,6 +15,8 @@ public class Controleur {
 
 	private Serveur serveur;
 
+	private IHM ihm;
+
 	private Controleur() {
 		new FormChoixServeurPlateau(this);
 	}
@@ -27,12 +29,13 @@ public class Controleur {
 		this.metier = new Metier(nbLig, nbCol);
 	}
 
+
 	/* ----------------------------- */
 	/*  GESTION DE LA GRILLE DE JEU  */
 	/* ----------------------------- */
-
 	public void chargerIHM() {
-		new IHM(this).lancer();
+		this.ihm = new IHM(this);
+		this.ihm.lancer();
 	}
 
 	public int getNbLig() {
@@ -50,6 +53,7 @@ public class Controleur {
 	public String getRepresentationPlateau() {
 		return this.metier.getRepresentationPlateau();
 	}
+
 
 	/* ------------------------ */
 	/*  GESTION DES TWISTLOCKS  */
@@ -86,6 +90,11 @@ public class Controleur {
 	    
 	    this.chargerMetier(lignes, colonnes);
 		this.serveur = new Serveur(this, portConnexion, nbJoueurs, tL);
+	}
+
+	public void miseAJourIHM() {
+		if (this.ihm != null)
+			this.ihm.miseAJour();
 	}
 
 }
