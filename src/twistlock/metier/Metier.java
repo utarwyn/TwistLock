@@ -151,6 +151,9 @@ public class Metier {
 		return joueur;
 	}
 
+	/**
+	 * Lance la partie
+	 */
 	public void lancerPartie() {
 		// On test de faire jouer le premier joueur (IA)
 		this.faireJouerIA();

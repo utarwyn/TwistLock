@@ -30,7 +30,7 @@ class Plateau extends JPanel {
 
 		for (int lig = 0; lig < this.controleur.getNbLig(); lig++)
 			for (int col = 0; col < this.controleur.getNbCol(); col++)
-				this.add(new ConteneurGraphique(this.ihm, this.controleur.getConteneur(lig, col), focus ));
+				this.add(new ConteneurGraphique(this.ihm, this.controleur.getConteneur(lig, col), focus));
 
 		this.repaint();
 	}
@@ -56,16 +56,16 @@ class Plateau extends JPanel {
 
 		Dimension conteneurSize = new Dimension();
 		conteneurSize.setSize(
-				dim.getWidth() / this.controleur.getNbCol(),
-				dim.getHeight() / this.controleur.getNbLig()
+				dim.getWidth() / this.controleur.getNbCol() - 1,
+				dim.getHeight() / this.controleur.getNbLig() - 1
 		);
 
 		for (int lig = 0; lig < this.controleur.getNbLig(); lig++)
 			for (int col = 0; col < this.controleur.getNbCol(); col++) {
 				conteneur = this.controleur.getConteneur(lig, col);
 
-				baseX = (int) (col * conteneurSize.getWidth());
-				baseY = (int) (lig * conteneurSize.getHeight());
+				baseX = col * conteneurSize.getWidth() + 1;
+				baseY = lig * conteneurSize.getHeight() + 3;
 
 				for (int i = 0; i < conteneur.getCoins().length; i++) {
 					twistLock = conteneur.getCoins()[i];
