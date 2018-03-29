@@ -87,6 +87,8 @@ public class FormJoueur extends JFrame {
 		intelligenceJ3 = new JCheckBox( "Intelligent" );
 		intelligenceJ4 = new JCheckBox( "Intelligent" );
 		
+		intelligents = new ArrayList<>( );
+		
 		intelligents.add( intelligenceJ1 );
 		intelligents.add( intelligenceJ2 );
 		intelligents.add( intelligenceJ3 );
