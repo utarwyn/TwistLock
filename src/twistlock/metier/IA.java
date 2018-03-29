@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Classe AIGestion qui gère les IA et leurs actions
+ * Classe IA qui gère les IA et leurs actions
  */
 public class IA extends Joueur {
 

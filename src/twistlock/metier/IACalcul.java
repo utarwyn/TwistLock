@@ -1,7 +1,7 @@
 package twistlock.metier;
 
 /**
- * Classe AI permettant d'instancier une IA
+ * Classe IACalcul permettant d'effectuer des calculs sur les IA
  */
 
 public class IACalcul {
