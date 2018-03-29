@@ -286,8 +286,11 @@ public class IA extends Joueur {
         System.out.println("\nGain 1 : "+pointsVoisin[0]+" Gain 2 : "+pointsVoisin[1]+" Gain 3 : "+pointsVoisin[2]+" Gain 4 : "+pointsVoisin[3]);
 
         int selection=-1;
+        int essais=0;
 
         while(selection==-1 || cSelect.estOccupe(selection)) {
+
+            if(essais>20){break;}
 
             if(selection!=-1 && cSelect.estOccupe(selection))
             {
@@ -297,6 +300,7 @@ public class IA extends Joueur {
                 pointsVoisin[3]=0;
                 selection++;
                 if(selection>4){selection=1;}
+                essais++;
             }
 
             if (pointsVoisin[0] > pointsVoisin[1] && pointsVoisin[0] > pointsVoisin[2] && pointsVoisin[0] > pointsVoisin[3]) {
