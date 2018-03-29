@@ -9,17 +9,16 @@ import java.util.Map;
 /**
  * Classe AIGestion qui gère les IA et leurs actions
  */
-
-public class IA{
+public class IA extends Joueur {
 
     private IACalcul aiPrincipal;
-    private Joueur joueur;
     private Metier metier;
     private Conteneur[][] jeu;
     private Conteneur contChoisi;
     private int meilleurCheminX,meilleurCheminY,pireCheminX,pireCheminY;
-    private static int nbDeplacements = 20;
-    private static int[] deplacement = new int[nbDeplacements];
+    private int nbDeplacements;
+
+    private int[] deplacement = new int[nbDeplacements];
 
     public static void main(String[] args) {
 
@@ -27,19 +26,23 @@ public class IA{
         Metier m = new Metier(5,6);
 
         // Gestion de l'IA
-        new IA(m);
+        new IA(m, 1, "IA", 20);
     }
 
     /**
      * Constructeur de la classe AIGestion
      * @param m métier associé
+	 * @param id identifiant du joueur lié
+	 * @param nom Nom du joueur lié
+	 * @param nbTwistLock Nombre de twistlock
      */
-
-    private IA(Metier m)
+    public IA(Metier m, int id, String nom, int nbTwistLock)
     {
-        this.metier=m;
-        this.joueur = this.metier.ajouterJoueur("IA",20);
+        super(id, nom, nbTwistLock);
+
+        this.metier = m;
         this.jeu = m.getConteneurs();
+        this.nbDeplacements = nbTwistLock;
         this.aiPrincipal = new IACalcul(jeu,0,0,3,3);
 
         System.out.println(this.metier.getRepresentationPlateau());
@@ -190,7 +193,7 @@ public class IA{
 
     private boolean AppliquerAction()
     {
-        if(!joueur.peutJouer()){System.out.println("l'IA ne peut pas jouer"); return false;}
+        if(!this.peutJouer()){System.out.println("l'IA ne peut pas jouer"); return false;}
         if(this.contChoisi==null){System.out.println("conteneur null"); return false;}
 
         /*if(contChoisi.getProprietaire()==joueur)
@@ -203,7 +206,7 @@ public class IA{
         System.out.println("\nJOUE " + this.contChoisi.getLigne() + this.contChoisi.getColonne() + coin);
 
         // Mouvement appliqué sur le plateau
-        if(metier.getJoueurCourant()==joueur)
+        if(metier.getJoueurCourant()==this)
         {
             metier.jouerTwistlock(this.contChoisi, coin);
         }

@@ -130,6 +130,21 @@ public class Metier {
 	}
 
 	/**
+	 * Ajoute un joueur lié au jeu avec avec nom
+	 *
+	 * @param nom Nom du joueur
+	 */
+	public Joueur ajouterAI(String nom, int tL) {
+		Joueur joueur = new IA(this, this.joueurs.size() + 1, nom, tL);
+
+		this.joueurs.add(joueur);
+		if (this.joueurCourant == null)
+			this.joueurCourant = joueur;
+
+		return joueur;
+	}
+
+	/**
 	 * Passe le tour au joueur suivant
 	 *
 	 * @return Vrai si le tour a pu être passé, faux si la partie est terminée.
@@ -145,9 +160,9 @@ public class Metier {
 		 *   - Plus aucun joueur n'a de twistlock         */
 		boolean fin1 = true, fin2 = true;
 		Conteneur[][] conteneurs = this.conteneurs;
-		
-		for( Conteneur[] conteneur : conteneurs )
-			for( Conteneur aConteneur : conteneur ) if( ! aConteneur.estEntoure( ) ) fin1 = false;
+
+		for (Conteneur[] conteneur : conteneurs)
+			for (Conteneur aConteneur : conteneur) if (!aConteneur.estEntoure()) fin1 = false;
 
 		for (Joueur joueur : this.joueurs)
 			if (joueur.peutJouer())
@@ -206,6 +221,7 @@ public class Metier {
 
 	/**
 	 * Récupère le joueur qui possède le plus de score
+	 *
 	 * @return Joueur gagnant
 	 */
 	public Joueur getGagnant() {
@@ -223,6 +239,7 @@ public class Metier {
 
 	/**
 	 * Calculer les scores des joueurs dans l'ordre
+	 *
 	 * @return Classement des scores des joueurs
 	 */
 	public String getClassement() {
@@ -243,19 +260,20 @@ public class Metier {
 
 	/**
 	 * Retourne la présentation en chaîne du plateau
+	 *
 	 * @return Plateau en chaîne
 	 */
 	public String getRepresentationPlateau() {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("MAP=");
-		
-		for( Conteneur[] conteneur : this.conteneurs ) {
-			for( Conteneur aConteneur : conteneur ) sb.append( String.format( "%02d" , aConteneur.getValeur( ) ) ).append( ":" );
-			
-			sb.deleteCharAt( sb.length( ) - 1 );
-			
-			sb.append( "|" );
+
+		for (Conteneur[] conteneur : this.conteneurs) {
+			for (Conteneur aConteneur : conteneur) sb.append(String.format("%02d", aConteneur.getValeur())).append(":");
+
+			sb.deleteCharAt(sb.length() - 1);
+
+			sb.append("|");
 		}
 
 		return sb.toString();
@@ -268,7 +286,7 @@ public class Metier {
 	 * @param coin    Coin de liaison
 	 * @return Tableau associatif des voisins (avec les coins de liaison)
 	 */
-	HashMap<Conteneur, Integer> getVoisins( Conteneur origine , int coin ) {
+	HashMap<Conteneur, Integer> getVoisins(Conteneur origine, int coin) {
 		HashMap<Conteneur, Integer> voisins = new HashMap<>();
 		Conteneur voisin;
 
@@ -322,7 +340,7 @@ public class Metier {
 	 *
 	 * @return La liste des conteneurs
 	 */
-	Conteneur[][] getConteneurs( ) {
+	Conteneur[][] getConteneurs() {
 		return conteneurs;
 	}
 
