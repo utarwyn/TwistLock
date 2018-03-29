@@ -60,6 +60,7 @@ public class IA extends Joueur {
             {
                 System.out.println("Erreur : l'action ne peut pas etre appliquee");
                 RedefinirChemins();
+                AppliquerAction();
             }
         }
     }
@@ -86,10 +87,10 @@ public class IA extends Joueur {
 
         System.out.print(" total : " + total);
 
-        System.out.println();
+
 
         aiTest = new IACalcul(jeu,this.pireCheminX,this.pireCheminY,3,3);
-        System.out.print("PIRE CHEMIN ["+this.pireCheminX+";"+this.pireCheminY+"] --> ");
+        //System.out.print("PIRE CHEMIN ["+this.pireCheminX+";"+this.pireCheminY+"] --> ");
         total=0;
         for (int pas = 0; pas < nbDeplacements; pas++) {
             deplacement[pas] = aiTest.getMax(aiTest.getX(), aiTest.getY());
@@ -97,11 +98,11 @@ public class IA extends Joueur {
             total+=deplacement[pas];
         }
 
-        for (int pas = 0; pas < nbDeplacements; pas++) {
+        /*for (int pas = 0; pas < nbDeplacements; pas++) {
             System.out.print(deplacement[pas] + " --> ");
         }
 
-        System.out.print(" total : " + total);
+        System.out.print(" total : " + total);*/
     }
 
     /**
@@ -127,8 +128,12 @@ public class IA extends Joueur {
 
         System.out.println("-------");
 
-        for(int i=1;i<jeu.length-1;i++) {
-            for(int j=1;j<jeu.length-1;j++) {
+        int base=0;
+        if(CasesMilieuLibres()){base=1;}
+
+
+        for(int i=base;i<jeu.length-base;i++) {
+            for(int j=base;j<jeu.length-base;j++) {
 
                 valide = true;
                 // On vérifie si le conteneur a déjà été utilisé précédemment
@@ -157,10 +162,6 @@ public class IA extends Joueur {
                 /*for (int pas = 0; pas < nbDeplacements; pas++) {
                     System.out.print(deplacement[pas] + " --> ");
                 }*/
-                /*System.out.println();
-                for (int pas2 = 0; pas2 < nbDeplacements; pas2++) {
-                    System.out.print(deplacement[1][pas2] + " --> ");
-                }*/
 
                 //System.out.print(" total : " + total);
 
@@ -180,7 +181,7 @@ public class IA extends Joueur {
                 //if(total>lastTotal){lastTotal=total; meilleurCheminX=i; meilleurCheminY=j;}
                 //if(minimum<lastMinimum){lastMinimum=minimum; pireCheminX=i; pireCheminY=j;}
 
-                System.out.println();
+                //System.out.println();
             }
         }
 
@@ -188,6 +189,7 @@ public class IA extends Joueur {
         this.meilleurCheminY=meilleurCheminY;
         this.pireCheminX=pireCheminX;
         this.pireCheminY=pireCheminY;
+
 
         lastMeilleurX[lastMeilleurId] = meilleurCheminX;
         lastMeilleurY[lastMeilleurId] = meilleurCheminY;
@@ -219,13 +221,15 @@ public class IA extends Joueur {
         }*/
         int coin = GetMeilleurCoin(contChoisi);
 
-        System.out.println("\nJOUE " + this.contChoisi.getLigne() + this.contChoisi.getColonne() + coin);
+        if(coin>0 &&  coin<5) {
+            System.out.println("\nJOUE " + this.contChoisi.getLigne() + this.contChoisi.getColonne() + coin);
 
-        // Mouvement appliqué sur le plateau
-        if(metier.getJoueurCourant()==this)
-        {
-            metier.jouerTwistlock(this.contChoisi, coin);
+            // Mouvement appliqué sur le plateau
+            if (metier.getJoueurCourant() == this) {
+                metier.jouerTwistlock(this.contChoisi, coin);
+            }
         }
+        else{return false;}
 
         return true;
     }
@@ -254,8 +258,22 @@ public class IA extends Joueur {
                 break;
             }
         }
-        System.out.print(" voisins:"+total);
+        //System.out.print(" voisins:"+total);
         return total;
+    }
+
+    private boolean CasesMilieuLibres()
+    {
+        Conteneur[][] cont = metier.getConteneurs();
+        for(int cpt=1;cpt<cont.length-1;cpt++)
+        {
+            for(int cpt2=1;cpt2<cont[cpt].length-1;cpt2++)
+            {
+                if(!cont[cpt][cpt2].estOccupe(1) || !cont[cpt][cpt2].estOccupe(1) || !cont[cpt][cpt2].estOccupe(1) || !cont[cpt][cpt2].estOccupe(1))
+                {return true;}
+            }
+        }
+        return false;
     }
 
     private int GetMeilleurCoin(Conteneur c)
@@ -301,15 +319,18 @@ public class IA extends Joueur {
         pointsVoisin[3] = GetTotalPointsConteneur(xVoisin[3], yVoisin[3]);
 
 
-        System.out.println("\nGain 1 : "+pointsVoisin[0]+" Gain 2 : "+pointsVoisin[1]+" Gain 3 : "+pointsVoisin[2]+" Gain 4 : "+pointsVoisin[3]);
+        //System.out.println("\nGain 1 : "+pointsVoisin[0]+" Gain 2 : "+pointsVoisin[1]+" Gain 3 : "+pointsVoisin[2]+" Gain 4 : "+pointsVoisin[3]);
 
         int selection=-1;
-        int essais=0;
         int rd;
+
+        if(cSelect.estOccupe(1) && cSelect.estOccupe(2) && cSelect.estOccupe(3) && cSelect.estOccupe(4))
+        {
+            return -1;
+        }
 
         while(selection==-1 || cSelect.estOccupe(selection)) {
 
-            if(essais>20){break;}
 
             if(selection!=-1 && cSelect.estOccupe(selection))
             {
@@ -319,17 +340,18 @@ public class IA extends Joueur {
                 pointsVoisin[3]=0;
                 selection++;
                 if(selection>4){selection=1;}
-                essais++;
             }
+            else {
 
-            if (pointsVoisin[0] > pointsVoisin[1] && pointsVoisin[0] > pointsVoisin[2] && pointsVoisin[0] > pointsVoisin[3]) {
-                selection=1;
-            } else if (pointsVoisin[1] > pointsVoisin[0] && pointsVoisin[1] > pointsVoisin[2] && pointsVoisin[1] > pointsVoisin[3]) {
-                selection=2;
-            } else if (pointsVoisin[2] > pointsVoisin[1] && pointsVoisin[2] > pointsVoisin[0] && pointsVoisin[2] > pointsVoisin[3]) {
-                selection=3;
-            } else {
-                selection=4;
+                if (pointsVoisin[0] > pointsVoisin[1] && pointsVoisin[0] > pointsVoisin[2] && pointsVoisin[0] > pointsVoisin[3]) {
+                    selection = 1;
+                } else if (pointsVoisin[1] > pointsVoisin[0] && pointsVoisin[1] > pointsVoisin[2] && pointsVoisin[1] > pointsVoisin[3]) {
+                    selection = 2;
+                } else if (pointsVoisin[2] > pointsVoisin[1] && pointsVoisin[2] > pointsVoisin[0] && pointsVoisin[2] > pointsVoisin[3]) {
+                    selection = 3;
+                } else {
+                    selection = 4;
+                }
             }
         }
 
