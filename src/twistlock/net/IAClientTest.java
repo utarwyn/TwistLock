@@ -72,7 +72,7 @@ public class IAClientTest {
 					while (this.fakeMetier.getJoueurCourant() == this.ia)
 						this.fakeMetier.nouveauTour();
 
-					Conteneur conteneur = this.fakeMetier.getConteneur(lig, col);
+					Conteneur conteneur = this.fakeMetier.getConteneur(lig-1, col);
 					if (conteneur != null)
 						this.fakeMetier.jouerTwistlock(conteneur, coin);
 				}
