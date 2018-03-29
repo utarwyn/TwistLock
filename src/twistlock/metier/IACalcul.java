@@ -4,7 +4,7 @@ package twistlock.metier;
  * Classe AI permettant d'instancier une IA
  */
 
-public class AI {
+public class IACalcul {
 
     private Conteneur[][] jeu;
     private int nextI;
@@ -23,7 +23,7 @@ public class AI {
      * @param positionAdversaireY position Y actuelle de l'adversaire
      */
 
-    AI(Conteneur[][] jeu, int departX, int departY, int positionAdversaireX, int positionAdversaireY)
+    IACalcul(Conteneur[][] jeu, int departX, int departY, int positionAdversaireX, int positionAdversaireY)
     {
         this.jeu = jeu;
         this.lastCases = new Conteneur[6];
@@ -143,12 +143,12 @@ public class AI {
     }
 
     /**
-     * Permet d'actualiser le début du chemin de l'IA
+     * Permet d'actualiser la position de l'IA
      * @param x Coordonnée X de l'IA
      * @param y Coordonnée Y de l'IA
      */
 
-    void ChangerMeilleurChemin(int x, int y)
+    void setPosition(int x, int y)
     {
         this.nextI=x;
         this.nextJ=y;

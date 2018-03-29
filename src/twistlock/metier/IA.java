@@ -1,10 +1,7 @@
 package twistlock.metier;
 
-// état du plateau
-// prévoir l'action de chaque joueur
-// vérifier que le coup est possible
+// à faire : prévoir l'action de chaque joueur
 
-// estOccupe(int nb) (coins)
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,9 +10,9 @@ import java.util.Map;
  * Classe AIGestion qui gère les IA et leurs actions
  */
 
-public class AIGestion {
+public class IA{
 
-    private AI aiTest;
+    private IACalcul aiPrincipal;
     private Joueur joueur;
     private Metier metier;
     private Conteneur[][] jeu;
@@ -30,7 +27,7 @@ public class AIGestion {
         Metier m = new Metier(5,6);
 
         // Gestion de l'IA
-        new AIGestion(m);
+        new IA(m);
     }
 
     /**
@@ -38,20 +35,30 @@ public class AIGestion {
      * @param m métier associé
      */
 
-    private AIGestion(Metier m)
+    private IA(Metier m)
     {
         this.metier=m;
-        this.joueur = new Joueur(0,"AI",20);
+        this.joueur = this.metier.ajouterJoueur("IA",20);
         this.jeu = m.getConteneurs();
-        this.aiTest = new AI(jeu,0,0,3,3);
+        this.aiPrincipal = new IACalcul(jeu,0,0,3,3);
+
+        System.out.println(this.metier.getRepresentationPlateau());
 
         contChoisi = null;
 
-        // action à répéter à chaque tour pour redéfinir le chemin de l'IA
+        Jouer();
+    }
+
+    /**
+     * Permet d'instancier l'IA, chercher le meilleur chemin et effectuer l'action sur le plateau
+     */
+    public void Jouer()
+    {
         if(RedefinirChemins())
         {
             while(!AppliquerAction())
             {
+                System.out.println("Erreur : l'action ne peut pas etre appliquee");
                 RedefinirChemins();
             }
         }
@@ -62,9 +69,9 @@ public class AIGestion {
      * permettant de simuler les déplacements
      */
 
-    private boolean GenererCheminAI()
+    private boolean AfficherCheminAI()
     {
-        AI aiTest = new AI(jeu,this.meilleurCheminX,this.meilleurCheminY,3,3);
+        IACalcul aiTest = new IACalcul(jeu,this.meilleurCheminX,this.meilleurCheminY,3,3);
         System.out.print("MEILLEUR CHEMIN ["+this.meilleurCheminX+";"+this.meilleurCheminY+"] --> ");
         int total=0;
         for (int pas = 0; pas < nbDeplacements; pas++) {
@@ -81,7 +88,7 @@ public class AIGestion {
 
         System.out.println();
 
-        aiTest = new AI(jeu,this.pireCheminX,this.pireCheminY,3,3);
+        aiTest = new IACalcul(jeu,this.pireCheminX,this.pireCheminY,3,3);
         System.out.print("PIRE CHEMIN ["+this.pireCheminX+";"+this.pireCheminY+"] --> ");
         total=0;
         for (int pas = 0; pas < nbDeplacements; pas++) {
@@ -124,7 +131,7 @@ public class AIGestion {
         for(int i=0;i<jeu.length;i++) {
             for(int j=0;j<jeu.length;j++) {
 
-                AI aiTest = new AI(jeu,i,j,3,3);
+                IACalcul aiTest = new IACalcul(jeu,i,j,3,3);
 
                 System.out.print("CHEMIN ["+i+";"+j+"] --> ");
                 total=0;
@@ -170,11 +177,11 @@ public class AIGestion {
         this.pireCheminX=pireCheminX;
         this.pireCheminY=pireCheminY;
 
-        this.aiTest.ChangerMeilleurChemin(this.meilleurCheminX,this.meilleurCheminY);
+        this.aiPrincipal.setPosition(this.meilleurCheminX,this.meilleurCheminY);
 
         contChoisi = jeu[meilleurCheminX][meilleurCheminY];
 
-        return GenererCheminAI();
+        return AfficherCheminAI();
     }
 
     /**
@@ -186,23 +193,24 @@ public class AIGestion {
     {
         if(!joueur.peutJouer()){System.out.println("l'IA ne peut pas jouer"); return false;}
         if(this.contChoisi==null){System.out.println("conteneur null"); return false;}
-        else
+
+        /*if(contChoisi.getProprietaire()==joueur)
         {
-            if(contChoisi.getProprietaire()==joueur)
-            {
-                System.out.println("L'IA est deja proprietaire");
-                return true;
-            }
-            for (int i = 1; i < 5; i++) {
-                if (!this.contChoisi.estOccupe(i)) {
-                    // appliquer l'action du joueur sur le plateau
-                    //
-                    return true;
-                }
-            }
+            System.out.println("L'IA est deja proprietaire");
+            return true;
+        }*/
+        int coin = GetMeilleurCoin(contChoisi);
+
+        System.out.println("\nJOUE " + this.contChoisi.getLigne() + this.contChoisi.getColonne() + coin);
+
+        // Mouvement appliqué sur le plateau
+        if(metier.getJoueurCourant()==joueur)
+        {
+            metier.jouerTwistlock(this.contChoisi, coin);
         }
 
-        return false;
+
+        return true;
     }
 
     /**
@@ -217,6 +225,8 @@ public class AIGestion {
         HashMap<Conteneur, Integer> voisins = new HashMap<>();
         Conteneur conteneurActuel = this.metier.getConteneur(i,j);
 
+        if(conteneurActuel==null){return total;}
+
         for(int c=1;c<5;c++) {
             if(!conteneurActuel.estOccupe(c)) {
                 voisins.put(conteneurActuel, c);
@@ -227,8 +237,79 @@ public class AIGestion {
                 break;
             }
         }
-        System.out.print(" pts:"+total);
+        System.out.print(" voisins:"+total);
         return total;
+    }
+
+    private int GetMeilleurCoin(Conteneur c)
+    {
+        if(c==null){return 1;}
+        int coin=1;
+
+        int x=-1,y=-1;
+        Conteneur[][] cont = metier.getConteneurs();
+        Conteneur cSelect = null;
+
+        for(int cpt=0;cpt<cont.length;cpt++)
+        {
+            for(int cpt2=0;cpt2<cont[cpt].length;cpt2++)
+            {
+                if(c==cont[cpt][cpt2])
+                {
+                    x=cpt;
+                    y=cpt2;
+                }
+                if(cont[cpt][cpt2].getLigne()==this.contChoisi.getLigne() && cont[cpt][cpt2].getColonne()==this.contChoisi.getColonne())
+                {
+                    cSelect=cont[cpt][cpt2];
+                }
+            }
+        }
+
+        if(x==-1 || y==-1){return 1;}
+        if(cSelect==null){return 1;}
+
+        int[] xVoisin = new int[4];
+        int[] yVoisin = new int[4];
+        int[] pointsVoisin = new int[4];
+
+        xVoisin[0] = x + 1; yVoisin[0] = y + 1;
+        xVoisin[1] = x - 1; yVoisin[1] = y - 1;
+        xVoisin[2] = x + 1; yVoisin[2] = y - 1;
+        xVoisin[3] = x - 1; yVoisin[3] = y + 1;
+
+        pointsVoisin[0] = GetTotalPointsConteneur(xVoisin[0], yVoisin[0]);
+        pointsVoisin[1] = GetTotalPointsConteneur(xVoisin[1], yVoisin[1]);
+        pointsVoisin[2] = GetTotalPointsConteneur(xVoisin[2], yVoisin[2]);
+        pointsVoisin[3] = GetTotalPointsConteneur(xVoisin[3], yVoisin[3]);
+
+        System.out.println("\nGain 1 : "+pointsVoisin[0]+" Gain 2 : "+pointsVoisin[1]+" Gain 3 : "+pointsVoisin[2]+" Gain 4 : "+pointsVoisin[3]);
+
+        int selection=-1;
+        while(selection==-1 || cSelect.estOccupe(selection)) {
+
+            if(selection!=-1 && cSelect.estOccupe(selection))
+            {
+                pointsVoisin[0]=0;
+                pointsVoisin[1]=0;
+                pointsVoisin[2]=0;
+                pointsVoisin[3]=0;
+                selection++;
+                if(selection>4){selection=1;}
+            }
+
+            if (pointsVoisin[0] > pointsVoisin[1] && pointsVoisin[0] > pointsVoisin[2] && pointsVoisin[0] > pointsVoisin[3]) {
+                selection=1;
+            } else if (pointsVoisin[1] > pointsVoisin[0] && pointsVoisin[1] > pointsVoisin[2] && pointsVoisin[1] > pointsVoisin[3]) {
+                selection=2;
+            } else if (pointsVoisin[2] > pointsVoisin[1] && pointsVoisin[2] > pointsVoisin[0] && pointsVoisin[2] > pointsVoisin[3]) {
+                selection=3;
+            } else if (pointsVoisin[3] > pointsVoisin[1] && pointsVoisin[3] > pointsVoisin[0] && pointsVoisin[3] > pointsVoisin[2]) {
+                selection=4;
+            }
+        }
+
+        return selection;
     }
 
 }
