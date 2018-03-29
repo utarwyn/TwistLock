@@ -141,6 +141,7 @@ public class Metier {
 	 * @param nom Nom du joueur
 	 */
 	public Joueur ajouterAI(String nom, int tL) {
+		//tL=1;
 		Joueur joueur = new IA(this, this.joueurs.size() + 1, nom, tL);
 
 		this.joueurs.add(joueur);
@@ -378,5 +379,5 @@ public class Metier {
 	Conteneur[][] getConteneurs() {
 		return conteneurs;
 	}
-
+	
 }
