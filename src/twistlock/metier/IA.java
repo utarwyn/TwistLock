@@ -69,7 +69,7 @@ public class IA{
      * permettant de simuler les déplacements
      */
 
-    private boolean AfficherCheminAI()
+    private void AfficherCheminAI()
     {
         IACalcul aiTest = new IACalcul(jeu,this.meilleurCheminX,this.meilleurCheminY,3,3);
         System.out.print("MEILLEUR CHEMIN ["+this.meilleurCheminX+";"+this.meilleurCheminY+"] --> ");
@@ -102,8 +102,6 @@ public class IA{
         }
 
         System.out.print(" total : " + total);
-
-        return true;
     }
 
     /**
@@ -181,7 +179,8 @@ public class IA{
 
         contChoisi = jeu[meilleurCheminX][meilleurCheminY];
 
-        return AfficherCheminAI();
+        AfficherCheminAI();
+        return true;
     }
 
     /**
