@@ -94,7 +94,7 @@ public class Serveur extends Thread {
 
 				// Tous les joueurs sont connectés
 				if (this.clients.size() == this.nbJoueurs) {
-					this.controleur.chargerIHM();
+					this.controleur.chargerIHM(false);
 					this.envoiDemarragePartie();
 					this.envoiInfoTour();
 				}

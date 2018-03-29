@@ -36,9 +36,9 @@ public class Controleur {
 	/* ----------------------------- */
 	/*  GESTION DE LA GRILLE DE JEU  */
 	/* ----------------------------- */
-	public void chargerIHM() {
+	public void chargerIHM(boolean focus) {
 		this.ihm = new IHM(this);
-		this.ihm.lancer(false);
+		this.ihm.lancer(focus);
 	}
 
 	public int getNbLig() {
