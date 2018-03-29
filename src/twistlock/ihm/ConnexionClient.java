@@ -4,6 +4,9 @@ import twistlock.Controleur;
 import javax.swing.*;
 import java.awt.*;
 
+//TODO ajouter score et tL restant
+//TODO Button terminer la partie
+
 public class ConnexionClient extends JFrame
 {
 	private Controleur controleur;
