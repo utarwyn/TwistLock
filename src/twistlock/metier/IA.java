@@ -22,14 +22,6 @@ public class IA extends Joueur {
     static int[] lastMeilleurY;
     static int lastMeilleurId;
 
-    public static void main(String[] args) {
-
-        // Création du métier
-        Metier m = new Metier(null, 5,6);
-
-        // Gestion de l'IA
-        new IA(m, 1, "IA", 20);
-    }
 
     /**
      * Constructeur de la classe AIGestion
@@ -135,8 +127,8 @@ public class IA extends Joueur {
 
         System.out.println("-------");
 
-        for(int i=0;i<jeu.length;i++) {
-            for(int j=0;j<jeu.length;j++) {
+        for(int i=1;i<jeu.length-1;i++) {
+            for(int j=1;j<jeu.length-1;j++) {
 
                 valide = true;
                 // On vérifie si le conteneur a déjà été utilisé précédemment
@@ -153,7 +145,7 @@ public class IA extends Joueur {
 
                 IACalcul aiTest = new IACalcul(jeu,i,j,3,3);
 
-                System.out.print("CHEMIN ["+i+";"+j+"] --> ");
+                //System.out.print("CHEMIN ["+i+";"+j+"] --> ");
                 total=0;
 
                 for (int pas = 0; pas < nbDeplacements; pas++) {
@@ -162,15 +154,15 @@ public class IA extends Joueur {
                     total+=deplacement[pas];
                 }
 
-                for (int pas = 0; pas < nbDeplacements; pas++) {
+                /*for (int pas = 0; pas < nbDeplacements; pas++) {
                     System.out.print(deplacement[pas] + " --> ");
-                }
+                }*/
                 /*System.out.println();
                 for (int pas2 = 0; pas2 < nbDeplacements; pas2++) {
                     System.out.print(deplacement[1][pas2] + " --> ");
                 }*/
 
-                System.out.print(" total : " + total);
+                //System.out.print(" total : " + total);
 
                 minimum = total;
 
@@ -308,10 +300,12 @@ public class IA extends Joueur {
         pointsVoisin[2] = GetTotalPointsConteneur(xVoisin[2], yVoisin[2]);
         pointsVoisin[3] = GetTotalPointsConteneur(xVoisin[3], yVoisin[3]);
 
+
         System.out.println("\nGain 1 : "+pointsVoisin[0]+" Gain 2 : "+pointsVoisin[1]+" Gain 3 : "+pointsVoisin[2]+" Gain 4 : "+pointsVoisin[3]);
 
         int selection=-1;
         int essais=0;
+        int rd;
 
         while(selection==-1 || cSelect.estOccupe(selection)) {
 
