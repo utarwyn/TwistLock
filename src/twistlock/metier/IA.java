@@ -209,7 +209,6 @@ public class IA extends Joueur {
             metier.jouerTwistlock(this.contChoisi, coin);
         }
 
-
         return true;
     }
 
