@@ -48,8 +48,6 @@ public class IA extends Joueur {
         System.out.println(this.metier.getRepresentationPlateau());
 
         contChoisi = null;
-
-        Jouer();
     }
 
     /**
@@ -59,7 +57,7 @@ public class IA extends Joueur {
     {
         if(RedefinirChemins())
         {
-            while(!AppliquerAction())
+            if(!AppliquerAction())
             {
                 System.out.println("Erreur : l'action ne peut pas etre appliquee");
                 RedefinirChemins();
