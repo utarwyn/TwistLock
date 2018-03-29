@@ -48,24 +48,22 @@ class Plateau extends JPanel {
 		Conteneur conteneur;
 		TwistLock twistLock;
 		double baseX, baseY;
+		double contWidth, contHeight;
 		double x, y;
 
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		int SIZE = 20;
 
-		Dimension conteneurSize = new Dimension();
-		conteneurSize.setSize(
-				dim.getWidth() / this.controleur.getNbCol() - 1,
-				dim.getHeight() / this.controleur.getNbLig() - 1
-		);
+		contWidth = dim.getWidth() / this.controleur.getNbCol();
+		contHeight = dim.getHeight() / this.controleur.getNbLig();
 
 		for (int lig = 0; lig < this.controleur.getNbLig(); lig++)
 			for (int col = 0; col < this.controleur.getNbCol(); col++) {
 				conteneur = this.controleur.getConteneur(lig, col);
 
-				baseX = col * conteneurSize.getWidth() + 1;
-				baseY = lig * conteneurSize.getHeight() + 3;
+				baseX = col * contWidth;
+				baseY = lig * contHeight;
 
 				for (int i = 0; i < conteneur.getCoins().length; i++) {
 					twistLock = conteneur.getCoins()[i];
@@ -79,16 +77,16 @@ class Plateau extends JPanel {
 							y = 0;
 							break;
 						case 1:
-							x = conteneurSize.getWidth();
+							x = contWidth;
 							y = 0;
 							break;
 						case 2:
-							x = conteneurSize.getWidth();
-							y = conteneurSize.getHeight();
+							x = contWidth;
+							y = contHeight;
 							break;
 						case 3:
 							x = 0;
-							y = conteneurSize.getHeight();
+							y = contHeight;
 							break;
 					}
 
