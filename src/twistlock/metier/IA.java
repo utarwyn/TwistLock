@@ -18,9 +18,9 @@ public class IA extends Joueur {
     private int meilleurCheminX,meilleurCheminY,pireCheminX,pireCheminY;
     private int nbDeplacements;
     private int[] deplacement;
-    private int[] lastMeilleurX;
-    private int[] lastMeilleurY;
-    private int lastMeilleurId;
+    static int[] lastMeilleurX;
+    static int[] lastMeilleurY;
+    static int lastMeilleurId;
 
     public static void main(String[] args) {
 
@@ -50,9 +50,9 @@ public class IA extends Joueur {
 
         System.out.println(this.metier.getRepresentationPlateau());
 
-        this.lastMeilleurX = new int[10];
-        this.lastMeilleurY = new int[10];
-        this.lastMeilleurId = 0;
+        lastMeilleurX = new int[10];
+        lastMeilleurY = new int[10];
+        lastMeilleurId = 0;
 
         contChoisi = null;
     }
@@ -142,7 +142,7 @@ public class IA extends Joueur {
                 // On vérifie si le conteneur a déjà été utilisé précédemment
                 for(int m=0;m<10;m++)
                 {
-                    if(i==this.lastMeilleurX[m] && j==this.lastMeilleurY[m])
+                    if(i==lastMeilleurX[m] && j==lastMeilleurY[m])
                     {
                         valide = false;
                         break;
@@ -197,10 +197,10 @@ public class IA extends Joueur {
         this.pireCheminX=pireCheminX;
         this.pireCheminY=pireCheminY;
 
-        this.lastMeilleurX[this.lastMeilleurId] = meilleurCheminX;
-        this.lastMeilleurY[this.lastMeilleurId] = meilleurCheminY;
-        this.lastMeilleurId++;
-        if(this.lastMeilleurId>=10){this.lastMeilleurId=0;}
+        lastMeilleurX[lastMeilleurId] = meilleurCheminX;
+        lastMeilleurY[lastMeilleurId] = meilleurCheminY;
+        lastMeilleurId++;
+        if(lastMeilleurId>=10){lastMeilleurId=0;}
 
         this.aiPrincipal.setPosition(this.meilleurCheminX,this.meilleurCheminY);
 
