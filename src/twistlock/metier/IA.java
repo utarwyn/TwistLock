@@ -25,7 +25,7 @@ public class IA extends Joueur {
     public static void main(String[] args) {
 
         // Création du métier
-        Metier m = new Metier(5,6);
+        Metier m = new Metier(null, 5,6);
 
         // Gestion de l'IA
         new IA(m, 1, "IA", 20);

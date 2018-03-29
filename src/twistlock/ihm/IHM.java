@@ -66,6 +66,8 @@ public class IHM extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+
+		this.miseAJour();
 	}
 
 	/**
@@ -90,11 +92,11 @@ public class IHM extends JFrame {
 		this.miseAJour();
 
 		if (!nouveauTour) {
-			messageFin();
+			fermer();
 		}
 	}
 	
-	public void messageFin(){
+	public void fermer(){
 		this.setEnabled( true );
 		JOptionPane.showMessageDialog(
 				this,

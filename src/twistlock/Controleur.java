@@ -29,7 +29,7 @@ public class Controleur {
 	}
 
 	public void chargerMetier(int nbLig, int nbCol) {
-		this.metier = new Metier(nbLig, nbCol);
+		this.metier = new Metier(this, nbLig, nbCol);
 	}
 
 
@@ -89,6 +89,14 @@ public class Controleur {
 		return this.metier.getJoueurCourant();
 	}
 
+	public void faireJouerIA() {
+		this.metier.faireJouerIA();
+	}
+
+	public void lancerPartie() {
+		this.metier.lancerPartie();
+	}
+
 	public boolean nouveauTour() {
 		return this.metier.nouveauTour();
 	}
@@ -120,9 +128,9 @@ public class Controleur {
 		if (this.ihm != null)
 			this.ihm.miseAJour();
 	}
-	
-	public IHM getIhm( )
-	{
-		return ihm;
+
+	public void fermerIHM() {
+		this.ihm.fermer();
 	}
+
 }

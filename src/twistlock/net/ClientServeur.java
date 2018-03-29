@@ -93,7 +93,7 @@ public class ClientServeur {
 					client.envoyer("KILL");
 				}
 				
-				this.serveur.getControleur().getIhm().messageFin();
+				this.serveur.getControleur().fermerIHM();
 				
 			} else {
 				this.serveur.envoiInfoTour();
