@@ -18,6 +18,9 @@ public class IA extends Joueur {
     private int meilleurCheminX,meilleurCheminY,pireCheminX,pireCheminY;
     private int nbDeplacements;
     private int[] deplacement;
+    private int[] lastMeilleurX;
+    private int[] lastMeilleurY;
+    private int lastMeilleurId;
 
     public static void main(String[] args) {
 
@@ -46,6 +49,10 @@ public class IA extends Joueur {
         this.aiPrincipal = new IACalcul(jeu,0,0,3,3);
 
         System.out.println(this.metier.getRepresentationPlateau());
+
+        this.lastMeilleurX = new int[10];
+        this.lastMeilleurY = new int[10];
+        this.lastMeilleurId = 0;
 
         contChoisi = null;
     }
@@ -124,11 +131,25 @@ public class IA extends Joueur {
         int lastMinimum=9999;
         int pireCheminX = 0;
         int pireCheminY = 0;
+        boolean valide = true;
 
         System.out.println("-------");
 
         for(int i=0;i<jeu.length;i++) {
             for(int j=0;j<jeu.length;j++) {
+
+                valide = true;
+                // On vérifie si le conteneur a déjà été utilisé précédemment
+                for(int m=0;m<10;m++)
+                {
+                    if(i==this.lastMeilleurX[m] && j==this.lastMeilleurY[m])
+                    {
+                        valide = false;
+                        break;
+                    }
+                }
+
+                if(!valide){continue;}
 
                 IACalcul aiTest = new IACalcul(jeu,i,j,3,3);
 
@@ -175,6 +196,11 @@ public class IA extends Joueur {
         this.meilleurCheminY=meilleurCheminY;
         this.pireCheminX=pireCheminX;
         this.pireCheminY=pireCheminY;
+
+        this.lastMeilleurX[this.lastMeilleurId] = meilleurCheminX;
+        this.lastMeilleurY[this.lastMeilleurId] = meilleurCheminY;
+        this.lastMeilleurId++;
+        if(this.lastMeilleurId>=10){this.lastMeilleurId=0;}
 
         this.aiPrincipal.setPosition(this.meilleurCheminX,this.meilleurCheminY);
 
