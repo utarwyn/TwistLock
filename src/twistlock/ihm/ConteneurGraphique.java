@@ -88,7 +88,7 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 		int widthID = g2.getFontMetrics(fontID).stringWidth(textID);
 		
 		g2.setFont(fontID);
-		g2.drawString(textID, (float) dim.getWidth() / 2 - widthID / 2, (float) (dim.getHeight()) * 4 / 5 + FONT_SIZE_ID / 2);
+		g2.drawString(textID, (float) dim.getWidth() / 2 - widthID / 2, (float) (dim.getHeight()) * 3 / 4 + FONT_SIZE_ID / 2);
 		
 		g2.dispose();
 	}

@@ -253,7 +253,7 @@ public class FormJoueur extends JFrame {
 		for (int i = 0; i < nbJoueurs; i++) {
 			controleur.ajouterJoueur(nomJoueurs.get(i), nbTwistlocks);
 		}
-		controleur.chargerIHM();
+		controleur.chargerIHM(true);
 		this.dispose();
 	}
 
