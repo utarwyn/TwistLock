@@ -70,7 +70,7 @@ public class ConnexionClient extends JFrame
 		jLabelJ4Value = new JLabel( );
 		
 		//pour quitter
-		buttonQuitter = new JButton( "Quitter" );
+		buttonQuitter = new JButton( "Terminer la partie" );
 		buttonQuitter.addActionListener( e -> System.exit( 0 ) );
 		
 		//pour passer au jeu
