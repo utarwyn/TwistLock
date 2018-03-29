@@ -73,6 +73,10 @@ public class Controleur {
 		return this.metier.ajouterJoueur(nom, tL);
 	}
 
+	public Joueur ajouterAI(String nom, int tL) {
+		return this.metier.ajouterAI(nom, tL);
+	}
+
 	public ArrayList<Joueur> getJoueurs() {
 		return this.metier.getJoueurs();
 	}
