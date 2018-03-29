@@ -285,6 +285,7 @@ public class IA{
         System.out.println("\nGain 1 : "+pointsVoisin[0]+" Gain 2 : "+pointsVoisin[1]+" Gain 3 : "+pointsVoisin[2]+" Gain 4 : "+pointsVoisin[3]);
 
         int selection=-1;
+
         while(selection==-1 || cSelect.estOccupe(selection)) {
 
             if(selection!=-1 && cSelect.estOccupe(selection))
@@ -303,7 +304,7 @@ public class IA{
                 selection=2;
             } else if (pointsVoisin[2] > pointsVoisin[1] && pointsVoisin[2] > pointsVoisin[0] && pointsVoisin[2] > pointsVoisin[3]) {
                 selection=3;
-            } else if (pointsVoisin[3] > pointsVoisin[1] && pointsVoisin[3] > pointsVoisin[0] && pointsVoisin[3] > pointsVoisin[2]) {
+            } else {
                 selection=4;
             }
         }
