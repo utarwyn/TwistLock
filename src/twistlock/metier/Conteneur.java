@@ -17,12 +17,12 @@ public class Conteneur {
 
 	private TwistLock[] coins;
 
-	Conteneur(int ligne, char colonne, int valeur) {
+	public Conteneur(int ligne, char colonne, int valeur) {
 		this.ligne = ligne;
 		this.colonne = colonne;
 		this.valeur = valeur;
 
-		this.coins = new twistlock.metier.TwistLock[4];
+		this.coins = new TwistLock[4];
 	}
 
 	/**
