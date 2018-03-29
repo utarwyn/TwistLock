@@ -43,6 +43,7 @@ public class IA extends Joueur {
         this.metier = m;
         this.jeu = m.getConteneurs();
         this.nbDeplacements = nbTwistLock;
+        deplacement = new int[nbDeplacements];
         this.aiPrincipal = new IACalcul(jeu,0,0,3,3);
 
         System.out.println(this.metier.getRepresentationPlateau());
