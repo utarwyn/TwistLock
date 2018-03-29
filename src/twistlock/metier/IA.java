@@ -17,8 +17,7 @@ public class IA extends Joueur {
     private Conteneur contChoisi;
     private int meilleurCheminX,meilleurCheminY,pireCheminX,pireCheminY;
     private int nbDeplacements;
-
-    private int[] deplacement = new int[nbDeplacements];
+    private int[] deplacement;
 
     public static void main(String[] args) {
 
