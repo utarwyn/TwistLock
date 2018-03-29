@@ -297,6 +297,8 @@ class FormJoueur extends JFrame
 			if( intelligents.get( i ).isSelected( ) ) controleur.ajouterAI( nomJoueurs.get( i ) , nbTwistlocks );
 			else controleur.ajouterJoueur( nomJoueurs.get( i ) , nbTwistlocks );
 		}
+
+		controleur.lancerPartie();
 		controleur.chargerIHM( true );
 		this.dispose( );
 	}

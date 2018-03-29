@@ -1,5 +1,7 @@
 package twistlock.metier;
 
+import twistlock.Controleur;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +19,11 @@ public class Metier {
 
 	private Conteneur[][] conteneurs;
 
-	public Metier(int nbLig, int nbCol) {
+	private Controleur controleur;
+
+	public Metier(Controleur controleur, int nbLig, int nbCol) {
+		this.controleur = controleur;
+
 		this.nbLig = nbLig;
 		this.nbCol = nbCol;
 
@@ -36,9 +42,6 @@ public class Metier {
 			for (char col = 0; col < this.nbCol; col++) {
 				this.conteneurs[lig][col] = new Conteneur(lig + 1, (char) ('A' + col), (int) (Math.random() * (54 - 5) + 5));
 			}
-
-		// on fait jouer le premier joueur si c'est une IA
-		this.faireJouerIA();
 	}
 
 	/**
@@ -147,6 +150,11 @@ public class Metier {
 		return joueur;
 	}
 
+	public void lancerPartie() {
+		// On test de faire jouer le premier joueur (IA)
+		this.faireJouerIA();
+	}
+
 	/**
 	 * Passe le tour au joueur suivant
 	 *
@@ -183,7 +191,6 @@ public class Metier {
 
 		} while (!this.joueurCourant.peutJouer());
 
-		// On teste de faire jouer le prochain joueur (si c'est une IA)
 		this.faireJouerIA();
 
 		return true;
@@ -192,18 +199,22 @@ public class Metier {
 	/**
 	 * On teste de faire jouer le joueur courant si c'est une IA
 	 */
-	private void faireJouerIA() {
+	public void faireJouerIA() {
 		// Tour de jeu pour un IA (si tel est le cas)
 		if (this.getJoueurCourant() instanceof IA) {
 			((IA) this.getJoueurCourant()).Jouer();
+			this.controleur.miseAJourIHM();
 
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			new Thread(() -> {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 
-			this.nouveauTour();
+				if (!this.nouveauTour())
+					this.controleur.fermerIHM();
+			}).start();
 		}
 	}
 
