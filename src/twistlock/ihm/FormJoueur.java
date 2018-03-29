@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Formulaire pour donner : - le nombre de conteneurs (lignes et colonnes) - le nombre de twistlocks de chaque joueurs au départ - le nom de chaque
  * joueurs
  */
-public class FormJoueur extends JFrame {
+class FormJoueur extends JFrame {
 
 	private Controleur controleur;
 
