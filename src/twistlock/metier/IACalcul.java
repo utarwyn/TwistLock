@@ -148,7 +148,6 @@ public class IACalcul {
      * @param x Coordonnée X de l'IA
      * @param y Coordonnée Y de l'IA
      */
-
     void setPosition(int x, int y)
     {
         this.nextI=x;
@@ -156,16 +155,16 @@ public class IACalcul {
     }
 
     /**
-     * Obtenir la valeur du conteneur en gérant la valeur null
-     * @param c Conteneur
-     * @return Valeur du conteneur
-     */
+	 * Obtenir la valeur du conteneur en gérant la valeur null
+	 * @param c Conteneur
+	 * @return Valeur du conteneur
+	 */
+	private int cVal(Conteneur c) {
+		if (c == null)
+			return -1;
 
-    private int cVal(Conteneur c)
-    {
-        if(c==null){return -1;}
-        return c.getValeur();
-    }
+		return c.getValeur();
+	}
 
     /**
      * Obtenir l'index du conteneur possédant la valeur la plus haute
@@ -199,20 +198,19 @@ public class IACalcul {
         return min;
     }
 
-    /**
-     * Vérifie si un conteneur a déjà été précédemment utilisé dans le chemin
-     * pour éviter de repasser par ce conteneur
-     * @param val conteneur
-     * @return vrai si le conteneur a déjà été utilisé
-     */
+	/**
+	 * Vérifie si un conteneur a déjà été précédemment utilisé dans le chemin
+	 * pour éviter de repasser par ce conteneur
+	 *
+	 * @param val conteneur
+	 * @return vrai si le conteneur a déjà été utilisé
+	 */
+	private boolean dejaUtilise(Conteneur val) {
+		for (Conteneur c : this.lastCases)
+			if (c != null && c == val)
+				return true;
 
+		return false;
+	}
 
-    private boolean dejaUtilise(Conteneur val)
-    {
-        for(Conteneur c : this.lastCases)
-        {
-            if(c!=null && c==val){return true;}
-        }
-        return false;
-    }
 }

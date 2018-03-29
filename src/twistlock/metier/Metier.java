@@ -205,7 +205,7 @@ public class Metier {
 	 */
 	public void faireJouerIA() {
 		// Tour de jeu pour un IA (si tel est le cas)
-		if (this.getJoueurCourant() instanceof IA) {
+		if (this.getJoueurCourant() instanceof IA && this.controleur != null) {
 			((IA) this.getJoueurCourant()).Jouer();
 			this.controleur.miseAJourIHM();
 
@@ -325,7 +325,7 @@ public class Metier {
 	 * @param coin    Coin de liaison
 	 * @return Tableau associatif des voisins (avec les coins de liaison)
 	 */
-	HashMap<Conteneur, Integer> getVoisins(Conteneur origine, int coin) {
+	public HashMap<Conteneur, Integer> getVoisins(Conteneur origine, int coin) {
 		HashMap<Conteneur, Integer> voisins = new HashMap<>();
 		Conteneur voisin;
 
@@ -379,7 +379,7 @@ public class Metier {
 	 *
 	 * @return La liste des conteneurs
 	 */
-	Conteneur[][] getConteneurs() {
+	public Conteneur[][] getConteneurs() {
 		return conteneurs;
 	}
 	
