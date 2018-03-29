@@ -180,6 +180,10 @@ public class Metier {
 
 		} while (!this.joueurCourant.peutJouer());
 
+		// Tour de jeu pour un IA (si tel est le cas)
+		if (this.getJoueurCourant() instanceof IA)
+			((IA) this.getJoueurCourant()).Jouer();
+
 		return true;
 	}
 
