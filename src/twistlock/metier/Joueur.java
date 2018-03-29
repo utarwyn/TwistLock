@@ -89,4 +89,5 @@ public class Joueur {
 
 		if (this.nbTwistLock < 0) this.nbTwistLock = 0;
 	}
+	
 }
