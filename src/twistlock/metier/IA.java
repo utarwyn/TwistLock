@@ -133,7 +133,7 @@ public class IA extends Joueur {
 
 
         for(int i=base;i<jeu.length-base;i++) {
-            for(int j=base;j<jeu.length-base;j++) {
+            for(int j=base;j<jeu[0].length-base;j++) {
 
                 valide = true;
                 // On vérifie si le conteneur a déjà été utilisé précédemment
