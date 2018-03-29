@@ -36,6 +36,9 @@ public class Metier {
 			for (char col = 0; col < this.nbCol; col++) {
 				this.conteneurs[lig][col] = new Conteneur(lig + 1, (char) ('A' + col), (int) (Math.random() * (54 - 5) + 5));
 			}
+
+		// on fait jouer le premier joueur si c'est une IA
+		this.faireJouerIA();
 	}
 
 	/**
@@ -180,11 +183,28 @@ public class Metier {
 
 		} while (!this.joueurCourant.peutJouer());
 
-		// Tour de jeu pour un IA (si tel est le cas)
-		if (this.getJoueurCourant() instanceof IA)
-			((IA) this.getJoueurCourant()).Jouer();
+		// On teste de faire jouer le prochain joueur (si c'est une IA)
+		this.faireJouerIA();
 
 		return true;
+	}
+
+	/**
+	 * On teste de faire jouer le joueur courant si c'est une IA
+	 */
+	private void faireJouerIA() {
+		// Tour de jeu pour un IA (si tel est le cas)
+		if (this.getJoueurCourant() instanceof IA) {
+			((IA) this.getJoueurCourant()).Jouer();
+
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			this.nouveauTour();
+		}
 	}
 
 	/**
