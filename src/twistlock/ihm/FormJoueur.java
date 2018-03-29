@@ -31,12 +31,17 @@ public class FormJoueur extends JFrame {
 	private JTextField textFieldJ2;
 	private JTextField textFieldJ3;
 	private JTextField textFieldJ4;
+	private JCheckBox intelligenceJ1;
+	private JCheckBox intelligenceJ2;
+	private JCheckBox intelligenceJ3;
+	private JCheckBox intelligenceJ4;
 	private JButton buttonQuitter, buttonValider;
 	private int nbJoueurs;
 	private int lignes;
 	private int colonnes;
 	private int nbTwistlocks;
 	private ArrayList<String> nomJoueurs;
+	private ArrayList<JCheckBox> intelligents;
 
 	/**
 	 * Classe Formulaire de joueur
@@ -76,6 +81,16 @@ public class FormJoueur extends JFrame {
 		jLabelJ2 = new JLabel("Nom du joueur 2 : ");
 		jLabelJ3 = new JLabel("Nom du joueur 3 : ");
 		jLabelJ4 = new JLabel("Nom du joueur 4 : ");
+		
+		intelligenceJ1 = new JCheckBox( "Intelligent" );
+		intelligenceJ2 = new JCheckBox( "Intelligent" );
+		intelligenceJ3 = new JCheckBox( "Intelligent" );
+		intelligenceJ4 = new JCheckBox( "Intelligent" );
+		
+		intelligents.add( intelligenceJ1 );
+		intelligents.add( intelligenceJ2 );
+		intelligents.add( intelligenceJ3 );
+		intelligents.add( intelligenceJ4 );
 
 		textFieldNbLignes = new JTextField();
 		textFieldNbLignes.addKeyListener(new KeyAdapter() {
@@ -119,6 +134,8 @@ public class FormJoueur extends JFrame {
 		textFieldJ2.setColumns(20);
 		textFieldJ3.setColumns(20);
 		textFieldJ4.setColumns(20);
+		
+		
 
 		//pour quitter
 		buttonQuitter = new JButton("Quitter");
@@ -176,7 +193,7 @@ public class FormJoueur extends JFrame {
 		gridBagConstraints.gridy = 1;
 		gridBagConstraints.gridx = 0;
 		this.add(jLabelNbLignes, gridBagConstraints);
-
+		
 		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.gridx = 1;
 		this.add(textFieldNbLignes, gridBagConstraints);
@@ -207,6 +224,10 @@ public class FormJoueur extends JFrame {
 		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.gridx = 1;
 		this.add(textFieldJ1, gridBagConstraints);
+		
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
+		gridBagConstraints.gridx = 2;
+		this.add(intelligenceJ1, gridBagConstraints);
 
 		gridBagConstraints.anchor = GridBagConstraints.LINE_END;
 		gridBagConstraints.gridy = 5;
@@ -216,6 +237,10 @@ public class FormJoueur extends JFrame {
 		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.gridx = 1;
 		this.add(textFieldJ2, gridBagConstraints);
+		
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
+		gridBagConstraints.gridx = 2;
+		this.add(intelligenceJ2, gridBagConstraints);
 
 		gridBagConstraints.anchor = GridBagConstraints.LINE_END;
 		gridBagConstraints.gridy = 6;
@@ -225,6 +250,10 @@ public class FormJoueur extends JFrame {
 		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.gridx = 1;
 		this.add(textFieldJ3, gridBagConstraints);
+		
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
+		gridBagConstraints.gridx = 2;
+		this.add(intelligenceJ3, gridBagConstraints);
 
 		gridBagConstraints.anchor = GridBagConstraints.LINE_END;
 		gridBagConstraints.gridy = 7;
@@ -234,6 +263,10 @@ public class FormJoueur extends JFrame {
 		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.gridx = 1;
 		this.add(textFieldJ4, gridBagConstraints);
+		
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
+		gridBagConstraints.gridx = 2;
+		this.add(intelligenceJ4, gridBagConstraints);
 
 		gridBagConstraints.anchor = GridBagConstraints.CENTER;
 		gridBagConstraints.gridy = 8;
@@ -251,7 +284,8 @@ public class FormJoueur extends JFrame {
 	private void lancer() {
 		controleur.chargerMetier(lignes, colonnes);
 		for (int i = 0; i < nbJoueurs; i++) {
-			controleur.ajouterJoueur(nomJoueurs.get(i), nbTwistlocks);
+			if( intelligents.get( i ).isSelected() ) controleur.ajouterAI( nomJoueurs.get( i ), nbTwistlocks );
+			else controleur.ajouterJoueur(nomJoueurs.get(i), nbTwistlocks);
 		}
 		controleur.chargerIHM(true);
 		this.dispose();
@@ -320,6 +354,12 @@ public class FormJoueur extends JFrame {
 		if (!textFieldJ4.getText().equals("") && textFieldJ3.getText().equals("")) {
 			bOk = false;
 			erreur("Saisissez le nom du joueur 3");
+		}
+		
+		//intelligent
+		if( intelligenceJ1.isSelected() && textFieldJ1.getText().equals( "" ) && intelligenceJ2.isSelected() && textFieldJ2.getText().equals( "" ) && intelligenceJ3.isSelected() && textFieldJ3.getText().equals( "" ) && intelligenceJ4.isSelected() && textFieldJ4.getText().equals( "" ) ){
+			bOk = false;
+			erreur( "Une de vos intelligence n'a pas de nom" );
 		}
 
 		//noms de joueurs égaux
