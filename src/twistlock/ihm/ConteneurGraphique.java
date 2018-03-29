@@ -20,7 +20,7 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 
 	private Conteneur conteneur;
 
-	ConteneurGraphique(IHM ihm, Conteneur conteneur) {
+	ConteneurGraphique(IHM ihm, Conteneur conteneur, boolean focus) {
 		this.ihm = ihm;
 		this.conteneur = conteneur;
 
@@ -31,7 +31,7 @@ public class ConteneurGraphique extends JButton implements ActionListener {
 		this.setBorderPainted(false);
 		this.setContentAreaFilled(false);
 
-		this.addActionListener(this);
+		if( focus ) this.addActionListener(this);
 	}
 
 	/**

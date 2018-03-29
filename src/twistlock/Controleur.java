@@ -38,7 +38,7 @@ public class Controleur {
 	/* ----------------------------- */
 	public void chargerIHM() {
 		this.ihm = new IHM(this);
-		this.ihm.lancer();
+		this.ihm.lancer(false);
 	}
 
 	public int getNbLig() {

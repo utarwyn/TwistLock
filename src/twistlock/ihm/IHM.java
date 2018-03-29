@@ -52,7 +52,7 @@ public class IHM extends JFrame {
 	/**
 	 * Lance la partie IHM et ouvre la fenêtre de jeu
 	 */
-	public void lancer() {
+	public void lancer(boolean unFocus) {
 		ArrayList<Joueur> joueurs = this.controleur.getJoueurs();
 
 		int i = 0;
@@ -61,7 +61,7 @@ public class IHM extends JFrame {
 			this.add(this.mains[i], PLACES_MAIN[i++]);
 		}
 
-		this.plateau.preparer();
+		this.plateau.preparer(unFocus);
 
 		this.pack();
 		this.setLocationRelativeTo(null);
@@ -95,6 +95,7 @@ public class IHM extends JFrame {
 	}
 	
 	public void messageFin(){
+		this.setEnabled( true );
 		JOptionPane.showMessageDialog(
 				this,
 				this.controleur.getClassement(),
@@ -114,5 +115,4 @@ public class IHM extends JFrame {
 
 		this.plateau.miseAJour();
 	}
-
 }
