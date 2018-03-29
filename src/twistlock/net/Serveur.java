@@ -95,9 +95,6 @@ public class Serveur extends Thread {
 				// Tous les joueurs sont connectés
 				if (this.clients.size() == this.nbJoueurs) {
 					this.controleur.chargerIHM();
-					
-					//TODO rendre la fenêtre non focusable
-//					this.controleur.getIhm().getContentPane().set( false );
 					this.envoiDemarragePartie();
 					this.envoiInfoTour();
 				}
