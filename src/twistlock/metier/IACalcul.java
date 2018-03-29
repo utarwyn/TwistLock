@@ -77,17 +77,18 @@ public class IACalcul {
     {
         Conteneur[] val = new Conteneur[8];
 
+
         if(i+1<this.jeu.length){val[0] = this.jeu[i+1][j];} else{val[0]=null;}
         if(i-1>=0){val[1] = this.jeu[i-1][j];} else{val[1]=null;}
-        if(j+1<this.jeu.length){val[2] = this.jeu[i][j+1];} else{val[2]=null;}
+        if(j+1<this.jeu[0].length){val[2] = this.jeu[i][j+1];} else{val[2]=null;}
         if(j-1>=0){val[3] = this.jeu[i][j-1];} else{val[3]=null;}
 
         // diagonales
-        if(i+1<this.jeu.length && j+1<this.jeu.length){val[4] = this.jeu[i+1][j+1];} else{val[4]=null;}
+        if(i+1<this.jeu.length && j+1<this.jeu[0].length){val[4] = this.jeu[i+1][j+1];} else{val[4]=null;}
         if(i-1>=0 && j-1>=0){val[5] = this.jeu[i-1][j-1];} else{val[5]=null;}
 
         if(i+1<this.jeu.length && j-1>=0){val[6] = this.jeu[i+1][j-1];} else{val[6]=null;}
-        if(i-1>=0 && j+1<this.jeu.length){val[7] = this.jeu[i-1][j+1];} else{val[7]=null;}
+        if(i-1>=0 && j+1<this.jeu[0].length){val[7] = this.jeu[i-1][j+1];} else{val[7]=null;}
 
         int min=-1;
 
