@@ -51,17 +51,15 @@ public class IA extends Joueur {
 	 * Permet d'instancier l'IA, chercher le meilleur chemin et effectuer l'action sur le plateau
 	 */
 	public void Jouer() {
-		if (RedefinirChemins()) {
-			if (!AppliquerAction()) {
-				System.out.println("Erreur : l'action ne peut pas etre appliquee");
-				RedefinirChemins();
-				AppliquerAction();
-			}
+		int essais=0;
+		while ((!RedefinirChemins() || !AppliquerAction()) && essais<30) {
+			System.out.println("Erreur : l'action ne peut pas etre appliquee");
+			essais++;
 		}
 	}
 
 	/**
-	 * Reetourne la dernière action effectuée par l'IA sous format texte
+	 * Retourne la dernière action effectuée par l'IA sous format texte
 	 * @return Dernière action sous format texte
 	 */
 	public String getDerniereAction() {
@@ -366,6 +364,20 @@ public class IA extends Joueur {
 				}
 			}
 
+		}
+
+		int essais=0;
+		if(selection<1 || selection>4){selection=1;}
+		while(cSelect.estOccupe(selection) && essais<10)
+		{
+			selection++;
+			if(selection>4){selection=1;}
+			essais++;
+		}
+
+		if(cSelect.estOccupe(selection))
+		{
+			selection=-1;
 		}
 
 		return selection;
